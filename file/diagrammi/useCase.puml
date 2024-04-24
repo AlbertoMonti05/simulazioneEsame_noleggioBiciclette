@@ -1,0 +1,23 @@
+@startuml useCase
+left to right direction
+actor Utente
+actor Ospite
+actor Cliente
+
+Utente --> Ospite
+Utente --> Cliente
+
+
+rectangle "Diagramma dei casi d'uso"{
+  Ospite -- (Visualizza mappa)
+  Ospite -- (Si registra)
+  (Si registra) --> (Riceve tessera elettronica)
+
+  Cliente -- (Visualizza mappa)
+  Cliente -- (Si autentica)
+  Cliente -- (Noleggia bici)
+  (Noleggia bici) --> (Usa tessera elettronica)
+  Cliente -- (Consegna bici)
+}
+
+@enduml
