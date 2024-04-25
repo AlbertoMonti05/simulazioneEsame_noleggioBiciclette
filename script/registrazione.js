@@ -13,11 +13,9 @@ function doRegistrazione()
     let stato = doControlli(nome, cognome, username, mail, password, confermaPassword);
 
     // controlli a buon fine
-    if(stato)
-    {
+    if(stato == true)
         // richiestra di registrazione al db
         callDB_registrazione({nome: nome, cognome: cognome, username: username, mail: mail, password: password});
-    }
     else
     {
         alert(stato);
@@ -49,11 +47,13 @@ function doControlli(nome, cognome, username, mail, password, confermaPassword)
         return "ERRORE! Le password non corrispondono!";
 
     // username già utilizzato
-    if(callDB_checkUsername({username: username}))
+    $isUsed = callDB_checkUsername({username: username});
+    if($isUsed)
         return "ERRORE! Username già in uso da un altro utente!";
 
     // mail già utilizzata
-    if(callDB_checkMail({mail: mail}))
+    $isUsed = callDB_checkMail({mail: mail});
+    if($isUsed)
         return "ERRORE! Mail già associata ad un account! Esegui la login!";
 
     // tutto ok
