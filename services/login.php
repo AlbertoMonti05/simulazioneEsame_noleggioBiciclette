@@ -11,7 +11,7 @@
     global $checkLogin;
 
     // connessione al database
-    $connDB = new mysqli($server, $cliente, $psw, $dbLogin);
+    $connDB = new mysqli($server, $cliente, $psw, $dbBiciclette);
 
     // errore nella connessione al db
     if ($connDB->connect_error)
