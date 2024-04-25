@@ -1,7 +1,13 @@
 <?php
+    // prendo la sessione
+    session_start();
+    
     // distruggo la sessione
-    session_abort();
+    unset($_SESSION);
+    session_destroy();
+    session_write_close();
 
     // reindirizzamento
-    header("Location: login.php");
+    header('Location: login.php');
+    die;
 ?>
