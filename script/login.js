@@ -5,7 +5,7 @@ function doLogin()
     let mail = $("#mail").val();
     let password = $("#password").val();
 
-    // errore parametri
+    // parametri mancanti
     if(mail == "" || password == "")
     {
         alert("ERRORE! Inserire mail e password!");
@@ -16,7 +16,7 @@ function doLogin()
     callDB_login({mail: mail, password: password});
 }
 
-// CHIAMATA AL DB PER
+// CHIAMATA AL DB PER LA LOGIN
 function callDB_login(params)
 {
     // chiamata al db
