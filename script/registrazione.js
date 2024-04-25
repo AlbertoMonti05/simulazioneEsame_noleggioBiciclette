@@ -25,6 +25,18 @@ function doRegistrazione()
     }
 }
 
+// RICHIESTA SERVIZIO
+async function richiesta(page, params)
+{
+    return new Promise(function(resolve)
+    {
+        $.get(page, params, function(phpData)
+        {
+            resolve(phpData);
+        });
+    });
+}
+
 // CONTROLLI SUI PARAMETRI IN INPUT
 function doControlli(nome, cognome, username, mail, password, confermaPassword)
 {
@@ -49,34 +61,30 @@ function doControlli(nome, cognome, username, mail, password, confermaPassword)
 }
 
 // CHIAMATA AL DB PER CONTROLLARE LA MAIL
-function callDB_checkMail(params)
+async function callDB_checkMail(params)
 {
     // chiamata al db
-    $.get("../services/checkMail.php",params,function(isUsed)
-    {
-        return isUsed;
-    });
+    let isUsed = await richiesta("../services/checkMail.php",params);
+
+    return isUsed;
 }
 
 // CHIAMATA AL DB PER CONTROLLARE L'USERNAME
-function callDB_checkUsername(params)
+async function callDB_checkUsername(params)
 {
     // chiamata al db
-    $.get("../services/checkUsername.php",params,function(isUsed)
-    {
-        return isUsed;
-    });
+    let isUsed = await richiesta("../services/checkUsername.php",params);
+
+    return isUsed;
 }
 
 // CHIAMATA AL DB PER LA REGISTRAZIONE
-function callDB_registrazione(params)
+async function callDB_registrazione(params)
 {
     // chiamata al db
-    $.post("../services/registrazione.php",params,function(isRegistred)
-    {
-        // reindirizzamento
-        reindizzamento(isRegistred);
-    });
+    let isRegistred = await richiesta("../services/registrazione.php",params);
+
+    reindizzamento(isRegistred);
 }
 
 // REINDIRIZZAMENTO
