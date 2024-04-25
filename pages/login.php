@@ -3,7 +3,7 @@
     session_start();
 
     // utente in sessione
-    if(isset($_SESSION['user_id']))
+    if(isset($_SESSION['cliente_id']))
         header("Location: mappa.php");
     // else 
         // rimango su questa pagina

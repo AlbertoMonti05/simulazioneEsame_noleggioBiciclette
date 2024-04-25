@@ -1,7 +1,7 @@
 <?php
     // CREDENZIALI DEL DATABASE
     $server = "localhost";
-    $user = "root";
+    $cliente = "root";
     $password = "";
 
     // DATABASE NOLEGGIO BICICLETTE

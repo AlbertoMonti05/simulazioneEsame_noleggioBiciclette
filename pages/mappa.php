@@ -28,7 +28,7 @@
         <?php
 
             // ospite
-            if(!isset($_SESSION['user_id']))
+            if(!isset($_SESSION['cliente_id']))
             {
                 ?>
 
