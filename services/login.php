@@ -48,10 +48,12 @@
         // return
         echo true;
     }
+    else
+    {
+        // chiudo connessione al database
+        $connDB->close();
 
-    // chiudo connessione al database
-    $connDB->close();
-
-    // return
-    echo false;
+        // return
+        echo false;
+    }
 ?>
