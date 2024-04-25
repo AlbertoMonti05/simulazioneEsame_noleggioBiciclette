@@ -25,8 +25,13 @@
     </head>
 
     <body>
-        
-        
+        <h1>LOGIN</h1>    
+
+        mail: <input type="text" id="mail">
+        <br>
+        password: <input type="password" id="password">
+        <br>
+        <button onclick="doLogin()">LOGIN</button>
 
     </body>
 
