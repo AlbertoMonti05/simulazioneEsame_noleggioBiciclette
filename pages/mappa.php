@@ -32,6 +32,7 @@
             {
                 ?>
 
+                    <a href="login.php"><button>LOGIN</button></a>
                     <a href="registrazione.php"><button>REGISTRATI</button></a>
                     <br>
 
