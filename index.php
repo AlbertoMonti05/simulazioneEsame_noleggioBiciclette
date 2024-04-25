@@ -2,10 +2,7 @@
     // prendo la sessione
     session_start();
 
-    // utente in sessione
-    if(isset($_SESSION['User_id']))
-        header("Location: pages/mappa.php");
-    else 
-        // login
-        header("Location: pages/login.php");
+    // anche l'utente non loggato può visualizzare la mappa
+    // non controllo se l'utente è loggato perché non è un problema se non lo è
+    header("Location: pages/mappa.php");
 ?>
