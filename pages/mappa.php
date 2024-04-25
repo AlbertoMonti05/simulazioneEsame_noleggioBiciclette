@@ -23,6 +23,22 @@
 
     <body>
         
+        <h1>MAPPA STAZIONI NOGLEGGIO/RICONSEGNA BICICLETTE</h1>
+
+        <?php
+
+            // ospite
+            if(!isset($_SESSION['User_id']))
+            {
+                ?>
+
+                    <a href="/registrazione.php"><button>REGISTRATI</button></a>
+                    <br>
+
+                <?php
+            }
+
+        ?>
 
 
     </body>
