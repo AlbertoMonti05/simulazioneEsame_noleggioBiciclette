@@ -19,19 +19,24 @@
 
         <title>Login - BycicleRent</title>
 
+        <!-- IMPORTO jQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
         <!-- IMPORTO LO SCRIPT -->
         <script src="../script/login.js"></script>
 
     </head>
 
     <body>
-        <h1>LOGIN</h1>    
+        <h1>LOGIN</h1>
 
-        mail: <input type="text" id="mail">
-        <br>
-        password: <input type="password" id="password">
-        <br>
-        <button onclick="doLogin()">LOGIN</button>
+        <form>
+            mail: <input type="text" id="mail">
+            <br>
+            password: <input type="password" id="password">
+            <br>
+            <button onclick="doLogin()">LOGIN</button>
+        </form>
 
     </body>
 
