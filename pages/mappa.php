@@ -32,7 +32,7 @@
             {
                 ?>
 
-                    <a href="/registrazione.php"><button>REGISTRATI</button></a>
+                    <a href="registrazione.php"><button>REGISTRATI</button></a>
                     <br>
 
                 <?php
