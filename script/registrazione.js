@@ -47,13 +47,11 @@ function doControlli(nome, cognome, username, mail, password, confermaPassword)
         return "ERRORE! Le password non corrispondono!";
 
     // username già utilizzato
-    $isUsed = callDB_checkUsername({username: username});
-    if($isUsed)
+    if(callDB_checkUsername({username: username}) == true)
         return "ERRORE! Username già in uso da un altro utente!";
 
     // mail già utilizzata
-    $isUsed = callDB_checkMail({mail: mail});
-    if($isUsed)
+    if(callDB_checkMail({mail: mail}) == true)
         return "ERRORE! Mail già associata ad un account! Esegui la login!";
 
     // tutto ok

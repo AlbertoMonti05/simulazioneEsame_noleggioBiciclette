@@ -43,7 +43,7 @@
             <br>
             conferma password: <input type="password" id="confermaPassword" autocomplete="current-password">
             <br>
-            <button onclick="doRegistrazione()">LOGIN</button>
+            <button onclick="doRegistrazione()">REGISTRATI</button>
         </form>
 
     </body>

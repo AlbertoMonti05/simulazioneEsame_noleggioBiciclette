@@ -8,6 +8,6 @@
     session_write_close();
 
     // reindirizzamento
-    header('Location: login.php');
+    header('Location: mappa.php');
     die;
 ?>
