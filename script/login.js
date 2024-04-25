@@ -5,9 +5,12 @@ function doLogin()
     let mail = $("#mail").val();
     let password = $("#password").val();
 
-    // controllo parametri...
-
-    // password in md5...
+    // errore parametri
+    if(mail == "" || password == "")
+    {
+        alert("ERRORE! Inserire mail e password!");
+        return;
+    }
 
     // richiestra di login al db
     callDB_login({mail: mail, password: password});

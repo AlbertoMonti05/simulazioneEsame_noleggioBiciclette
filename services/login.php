@@ -20,8 +20,11 @@
     // statement
     $statement = $connDB->prepare($checkLogin);
 
+    // password in md5
+    $password = md5($_GET["password"]);
+
     // parametri nello statement
-    $statement->bind_param("ss", $_GET["mail"], $_GET["password"]);
+    $statement->bind_param("ss", $_GET["mail"], $password);
 
     // eseguo lo statement
     $statement->execute();
