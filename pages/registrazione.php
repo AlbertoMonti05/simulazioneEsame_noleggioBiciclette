@@ -39,9 +39,9 @@
             <br>
             mail: <input type="text" id="mail">
             <br>
-            password: <input type="password" id="password">
+            password: <input type="password" id="password" autocomplete="current-password">
             <br>
-            conferma password: <input type="password" id="confermaPassword">
+            conferma password: <input type="password" id="confermaPassword" autocomplete="current-password">
             <br>
             <button onclick="doRegistrazione()">LOGIN</button>
         </form>
