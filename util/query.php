@@ -10,4 +10,6 @@
     // controllo username
     $checkUsername = "SELECT * FROM `clienti` WHERE `username` = ?";
 
+    // registrazione
+    $registrazione = "INSERT INTO `clienti` (`nome`, `cognome`, `username`, `mail`, `password`) VALUE (?,?,?,?,?)";
 ?>
