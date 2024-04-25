@@ -38,6 +38,15 @@
 
                 <?php
             }
+            else
+            {
+                ?>
+
+                    <a href="logout.php"><button>LOGOUT</button></a>
+                    <br>
+
+                <?php
+            }
 
         ?>
 
