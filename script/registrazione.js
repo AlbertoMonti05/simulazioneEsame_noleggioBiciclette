@@ -84,7 +84,7 @@ function reindizzamento(isRegistred)
 {
     // registrazione corretta
     if(isRegistred)
-        window.location.href = "mappa.php";
+        window.location.href = "login.php";
     else
         alert("ERRORE! Registrazione non andata a buon fine!");
 }
