@@ -3,10 +3,13 @@ left to right direction
 actor Utente
 actor Ospite
 actor Cliente
+actor Admin
+actor "Server" as S
 
 Utente --> Ospite
 Utente --> Cliente
-
+Utente --> Admin
+Utente --> S
 
 rectangle "Diagramma dei casi d'uso"{
   Ospite -- (Visualizza mappa)
@@ -14,10 +17,31 @@ rectangle "Diagramma dei casi d'uso"{
   (Si registra) --> (Riceve tessera elettronica)
 
   Cliente -- (Visualizza mappa)
+  Cliente -- (Visualizza riepiloghi)
   Cliente -- (Si autentica)
   Cliente -- (Noleggia bici)
   (Noleggia bici) --> (Usa tessera elettronica)
   Cliente -- (Consegna bici)
+
+  S -- (Tariffazione servizio)
+
+  rectangle "Monitoraggio servizio"{
+    Admin -- (Stampe)
+    Admin -- (Riepilogo)
+    (Stampe) --> (Operazione utenti)
+    (Stampe) --> (Operazione stazioni)
+    (Stampe) --> (Posizione bicicletta)
+    (Stampe) --> (Biciclette non riconsegnate)
+    (Stampe) --> (Biciclette in manutenzione)
+
+  }
+
+  rectangle "Manutenzione servizio"{
+    S -- (Inserimento bicicletta)
+    S -- (Cancellazione bicicletta)
+    S -- (ALTRI CASI)
+  }
+
 }
 
 @enduml
