@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Apr 26, 2024 alle 10:03
+-- Creato il: Apr 29, 2024 alle 19:58
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -20,6 +20,25 @@ SET time_zone = "+00:00";
 --
 -- Database: `noleggio_biciclette`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `admin`
+--
+
+CREATE TABLE `admin` (
+  `admin_id` int(11) NOT NULL,
+  `username` varchar(32) NOT NULL,
+  `password` varchar(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dump dei dati per la tabella `admin`
+--
+
+INSERT INTO `admin` (`admin_id`, `username`, `password`) VALUES
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3');
 
 -- --------------------------------------------------------
 
@@ -69,16 +88,15 @@ CREATE TABLE `clienti` (
   `username` varchar(32) NOT NULL,
   `mail` varchar(64) NOT NULL,
   `password` varchar(32) NOT NULL,
-  `indrizzo_id` int(11) NOT NULL,
-  `carta_credito_id` int(11) NOT NULL
+  `indirizzo_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dump dei dati per la tabella `clienti`
 --
 
-INSERT INTO `clienti` (`cliente_id`, `nome`, `cognome`, `username`, `mail`, `password`, `indrizzo_id`, `carta_credito_id`) VALUES
-(16, 'mario', 'rossi', 'mario_rossi', 'rossi@gmail.com', '4124bc0a9335c27f086f24ba207a4912', 1, 1);
+INSERT INTO `clienti` (`cliente_id`, `nome`, `cognome`, `username`, `mail`, `password`, `indirizzo_id`) VALUES
+(1, 'pippo', 'pluto', 'pippo_pluto', 'a@gmail.com', '4124bc0a9335c27f086f24ba207a4912', 1);
 
 -- --------------------------------------------------------
 
@@ -87,7 +105,7 @@ INSERT INTO `clienti` (`cliente_id`, `nome`, `cognome`, `username`, `mail`, `pas
 --
 
 CREATE TABLE `indirizzi` (
-  `indrizzo_id` int(11) NOT NULL,
+  `indirizzo_id` int(11) NOT NULL,
   `via` varchar(64) NOT NULL,
   `citta` varchar(32) NOT NULL,
   `provincia` char(2) NOT NULL,
@@ -99,18 +117,22 @@ CREATE TABLE `indirizzi` (
 -- Dump dei dati per la tabella `indirizzi`
 --
 
-INSERT INTO `indirizzi` (`indrizzo_id`, `via`, `citta`, `provincia`, `regione`, `cap`) VALUES
-(1, 'via Garibaldi 11', 'Milano', 'MI', 'Lombardia', '20121');
+INSERT INTO `indirizzi` (`indirizzo_id`, `via`, `citta`, `provincia`, `regione`, `cap`) VALUES
+(1, 'via Garibaldi 11', 'Mariano Comense', 'CO', 'Lombardia', '22070');
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `stazioni`
+-- Struttura della tabella `operazioni`
 --
 
-CREATE TABLE `stazioni` (
+CREATE TABLE `operazioni` (
+  `operazione_id` int(11) NOT NULL,
+  `tipo` enum('noleggio','riconsegna','','') NOT NULL,
+  `data_ora` datetime NOT NULL,
+  `cliente_id` int(11) NOT NULL,
   `stazione_id` int(11) NOT NULL,
-  `indirizzo_id` int(11) NOT NULL
+  `bicicletta_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -118,18 +140,11 @@ CREATE TABLE `stazioni` (
 --
 
 --
--- Indici per le tabelle `biciclette`
+-- Indici per le tabelle `admin`
 --
-ALTER TABLE `biciclette`
-  ADD PRIMARY KEY (`bicicletta_id`);
-
---
--- Indici per le tabelle `carte_credito`
---
-ALTER TABLE `carte_credito`
-  ADD PRIMARY KEY (`carta_credito_id`),
-  ADD UNIQUE KEY `cvv` (`cvv`),
-  ADD UNIQUE KEY `numero` (`numero`);
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`admin_id`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- Indici per le tabelle `clienti`
@@ -138,55 +153,50 @@ ALTER TABLE `clienti`
   ADD PRIMARY KEY (`cliente_id`),
   ADD UNIQUE KEY `mail` (`mail`),
   ADD UNIQUE KEY `username` (`username`),
-  ADD KEY `carta_credito_id` (`carta_credito_id`),
-  ADD KEY `indrizzo_id` (`indrizzo_id`);
+  ADD KEY `indirizzo_id` (`indirizzo_id`);
 
 --
 -- Indici per le tabelle `indirizzi`
 --
 ALTER TABLE `indirizzi`
-  ADD PRIMARY KEY (`indrizzo_id`);
+  ADD PRIMARY KEY (`indirizzo_id`);
 
 --
--- Indici per le tabelle `stazioni`
+-- Indici per le tabelle `operazioni`
 --
-ALTER TABLE `stazioni`
-  ADD PRIMARY KEY (`stazione_id`),
-  ADD KEY `indirizzo_id` (`indirizzo_id`);
+ALTER TABLE `operazioni`
+  ADD PRIMARY KEY (`operazione_id`),
+  ADD KEY `bicicletta_id` (`bicicletta_id`),
+  ADD KEY `stazione_id` (`stazione_id`),
+  ADD KEY `cliente_id` (`cliente_id`);
 
 --
 -- AUTO_INCREMENT per le tabelle scaricate
 --
 
 --
--- AUTO_INCREMENT per la tabella `biciclette`
+-- AUTO_INCREMENT per la tabella `admin`
 --
-ALTER TABLE `biciclette`
-  MODIFY `bicicletta_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT per la tabella `carte_credito`
---
-ALTER TABLE `carte_credito`
-  MODIFY `carta_credito_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `admin`
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT per la tabella `clienti`
 --
 ALTER TABLE `clienti`
-  MODIFY `cliente_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `cliente_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT per la tabella `indirizzi`
 --
 ALTER TABLE `indirizzi`
-  MODIFY `indrizzo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `indirizzo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT per la tabella `stazioni`
+-- AUTO_INCREMENT per la tabella `operazioni`
 --
-ALTER TABLE `stazioni`
-  MODIFY `stazione_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `operazioni`
+  MODIFY `operazione_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Limiti per le tabelle scaricate
@@ -196,8 +206,7 @@ ALTER TABLE `stazioni`
 -- Limiti per la tabella `clienti`
 --
 ALTER TABLE `clienti`
-  ADD CONSTRAINT `clienti_ibfk_1` FOREIGN KEY (`carta_credito_id`) REFERENCES `carte_credito` (`carta_credito_id`),
-  ADD CONSTRAINT `clienti_ibfk_2` FOREIGN KEY (`indrizzo_id`) REFERENCES `indirizzi` (`indrizzo_id`);
+  ADD CONSTRAINT `clienti_ibfk_1` FOREIGN KEY (`indirizzo_id`) REFERENCES `indirizzi` (`indirizzo_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
