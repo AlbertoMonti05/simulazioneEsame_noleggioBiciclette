@@ -128,7 +128,7 @@ INSERT INTO `indirizzi` (`indirizzo_id`, `via`, `citta`, `provincia`, `regione`,
 
 CREATE TABLE `operazioni` (
   `operazione_id` int(11) NOT NULL,
-  `tipo` enum('noleggio','riconsegna','','') NOT NULL,
+  `tipo` enum('noleggio','riconsegna') NOT NULL,
   `data_ora` datetime NOT NULL,
   `cliente_id` int(11) NOT NULL,
   `stazione_id` int(11) NOT NULL,
