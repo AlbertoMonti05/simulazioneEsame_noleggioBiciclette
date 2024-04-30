@@ -30,7 +30,7 @@
     <body>
         <h1>REGISTRAZIONE</h1>
 
-        <form>
+        <div>
             nome:<input type="text" id="nome">
             <br>
             cognome:<input type="text" id="cognome">
@@ -44,7 +44,7 @@
             conferma password: <input type="password" id="confermaPassword" autocomplete="current-password">
             <br>
             <button onclick="doRegistrazione()">REGISTRATI</button>
-        </form>
+        </div>
 
     </body>
 

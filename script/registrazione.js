@@ -90,7 +90,7 @@ function reindizzamento(isRegistred)
 {
     // registrazione corretta
     if(isRegistred)
-        window.location.href = "login.php";
+        window.location.href = "../pages/login.php";
     else
         alert("ERRORE! Registrazione non andata a buon fine!");
 }
