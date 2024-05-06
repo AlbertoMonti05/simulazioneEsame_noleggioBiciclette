@@ -29,6 +29,8 @@
     // prendo il risultato
     $result = $statement->get_result();
 
+    $return = "ciao";
+
     // username già usato
     if ($result->num_rows == 1) 
     {
@@ -36,7 +38,7 @@
         $connDB->close();
 
         // return
-        echo true;
+        $return = true;
     }
     else
     {
@@ -44,6 +46,8 @@
         $connDB->close();
 
         // return
-        echo false;
+        $return = false;
     }
+
+    echo $return;
 ?>
