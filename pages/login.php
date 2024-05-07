@@ -31,7 +31,7 @@
         <h1>LOGIN</h1>
 
         <form>
-            mail: <input type="text" id="mail">
+            mail o username: <input type="text" id="mail_username">
             <br>
             password: <input type="password" id="password" autocomplete="current-password">
             <br>

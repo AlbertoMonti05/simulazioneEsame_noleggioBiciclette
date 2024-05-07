@@ -8,7 +8,7 @@
 
     // query
     include_once("../util/query.php");
-    global $checkLogin;
+    global $checkLoginCliente_Mail, $checkLoginCliente_Username;
 
     // connessione al database
     $connDB = new mysqli($server, $cliente, $psw, $dbBiciclette);
@@ -17,43 +17,55 @@
     if ($connDB->connect_error)
         die("Connessione con il database non riuscita: " . $connDB->connect_error);
 
-    // statement
-    $statement = $connDB->prepare($checkLogin);
-
-    // password in md5
-    $password = md5($_GET["password"]);
-
-    // parametri nello statement
-    $statement->bind_param("ss", $_GET["mail"], $password);
-
-    // eseguo lo statement
-    $statement->execute();
-
-    // prendo il risultato
-    $result = $statement->get_result();
-
-    // login corretta
-    if ($result->num_rows == 1) 
-    {
-        // prendo i dati dell'utente
-        $cliente = $result->fetch_assoc();
-
-        // salvo id utente in sessione
-        $_SESSION["cliente_id"] = $cliente["cliente_id"];
-        //$_SESSION["Username_Utente"] = $cliente["username"];
-
-        // chiudo connessione al database
-        $connDB->close();
-
-        // return
+    // login con la mail
+    if(doLogin($checkLoginCliente_Mail) == true)
         echo true;
-    }
-    else
-    {
-        // chiudo connessione al database
-        $connDB->close();
+    else // login con lo username
+        echo doLogin($checkLoginCliente_Username);
 
-        // return
-        echo false;
+    // LOGIN
+    function doLogin($query)
+    {
+        // prendo i parametri
+        $mail_username = $_GET["mail_username"];
+        // password in md5
+        $password = md5($_GET["password"]);
+
+        // statement
+        $statement = $connDB->prepare($query);
+
+        // parametri nello statement
+        $statement->bind_param("ss", $mail_username, $password);
+
+        // eseguo lo statement
+        $statement->execute();
+
+        // prendo il risultato
+        $result = $statement->get_result();
+
+        // login corretta
+        if ($result->num_rows == 1) 
+        {
+            // prendo i dati dell'utente
+            $cliente = $result->fetch_assoc();
+
+            // salvo id utente in sessione
+            $_SESSION["cliente_id"] = $cliente["cliente_id"];
+            //$_SESSION["Username_Utente"] = $cliente["username"];
+
+            // chiudo connessione al database
+            $connDB->close();
+
+            // return
+            return true;
+        }
+        else
+        {
+            // chiudo connessione al database
+            $connDB->close();
+
+            // return
+            return false;
+        }
     }
 ?>

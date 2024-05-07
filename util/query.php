@@ -1,8 +1,15 @@
 <?php
     // QUERY PER CONTROLLO NEL DATABASE
 
-    // controllo login
-    $checkLogin = "SELECT * FROM `clienti` WHERE `mail`=? AND `password`=?";
+    // controllo login cliente con mail
+    $checkLoginCliente_Mail = "SELECT * FROM `clienti` WHERE `mail`=? AND `password`=?";
+    // controllo login cliente con username
+    $checkLoginCliente_Username = "SELECT * FROM `clienti` WHERE `username`=? AND `password`=?";
+
+    // controllo login admin con mail
+    $checkLoginAdmin_Mail = "SELECT * FROM `admin` WHERE `mail`=? AND `password`=?";
+    // controllo login admin con username
+    $checkLoginAdmin_Username = "SELECT * FROM `admin` WHERE `username`=? AND `password`=?";
 
     // controllo mail
     $checkMail = "SELECT * FROM `clienti` WHERE `mail` = ?";

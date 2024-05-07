@@ -2,7 +2,7 @@
 function doLogin()
 {
     // prendo i parametri
-    let mail = $("#mail").val();
+    let mail_username = $("#mail_username").val();
     let password = $("#password").val();
 
     // parametri mancanti
@@ -13,7 +13,7 @@ function doLogin()
     }
 
     // richiestra di login al db
-    callDB_login({mail: mail, password: password});
+    callDB_login({mail_username: mail_username, password: password});
 }
 
 // CHIAMATA AL DB PER LA LOGIN
@@ -34,5 +34,5 @@ function reindizzamento(isLogged)
     if(isLogged)
         window.location.href = "mappa.php";
     else
-        alert("ERRORE! Mail e/o password errate!");
+        alert("ERRORE! Credenziali di accesso errate!");
 }
