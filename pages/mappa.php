@@ -42,6 +42,7 @@
             {
                 ?>
 
+                    <a href="profilo.php">PROFILO</a>
                     <a href="logout.php">LOGOUT</a>
                     <br>
 

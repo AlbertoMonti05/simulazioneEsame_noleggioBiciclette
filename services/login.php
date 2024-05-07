@@ -18,13 +18,25 @@
         die("Connessione con il database non riuscita: " . $connDB->connect_error);
 
     // login con la mail
-    if(doLogin($checkLoginCliente_Mail) == true)
+    if(doLogin($connDB, $checkLoginCliente_Mail) == true)
+    {
+        // chiudo connessione al database
+        $connDB->close();
+        
         echo true;
+    }
     else // login con lo username
-        echo doLogin($checkLoginCliente_Username);
+    {
+        $result =  doLogin($connDB, $checkLoginCliente_Username);
+
+        // chiudo connessione al database
+        $connDB->close();
+        
+        echo $result;
+    }    
 
     // LOGIN
-    function doLogin($query)
+    function doLogin($connDB, $query)
     {
         // prendo i parametri
         $mail_username = $_GET["mail_username"];
@@ -53,19 +65,10 @@
             $_SESSION["cliente_id"] = $cliente["cliente_id"];
             //$_SESSION["Username_Utente"] = $cliente["username"];
 
-            // chiudo connessione al database
-            $connDB->close();
-
             // return
             return true;
         }
-        else
-        {
-            // chiudo connessione al database
-            $connDB->close();
-
-            // return
+        else            
             return false;
-        }
     }
 ?>
