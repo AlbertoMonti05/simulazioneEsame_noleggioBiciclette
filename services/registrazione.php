@@ -32,6 +32,8 @@
     // prendo il risultato
     $result = $statement->get_result();
 
+    $return;
+
     // registrazione effettuata
     if ($result) 
     {
@@ -39,7 +41,7 @@
         $connDB->close();
 
         // return
-        echo true;
+        $return = true;
     }
     else
     {
@@ -47,6 +49,8 @@
         $connDB->close();
 
         // return
-        echo false;
+        $return = false;
     }
+
+    echo $return;
 ?>

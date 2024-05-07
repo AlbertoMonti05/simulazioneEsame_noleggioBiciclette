@@ -1,5 +1,5 @@
 // REGISTRAZIONE
-function doRegistrazione()
+async function doRegistrazione()
 {
     // prendo i parametri
     let nome = $("#nome").val();
@@ -10,12 +10,12 @@ function doRegistrazione()
     let confermaPassword = $("#confermaPassword").val();
 
     // eseguo i controlli
-    let stato = doControlli(nome, cognome, username, mail, password, confermaPassword);
+    let stato = await doControlli(nome, cognome, username, mail, password, confermaPassword);
 
     // controlli a buon fine
     if(stato == true)
         // richiestra di registrazione al db
-        callDB_registrazione({nome: nome, cognome: cognome, username: username, mail: mail, password: password});
+        await callDB_registrazione({nome: nome, cognome: cognome, username: username, mail: mail, password: password});
     else
     {
         alert(stato);
@@ -40,25 +40,11 @@ async function doControlli(nome, cognome, username, mail, password, confermaPass
 {
     // parametri mancanti
     if(nome == "" || cognome == "" || username == "" || mail == "" || password == "" || confermaPassword == "")
-        return "ERRORE! Inserire mail e password!";
+        return "ERRORE! Inserire tutti i campi!";
 
     // password non corrispondono
     if(password != confermaPassword)
         return "ERRORE! Le password non corrispondono!";
-
-
-
-
-
-        
-
-    //https://stackoverflow.com/questions/48708449/promise-pending-why-is-it-still-pending-how-can-i-fix-this
-
-
-
-
-
-
 
     // username già utilizzato
     let usernameUsed = await callDB_checkUsername({username: username});
@@ -68,7 +54,7 @@ async function doControlli(nome, cognome, username, mail, password, confermaPass
     // mail già utilizzata
     let mailUsed = await callDB_checkMail({mail: mail});
     if(mailUsed == true)
-        return "ERRORE! Mail già associata ad un altro account! Esegui la login!";
+        return "ERRORE! Mail già associata ad un altro account!";
 
     // tutto ok
     return true;
@@ -103,6 +89,9 @@ async function callDB_registrazione(params)
 {
     // chiamata al db
     let result = await richiesta("../services/registrazione.php", params);
+
+    if(result == "")
+        result = true;
 
     // reindirizzo l'utente
     reindizzamento(result);

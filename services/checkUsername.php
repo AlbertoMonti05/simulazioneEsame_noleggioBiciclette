@@ -29,7 +29,7 @@
     // prendo il risultato
     $result = $statement->get_result();
 
-    $return = "ciao";
+    $return;
 
     // username già usato
     if ($result->num_rows == 1) 

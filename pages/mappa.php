@@ -32,8 +32,8 @@
             {
                 ?>
 
-                    <a href="login.php"><button>LOGIN</button></a>
-                    <a href="registrazione.php"><button>REGISTRATI</button></a>
+                    <a href="login.php">LOGIN</a>
+                    <a href="registrazione.php">REGISTRATI</a>
                     <br>
 
                 <?php
@@ -42,7 +42,7 @@
             {
                 ?>
 
-                    <a href="logout.php"><button>LOGOUT</button></a>
+                    <a href="logout.php">LOGOUT</a>
                     <br>
 
                 <?php
