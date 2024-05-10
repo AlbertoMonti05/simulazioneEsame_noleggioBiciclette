@@ -6,7 +6,7 @@ function richiesta(page, params)
         $.get(page, params, function(phpData)
         {
             resolve(phpData);
-        });
+        }, "json");
     });
 }
 
@@ -14,19 +14,17 @@ function richiesta(page, params)
 $(document).ready(async function()
 {
     // prendo i dati del cliente
-    let dati = await getDati(/*{cliente_id: cliente_id}*/);
+    let dati = await getDati();
 
     // carico i dati del cliente
     await caricaDati(dati);
 });
 
 // PRENDO I DATI
-async function getDati(/*params*/)
+async function getDati()
 {
     // chiamata al db
-    let result = await richiesta("../services/getDatiCliente.php"/*, params*/);
-
-    alert(result);
+    let result = await richiesta("../services/getDatiCliente.php");
 
     return result;
 }
@@ -38,5 +36,18 @@ async function caricaDati(dati)
     $("#cognome").val(dati["cognome"]);
     $("#mail").val(dati["mail"]);
     $("#username").val(dati["username"]);
-    $("#indirizzo").val(dati["indirizzo"]);
+
+    let indirizzo = getIndirizzo({indirizzo_id: dati["indirizzo_id"]});
+    $("#indirizzo").val(indirizzo);
+}
+
+// PRENDO L'INDIRIZZO
+async function getIndirizzo(params)
+{
+    // chiamata al db
+    let result = await richiesta("../services/getIndirizzoCliente.php", params);
+
+    alert(result);
+
+    return result;
 }

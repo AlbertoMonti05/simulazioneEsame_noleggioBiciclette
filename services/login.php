@@ -65,9 +65,9 @@
             $_SESSION["cliente_id"] = $cliente["cliente_id"];
 
             // return
-            return true;
+            echo true;
         }
         else            
-            return false;
+            echo false;
     }
 ?>
