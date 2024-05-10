@@ -37,17 +37,16 @@ async function caricaDati(dati)
     $("#mail").val(dati["mail"]);
     $("#username").val(dati["username"]);
 
-    let indirizzo = getIndirizzo({indirizzo_id: dati["indirizzo_id"]});
+    let indirizzo = await getIndirizzo({indirizzo_id: dati["indirizzo_id"]});
     $("#indirizzo").val(indirizzo);
+    $("#indirizzo").attr("size", indirizzo.length);
 }
 
 // PRENDO L'INDIRIZZO
 async function getIndirizzo(params)
 {
     // chiamata al db
-    let result = await richiesta("../services/getIndirizzoCliente.php", params);
+    let result = await richiesta("../services/getIndirizzo.php", params);
 
-    alert(result);
-
-    return result;
+    return result["via"] + ", " + result["citta"] + ", (" + result["provincia"] + "), " + result["cap"];
 }

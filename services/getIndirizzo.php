@@ -29,7 +29,7 @@
     $statement = $connDB->prepare($getIndirizzo);
 
     // parametri nello statement
-    $statement->bind_param("i", $_SESSION["indirizzo_id"]);
+    $statement->bind_param("i", $_GET["indirizzo_id"]);
 
     // eseguo lo statement
     $statement->execute();
