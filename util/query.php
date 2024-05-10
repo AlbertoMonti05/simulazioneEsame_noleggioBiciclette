@@ -19,4 +19,7 @@
 
     // registrazione
     $registrazione = "INSERT INTO `clienti` (`nome`, `cognome`, `username`, `mail`, `password`) VALUE (?,?,?,?,?)";
+
+    // prendo i dati del cliente
+    $getDatiCliente = "SELECT * FROM `clienti` WHERE `cliente_id` = ?";
 ?>

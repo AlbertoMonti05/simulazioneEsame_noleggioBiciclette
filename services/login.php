@@ -58,12 +58,11 @@
         // login corretta
         if ($result->num_rows == 1) 
         {
-            // prendo i dati dell'utente
+            // prendo i dati del cliente
             $cliente = $result->fetch_assoc();
 
-            // salvo id utente in sessione
+            // salvo id cliente in sessione
             $_SESSION["cliente_id"] = $cliente["cliente_id"];
-            //$_SESSION["Username_Utente"] = $cliente["username"];
 
             // return
             return true;

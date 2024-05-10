@@ -6,7 +6,7 @@ function doLogin()
     let password = $("#password").val();
 
     // parametri mancanti
-    if(mail == "" || password == "")
+    if(mail_username == "" || password == "")
     {
         alert("ERRORE! Inserire mail e password!");
         return;
