@@ -37,5 +37,6 @@
     // prendo il risultato
     $result = $statement->get_result();
 
+    // ritorno !result perche' get_result() ritorna false se non ci sono stati errori
     echo json_encode(!$result);
 ?>
