@@ -7,8 +7,15 @@ async function doRegistrazione()
     // eseguo i controlli
     let stato = await doControlli(indirizzo);
 
-    // reindirizzo
-    callDB_registrazione(stato);
+    // controlli a buon fine
+    if(stato == true)
+        // richiestra di registrazione al db
+        await callDB_registrazione({indirizzo: indirizzo});
+    else
+    {
+        alert(stato);
+        return;
+    }
 }
 
 // RICHIESTA SERVIZIO
@@ -40,6 +47,10 @@ async function callDB_registrazione(params)
     // chiamata al db
     let result = await richiesta("../../services/registrazione.php", params);
 
+    if(result == "")
+        result = true;
+
+    // reindirizzo
     reindizzamento(result)
 }
 
