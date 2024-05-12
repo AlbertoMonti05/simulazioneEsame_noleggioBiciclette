@@ -44,6 +44,19 @@ async function modificaDati()
         alert("Errore! Dati non modificati");
 }
 
+// CARICO I DATI
+async function caricaDati(dati)
+{
+    $("#nome").val(dati["nome"]);
+    $("#cognome").val(dati["cognome"]);
+    $("#mail").val(dati["mail"]);
+    $("#username").val(dati["username"]);
+
+    let indirizzo = await getIndirizzo({indirizzo_id: dati["indirizzo_id"]});
+    $("#indirizzo").val(indirizzo);
+    $("#indirizzo").attr("size", indirizzo.length);
+}
+
 // PRENDO I DATI
 async function getDati()
 {
