@@ -1,4 +1,4 @@
-// REGISTRAZIONE
+// PROCEDO CON LA REGISTRAZIONE
 async function avanti()
 {
     // prendo i parametri
@@ -28,7 +28,7 @@ function reindizzamento(stato)
 {
     // controlli ok
     if(stato == true)
-        window.location.href = "../registrazione/fase2.php";
+        window.location.href = "fase2.php";
     else
         alert(stato);
 }
