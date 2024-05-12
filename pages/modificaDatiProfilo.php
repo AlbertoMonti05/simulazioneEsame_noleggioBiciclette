@@ -23,7 +23,6 @@
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
         <!-- IMPORTO LO SCRIPT -->
-        <script src="../script/profilo.js"></script>
         <script src="../script/modificaDatiProfilo.js"></script>
 
     </head>
@@ -32,13 +31,13 @@
         <h1>MODIFICA DATI PROFILO</h1>
 
         <div>
-            nome: <input type="text" id="nome">
+            nome: <input type="text" id="nome" onchange="modificaNome()">
             <br>
-            cognome: <input type="text" id="cognome">
+            cognome: <input type="text" id="cognome" onchange="modificaCognome()">
             <br>
-            mail: <input type="text" id="mail">
+            mail: <input type="text" id="mail" onchange="modificaMail()">
             <br>
-            username: <input type="text" id="username">
+            username: <input type="text" id="username" onchange="modificaUsername()">
             <br>
             <!--
             indirizzo: <input type="text" id="indirizzo">
