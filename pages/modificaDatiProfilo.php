@@ -17,31 +17,35 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Profilo cliente - BycicleRent</title>
+        <title>Modifica dati profilo - BycicleRent</title>
 
         <!-- IMPORTO jQuery -->
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
         <!-- IMPORTO LO SCRIPT -->
         <script src="../script/profilo.js"></script>
+        <script src="../script/modificaDatiProfilo.js"></script>
 
     </head>
 
     <body>
-        <h1>PROFILO CLIENTE</h1>
+        <h1>MODIFICA DATI PROFILO</h1>
 
         <div>
-            nome: <input type="text" id="nome" readonly="readonly">
+            nome: <input type="text" id="nome">
             <br>
-            cognome: <input type="text" id="cognome" readonly="readonly">
+            cognome: <input type="text" id="cognome">
             <br>
-            mail: <input type="text" id="mail" readonly="readonly">
+            mail: <input type="text" id="mail">
             <br>
-            username: <input type="text" id="username" readonly="readonly">
+            username: <input type="text" id="username">
             <br>
-            indirizzo: <input type="text" id="indirizzo" readonly="readonly">
+            <!--
+            indirizzo: <input type="text" id="indirizzo">
             <br>
-            <a href="modificaDatiProfilo.php">MODIFICA DATI</a>
+            -->
+            <button onclick="modificaDati()">MOFIFICA DATI</button>
+            <a href="profilo.php">ANNULLA</a>
         </div>
 
     </body>

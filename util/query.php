@@ -27,4 +27,7 @@
 
     // prendo l'indirizzo
     $getIndirizzo = "SELECT * FROM `indirizzi` WHERE `indirizzo_id` = ?";
+
+    // modifico dati del profilo
+    $modificaDatiProfilo = "UPDATE `clienti` SET `nome` = ?, `cognome` = ?, `mail` = ?, `username` = ? WHERE `cliente_id` = ?";
 ?>
