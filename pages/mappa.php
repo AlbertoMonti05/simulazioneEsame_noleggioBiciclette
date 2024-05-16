@@ -17,13 +17,22 @@
         <title>Mappa - BycicleRent</title>
 
         <!-- IMPORTO LO SCRIPT -->
+        <!-- IMPORTO jQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+            <!-- Includi la libreria Leaflet.js -->
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
         <script src="../script/mappa.js"></script>
+        
+        <!-- IMPORTO LO STILE -->
+        <link rel="stylesheet" type="text/css" href="../style/mappa.css" />
+        <!-- Includi il foglio di stile di Leaflet -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
     </head>
 
     <body>
         
-        <h1>MAPPA STAZIONI NOGLEGGIO/RICONSEGNA BICICLETTE</h1>
+        <h1 style="text-align: center;">MAPPA STAZIONI NOGLEGGIO/RICONSEGNA BICICLETTE</h1>
 
         <?php
 
@@ -31,25 +40,28 @@
             if(!isset($_SESSION['cliente_id']))
             {
                 ?>
-
-                    <a href="login.php">LOGIN</a>
-                    <a href="registrazione.php">REGISTRATI</a>
-                    <br>
-
+                    <div style="text-align: right;">
+                        <a href="login.php">LOGIN</a>
+                        <br>
+                        <a href="registrazione.php">REGISTRATI</a>
+                    </div>
                 <?php
             }
             else
             {
                 ?>
-
-                    <a href="profilo.php">PROFILO</a>
-                    <a href="logout.php">LOGOUT</a>
-                    <br>
-
+                    <div style="text-align: right;">
+                        <a href="profilo.php">PROFILO</a>
+                        <br>
+                        <a href="logout.php">LOGOUT</a>
+                    </div>
                 <?php
             }
 
         ?>
+
+        <br>
+        <div id="map-container"></div>
 
     </body>
 

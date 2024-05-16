@@ -30,4 +30,7 @@
 
     // modifico dati del profilo
     $modificaDatiProfilo = "UPDATE `clienti` SET `nome` = ?, `cognome` = ?, `mail` = ?, `username` = ? WHERE `cliente_id` = ?";
+
+    // prendo tutti i parcheggi
+    $getParcheggi = "SELECT `latitudine`, `longitudine` FROM `parcheggi`";
 ?>
