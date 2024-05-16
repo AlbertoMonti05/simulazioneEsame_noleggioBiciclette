@@ -63,5 +63,18 @@ function aggiungiParcheggi(parcheggi)
 // FUNZIONE PER AGGIUNGERE IL MARKER DI UN PARCHEGGIO NELLA MAPPA
 function aggiungiParcheggio(parcheggio)
 {
-    L.marker([parcheggio["latitudine"], parcheggio["longitudine"]]).addTo(mappa);
+    let marker = L.marker([parcheggio["latitudine"], parcheggio["longitudine"]]).addTo(mappa);
+
+    // alla selezione del marker
+    marker.on('click', function(e) {
+        // prendo latitudine e longitudine del parcheggio
+        let latitudine = e.latlng.lat;
+        let longitudine = e.latlng.lng;
+
+        // pagina da visualizzare
+        let pagina = "../pages/parcheggio.php?latitudine="+latitudine+"&longitudine="+longitudine;
+
+        // apro pagina che visualizza il parcheggio
+        window.location.href = pagina;
+    });
 }
