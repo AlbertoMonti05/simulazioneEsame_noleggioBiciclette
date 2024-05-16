@@ -41,7 +41,7 @@ async function doControlli(indirizzo)
     return true;
 }
 
-// CHIAMATA AL DB PER CONTROLLARE LA MAIL
+// CHIAMATA AL DB PER FARE LA REGISTRAZIONE
 async function callDB_registrazione(params)
 {
     // chiamata al db
