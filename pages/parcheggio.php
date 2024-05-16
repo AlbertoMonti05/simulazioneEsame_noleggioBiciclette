@@ -13,6 +13,10 @@
     }
     // else
         // rimango su questa pagina
+
+    // metto latitudine e longitudine in sessione
+    $_SESSION["latitudine"] = $_GET["latitudine"];
+    $_SESSION["longitudine"] = $_GET["longitudine"];
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +38,7 @@
     </head>
 
     <body>
-        <h1 id="h1">PARCHEGGIO</h1>
+        <h1 id="h1"></h1>
 
         <h3 id="postiLiberi"></h3>
     </body>

@@ -33,4 +33,7 @@
 
     // prendo tutti i parcheggi
     $getParcheggi = "SELECT `latitudine`, `longitudine` FROM `parcheggi`";
+
+    // prendo il parcheggio tramite latitudine e longitudine
+    $getParcheggioLatLon = "SELECT * FROM `parcheggi` WHERE `latitudine` = ? AND `longitudine` = ?";
 ?>
