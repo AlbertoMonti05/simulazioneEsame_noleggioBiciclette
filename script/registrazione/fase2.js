@@ -1,11 +1,15 @@
+let username = null;
+let mail = null;
+let password = null;
+
 // PROCEDO CON LA REGISTRAZIONE
 async function avanti()
 {
     // prendo i parametri
-    let username = $("#username").val();
-    let mail = $("#mail").val();
-    let password = $("#password").val();
-    let confermaPassword = $("#confermaPassword").val();
+    username = $("#username").val();
+    mail = $("#mail").val();
+    password = $("#password").val();
+    confermaPassword = $("#confermaPassword").val();
 
     // eseguo i controlli
     let stato = await doControlli(username, mail, password, confermaPassword);
@@ -80,7 +84,21 @@ function reindizzamento(stato)
 {
     // controlli ok
     if(stato == true)
+    {
+        // salvo dati
+        salvaDati();
+
+        // reindirizzo
         window.location.href = "fase3.php";
+    }
     else
         alert(stato);
+}
+
+// FUNZIONE PER SALVARE I DATI DELLA FASE
+function salvaDati()
+{
+    localStorage.setItem('username', username);
+    localStorage.setItem('mail', mail);
+    localStorage.setItem('password', password);
 }

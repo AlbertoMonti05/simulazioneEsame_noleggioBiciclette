@@ -1,21 +1,15 @@
-// REGISTRAZIONE
-async function doRegistrazione()
+let indirizzo = null;
+
+// PROCEDO CON LA REGISTRAZIONE
+async function avanti()
 {
     // prendo i parametri
-    let indirizzo = $("#indirizzo").val();
+    indirizzo = $("#indirizzo").val();
 
     // eseguo i controlli
     let stato = await doControlli(indirizzo);
 
-    // controlli a buon fine
-    if(stato == true)
-        // richiestra di registrazione al db
-        await callDB_registrazione({indirizzo: indirizzo});
-    else
-    {
-        alert(stato);
-        return;
-    }
+    reindizzamento(stato);
 }
 
 // RICHIESTA SERVIZIO
@@ -41,25 +35,24 @@ async function doControlli(indirizzo)
     return true;
 }
 
-// CHIAMATA AL DB PER FARE LA REGISTRAZIONE
-async function callDB_registrazione(params)
+// REINDIRIZZAMENTO
+function reindizzamento(stato)
 {
-    // chiamata al db
-    let result = await richiesta("../../services/registrazione.php", params);
+    // controlli ok
+    if(stato == true)
+    {
+        // salvo dati
+        salvaDati();
 
-    if(result == "")
-        result = true;
-
-    // reindirizzo
-    reindizzamento(result)
+        // reindirizzo
+        window.location.href = "fase4.php";
+    }
+    else
+        alert(stato);
 }
 
-// REINDIRIZZAMENTO
-function reindizzamento(isRegistred)
+// FUNZIONE PER SALVARE I DATI DELLA FASE
+function salvaDati()
 {
-    // regitrazione effettuata
-    if(isRegistred == true)
-        window.location.href = "../login.php";
-    else
-        alert(isRegistred);
+    localStorage.setItem('indirizzo', indirizzo);
 }
