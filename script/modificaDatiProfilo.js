@@ -3,6 +3,7 @@ let nome = "";
 let cognome = "";
 let mail = "";
 let username = "";
+//let indirizzo = "";
 
 // RICHIESTA SERVIZIO
 function richiesta(page, params)
@@ -24,19 +25,13 @@ $(document).ready(async function()
 
     // carico i dati del cliente
     await caricaDati(dati);
-
-    // prendo i dati attuali
-    nome = $("#nome").val();
-    cognome = $("#cognome").val();
-    mail = $("#mail").val();
-    username = $("#username").val();
 });
 
 // MODIFICA DATI DEL PROFILO
 async function modificaDati()
 {
     // modifico i dati nel database
-    let stato = await richiesta("../services/modificaDatiProfilo.php", {nome: nome, cognome: cognome, mail: mail, username: username});
+    let stato = await richiesta("../services/modificaDatiProfilo.php", {nome: nome, cognome: cognome, mail: mail, username: username/*, indirizzo: indirizzo*/});
 
     if(stato == true)
         alert("Dati modificati");
@@ -51,6 +46,14 @@ async function caricaDati(dati)
     $("#cognome").val(dati["cognome"]);
     $("#mail").val(dati["mail"]);
     $("#username").val(dati["username"]);
+    //$("#indirizzo").val(dati["indirizzo"]);
+
+    // prendo i dati attuali
+    nome = $("#nome").val();
+    cognome = $("#cognome").val();
+    mail = $("#mail").val();
+    username = $("#username").val();
+    //indirizzo = $("#indirizzo").val();
 
     let indirizzo = await getIndirizzo({indirizzo_id: dati["indirizzo_id"]});
     $("#indirizzo").val(indirizzo);
