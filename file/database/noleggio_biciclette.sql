@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 17, 2024 alle 08:23
+-- Creato il: Mag 17, 2024 alle 10:03
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -98,29 +98,8 @@ CREATE TABLE `clienti` (
 
 INSERT INTO `clienti` (`cliente_id`, `nome`, `cognome`, `username`, `mail`, `password`, `indirizzo_id`) VALUES
 (38, 'mario', 'rossi', 'marioRossi', 'mario@gmail.com', 'de2f15d014d40b93578d255e6221fd60', NULL),
-(39, 'a', 'aa', 'aaa', 'a@gmail.com', '4124bc0a9335c27f086f24ba207a4912', 1);
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `indirizzi`
---
-
-CREATE TABLE `indirizzi` (
-  `indirizzo_id` int(11) NOT NULL,
-  `via` varchar(64) NOT NULL,
-  `citta` varchar(32) NOT NULL,
-  `provincia` char(2) NOT NULL,
-  `regione` varchar(32) NOT NULL,
-  `cap` char(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dump dei dati per la tabella `indirizzi`
---
-
-INSERT INTO `indirizzi` (`indirizzo_id`, `via`, `citta`, `provincia`, `regione`, `cap`) VALUES
-(1, 'via Garibaldi 11', 'Mariano Comense', 'CO', 'Lombardia', '22070');
+(39, 'a', 'aa', 'user', 'a@gmail.com', '4124bc0a9335c27f086f24ba207a4912', NULL),
+(40, 'nome', 'cognome', 'useraa', 'mail', '1a1dc91c907325c69271ddf0c944bc72', NULL);
 
 -- --------------------------------------------------------
 
@@ -192,12 +171,6 @@ ALTER TABLE `clienti`
   ADD KEY `indirizzo_id` (`indirizzo_id`);
 
 --
--- Indici per le tabelle `indirizzi`
---
-ALTER TABLE `indirizzi`
-  ADD PRIMARY KEY (`indirizzo_id`);
-
---
 -- Indici per le tabelle `operazioni`
 --
 ALTER TABLE `operazioni`
@@ -227,13 +200,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT per la tabella `clienti`
 --
 ALTER TABLE `clienti`
-  MODIFY `cliente_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
-
---
--- AUTO_INCREMENT per la tabella `indirizzi`
---
-ALTER TABLE `indirizzi`
-  MODIFY `indirizzo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `cliente_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT per la tabella `operazioni`
