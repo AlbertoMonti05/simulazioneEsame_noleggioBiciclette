@@ -12,7 +12,7 @@ async function avanti()
     confermaPassword = $("#confermaPassword").val();
 
     // eseguo i controlli
-    let stato = await doControlli(username, mail, password, confermaPassword);
+    let stato = await doControlli(confermaPassword);
 
     // reindirizzo
     reindizzamento(stato);
@@ -31,7 +31,7 @@ function richiesta(page, params)
 }
 
 // CONTROLLI SUI PARAMETRI IN INPUT
-async function doControlli(username, mail, password, confermaPassword)
+async function doControlli(confermaPassword)
 {
     // parametri mancanti
     if(username == "" || mail == "" || password == "" || confermaPassword == "")
