@@ -32,7 +32,7 @@
     $modificaDatiProfilo = "UPDATE `clienti` SET `nome` = ?, `cognome` = ?, `mail` = ?, `username` = ? WHERE `cliente_id` = ?";
 
     // prendo tutti i parcheggi
-    $getParcheggi = "SELECT `latitudine`, `longitudine` FROM `parcheggi`";
+    $getParcheggi = "SELECT * FROM `parcheggi`";
 
     // prendo il parcheggio tramite latitudine e longitudine
     $getParcheggioLatLon = "SELECT * FROM `parcheggi` WHERE `latitudine` = ? AND `longitudine` = ?";
