@@ -31,6 +31,8 @@
         <h1>REGISTRAZIONE</h1>
 
         <div>
+            <h3 id="nome"></h3>
+            <h3 id="cognome"></h3>
             username:<input type="text" id="username">
             <br>
             mail:<input type="text" id="mail">

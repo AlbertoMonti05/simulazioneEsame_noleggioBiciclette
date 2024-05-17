@@ -1,3 +1,36 @@
+let nome = null;
+let congome = null;
+
+// DOCUMENTO CARICATO
+$(document).ready(function()
+{
+    // controllo i dati della fase precedente
+    getDatiFasePrecedente();
+
+    // fase 1 non fatta
+    if(nome == null || cognome == null)
+        // reindirizzamento alla fase 1
+        window.location.href = "fase1.php";
+    else
+        // inserisco i dati della fase 1 nella pagina
+        visualizzaDati();
+
+});
+
+// FUNZIONE PER PRENDERE I DATI DELLA FASE PRECEDENTE
+function getDatiFasePrecedente()
+{
+    nome = localStorage.getItem('nome');
+    cognome = localStorage.getItem('cognome');
+}
+
+// FUNZIONE PER INSERIRE I DATI DELLA FASE PRECEDENTE NELLA PAGINA
+function visualizzaDati()
+{
+    $("#nome").text("nome: " + nome);
+    $("#cognome").text("cognome: " + cognome);
+}
+
 let username = null;
 let mail = null;
 let password = null;
