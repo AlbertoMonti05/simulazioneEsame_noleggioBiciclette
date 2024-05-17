@@ -12,10 +12,10 @@ $(document).ready(function()
 
     // fase 2 non fatta
     if(username == null || username == null || password == null)
-        // reindirizzamento alla fase 2
+        // reindirizzamento
         window.location.href = "fase2.php";
     else
-        // inserisco i dati della fase 2 nella pagina
+        // inserisco i dati  nella pagina
         visualizzaDati();
 
 });

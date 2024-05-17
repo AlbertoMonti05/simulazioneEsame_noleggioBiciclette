@@ -23,7 +23,7 @@
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
         <!-- IMPORTO LO SCRIPT -->
-        <script src="../../script/registrazione/fase2.js"></script>
+        <script src="../../script/registrazione/fase4.js"></script>
 
     </head>
 
@@ -31,6 +31,11 @@
         <h1>REGISTRAZIONE</h1>
 
         <div>
+            <h3 id="nome"></h3>
+            <h3 id="cognome"></h3>
+            <h3 id="username"></h3>
+            <h3 id="mail"></h3>
+            <h3 id="indirizzo"></h3>
             nome titolare carta:<input type="text" id="nomeTitolareCarta">
             <br>
             cognome titolare carta:<input type="text" id="cognomeTitolareCarta">

@@ -9,10 +9,10 @@ $(document).ready(function()
 
     // fase 1 non fatta
     if(nome == null || cognome == null)
-        // reindirizzamento alla fase 1
+        // reindirizzamento
         window.location.href = "fase1.php";
     else
-        // inserisco i dati della fase 1 nella pagina
+        // inserisco i dati  nella pagina
         visualizzaDati();
 
 });

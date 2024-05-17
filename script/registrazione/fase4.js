@@ -4,6 +4,44 @@ let username = null;
 let mail = null;
 let password = null;
 let indirizzo = null;
+
+// DOCUMENTO CARICATO
+$(document).ready(function()
+{
+    // controllo i dati della fase precedente
+    getDatiFasePrecedente();
+
+    // fase 3 non fatta
+    if(indirizzo == null)
+        // reindirizzamento alla fase 3
+        window.location.href = "fase3.php";
+    else
+        // inserisco i dati nella pagina
+        visualizzaDati();
+
+});
+
+// FUNZIONE PER PRENDERE I DATI DELLA FASE PRECEDENTE
+function getDatiFasePrecedente()
+{
+    nome = localStorage.getItem('nome');
+    cognome = localStorage.getItem('cognome');
+    username = localStorage.getItem('username');
+    mail = localStorage.getItem('mail');
+    password = localStorage.getItem('password');
+    indirizzo = localStorage.getItem('indirizzo');
+}
+
+// FUNZIONE PER INSERIRE I DATI DELLA FASE PRECEDENTE NELLA PAGINA
+function visualizzaDati()
+{
+    $("#nome").text("nome: " + nome);
+    $("#cognome").text("cognome: " + cognome);
+    $("#username").text("username: " + username);
+    $("#mail").text("mail: " + mail);
+    $("#indirizzo").text("indirizzo: " + indirizzo);
+}
+
 let nomeTitolareCarta = null;
 let cognomeTitolareCarta = null;
 let numeroCarta = null;
@@ -65,13 +103,6 @@ async function doControlli()
 // FUNZIONE PER PRENDERE I DATI
 function getDati()
 {
-    nome = localStorage.getItem('nome');
-    cognome = localStorage.getItem('cognome');
-    username = localStorage.getItem('username');
-    mail = localStorage.getItem('mail');
-    password = localStorage.getItem('password');
-    indirizzo = localStorage.getItem('indirizzo');
-
     return {nome: nome, cognome: cognome, username:username,mail:mail,password:password,indirizzo:indirizzo,nomeTitolareCarta:nomeTitolareCarta,cognomeTitolareCarta:cognomeTitolareCarta,numeroCarta:numeroCarta,scadenzaCarta:scadenzaCarta,cvvCarta,cvvCarta}
 }
 
