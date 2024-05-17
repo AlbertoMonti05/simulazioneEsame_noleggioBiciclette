@@ -96,7 +96,35 @@ async function doControlli()
     if(nomeTitolareCarta == "" || cognomeTitolareCarta == "" || numeroCarta == "" || scadenzaCarta == "" || cvvCarta == "")
         return "ERRORE! Inserire i dati richiesti!";
 
+   // controllo numero della carta (lunghezza e che sono solo numeri)
+    if(numeroCarta.length != 16 || /^\d{16}$/.test(numeroCarta) == false)
+        return "ERRORE! Numero carta non valido!";
+
+    // controllo scadenza carta
+    if(!controlloData(scadenzaCarta))
+        return "ERRORE! Scadenza carta non valida!";
+
+    // controllo ccv della carta (lunghezza e che sono solo numeri)
+    if(cvvCarta.length != 3 || /^\d{3}$/.test(cvvCarta) == false)
+        return "ERRORE! Cvv carta non valido!";
+
     // tutto ok
+    return true;
+}
+
+// FUNZIONE PER CONTROLLARE LA DATA
+function controlloData(scadenzaCarta)
+{
+    // prendo mese e anno attuale
+    var dataAttuale = new Date();
+    var meseAttuale = dataAttuale.getMonth() + 1; // Mesi in JavaScript vanno da 0 a 11
+    var annoAttuale = dataAttuale.getFullYear();
+
+    // data non valida
+    var [annoScadenza, meseScadenza] = scadenzaCarta.split('-').map(Number);
+    if (annoScadenza < annoAttuale || (annoScadenza === annoAttuale && meseScadenza < meseAttuale))
+        return false;
+
     return true;
 }
 

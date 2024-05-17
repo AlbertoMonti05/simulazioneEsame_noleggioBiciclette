@@ -40,11 +40,11 @@
             <br>
             cognome titolare carta:<input type="text" id="cognomeTitolareCarta">
             <br>
-            numero carta:<input type="password" id="numeroCarta">
+            numero carta:<input type="password" id="numeroCarta" maxlength="16">
             <br>
             scadenza carta:<input type="month" id="scadenzaCarta">
             <br>
-            cvv carta:<input type="text" id="cvvCarta">
+            cvv carta:<input type="text" id="cvvCarta" maxlength="3">
             <br>
             <button onclick="doRegistrazione()">REGISTRAZIONE</button>
         </div>
