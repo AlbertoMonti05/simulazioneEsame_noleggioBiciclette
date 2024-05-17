@@ -31,6 +31,11 @@
         <h1>REGISTRAZIONE</h1>
 
         <div>
+            <h3 id="nome"></h3>
+            <h3 id="cognome"></h3>
+            <h3 id="username"></h3>
+            <h3 id="mail"></h3>
+            <h3 id="password"></h3>
             indirizzo:<input type="text" id="indirizzo">
             <br>
             <button onclick="avanti()">AVANTI</button>

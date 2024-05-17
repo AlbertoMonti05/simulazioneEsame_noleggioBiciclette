@@ -1,3 +1,44 @@
+let nome = null;
+let cognome = null;
+let username = null;
+let mail = null;
+let password = null;
+
+// DOCUMENTO CARICATO
+$(document).ready(function()
+{
+    // controllo i dati della fase precedente
+    getDatiFasePrecedente();
+
+    // fase 2 non fatta
+    if(username == null || username == null || password == null)
+        // reindirizzamento alla fase 2
+        window.location.href = "fase2.php";
+    else
+        // inserisco i dati della fase 2 nella pagina
+        visualizzaDati();
+
+});
+
+// FUNZIONE PER PRENDERE I DATI DELLA FASE PRECEDENTE
+function getDatiFasePrecedente()
+{
+    nome = localStorage.getItem('nome');
+    cognome = localStorage.getItem('cognome');
+    username = localStorage.getItem('username');
+    mail = localStorage.getItem('mail');
+    password = localStorage.getItem('password');
+}
+
+// FUNZIONE PER INSERIRE I DATI DELLA FASE PRECEDENTE NELLA PAGINA
+function visualizzaDati()
+{
+    $("#nome").text("nome: " + nome);
+    $("#cognome").text("cognome: " + cognome);
+    $("#username").text("username: " + username);
+    $("#mail").text("mail: " + mail);
+}
+
 let indirizzo = null;
 
 // PROCEDO CON LA REGISTRAZIONE
