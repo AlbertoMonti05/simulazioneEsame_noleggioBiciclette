@@ -92,7 +92,7 @@ def getBiciclette(codice=None):
 @app.route('/deleteBiciclette', methods=['GET'])
 @app.route('/deleteBiciclette/<string:codice>', methods=['GET'])
 def deleteBiciclette(codice=None):
-    # nome passato
+    # codice passato
     if codice:
         # elimino bicicletta tramite codice
         query = "DELETE FROM biciclette WHERE codice = %s;"
@@ -145,6 +145,36 @@ def updateSlotStazione(numero, stazione_id=None):
         return jsonify({'message': 'Numero di slot aggiornato con successo.', 'num_righe': num_righe})
     else:
         return jsonify({'message': 'ERRORE nell\'aggiornamento del numero di slot.'}), 500
+
+# ENDPOINT PER MODIFICARE IL CODICE DELLA BICICLETTA
+@app.route('/updateBicicletta/<string:codice>/<string:nuovoCodice>', methods=['GET'])
+@app.route('/updateBicicletta/<int:km_percorsi>/<int:bicicletta_id>', methods=['GET'])
+@app.route('/updateBicicletta/<int:codice>/<float:latitudine>/<float:longitudine>', methods=['GET'])
+def updateBicicletta(codice=None, nuovoCodice=None, km_percorsi=None, bicicletta_id=None, latitudine=None, longitudine=None):
+    if codice and nuovoCodice:
+        # modifico codice
+        query = "UPDATE biciclette SET codice = %s WHERE codice = %s;"
+        params = (nuovoCodice, codice)
+    elif km_percorsi and bicicletta_id:
+        # modifico chilometri percorsi
+        query = "UPDATE biciclette SET km_percorsi = km_percorsi + %s WHERE bicicletta_id = %s;"
+        params = (km_percorsi, bicicletta_id)
+    elif codice and latitudine and longitudine:
+        # modifico latitudine e longitudine
+        query = "UPDATE biciclette SET latitudine = %s, longitudine = %s WHERE codice = %s;"
+        params = (latitudine, longitudine, codice)
+    
+    # eseguo query
+    num_righe = execute_query(query, params)
+        
+    # controllo il risultato
+    if num_righe > 0:
+        # ritorno numero di righe
+        return jsonify({'numero_righe': num_righe})
+    else:
+        # ritorno errore
+        return jsonify({'message': 'Nessuna bicicletta modificata.'}), 404
+
 
 
 ###############################
