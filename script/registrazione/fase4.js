@@ -18,7 +18,6 @@ $(document).ready(function()
     else
         // inserisco i dati nella pagina
         visualizzaDati();
-
 });
 
 // FUNZIONE PER PRENDERE I DATI DELLA FASE PRECEDENTE
@@ -116,12 +115,12 @@ async function doControlli()
 function controlloData(scadenzaCarta)
 {
     // prendo mese e anno attuale
-    var dataAttuale = new Date();
-    var meseAttuale = dataAttuale.getMonth() + 1; // Mesi in JavaScript vanno da 0 a 11
-    var annoAttuale = dataAttuale.getFullYear();
+    let dataAttuale = new Date();
+    let meseAttuale = dataAttuale.getMonth() + 1; // Mesi in JavaScript vanno da 0 a 11
+    let annoAttuale = dataAttuale.getFullYear();
 
     // data non valida
-    var [annoScadenza, meseScadenza] = scadenzaCarta.split('-').map(Number);
+    let [annoScadenza, meseScadenza] = scadenzaCarta.split('-').map(Number);
     if (annoScadenza < annoAttuale || (annoScadenza === annoAttuale && meseScadenza < meseAttuale))
         return false;
 

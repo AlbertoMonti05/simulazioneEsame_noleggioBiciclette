@@ -37,7 +37,7 @@
             <h3 id="mail"></h3>
             indirizzo:<input type="text" id="indirizzo">
             <br>
-            <button onclick="avanti()">AVANTI</button>
+            <button onclick="getLatLonFromAddress()">AVANTI</button>
         </div>
 
     </body>
