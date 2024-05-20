@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, render_template
 import mysql.connector
-from _config import *
+from web_service._config import *
 from mysql.connector import Error
 
 # web service con Flask per gestire le richieste di stazioni e biciclette
