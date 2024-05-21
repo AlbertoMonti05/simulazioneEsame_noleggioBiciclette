@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 21, 2024 alle 20:34
+-- Creato il: Mag 21, 2024 alle 22:07
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -30,7 +30,6 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `admin_id` int(11) NOT NULL,
   `mail` varchar(64) NOT NULL,
-  `username` varchar(32) NOT NULL,
   `password` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -38,8 +37,8 @@ CREATE TABLE `admin` (
 -- Dump dei dati per la tabella `admin`
 --
 
-INSERT INTO `admin` (`admin_id`, `mail`, `username`, `password`) VALUES
-(1, '', 'admin', '21232f297a57a5a743894a0e4a801fc3');
+INSERT INTO `admin` (`admin_id`, `mail`, `password`) VALUES
+(1, 'admin1@admin.it', '21232f297a57a5a743894a0e4a801fc3');
 
 -- --------------------------------------------------------
 
@@ -171,7 +170,6 @@ INSERT INTO `stazioni` (`stazione_id`, `via`, `latitudine`, `longitudine`, `slot
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`admin_id`),
-  ADD UNIQUE KEY `username` (`username`),
   ADD UNIQUE KEY `mail` (`mail`);
 
 --
@@ -219,10 +217,22 @@ ALTER TABLE `stazioni`
 --
 
 --
+-- AUTO_INCREMENT per la tabella `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT per la tabella `biciclette`
 --
 ALTER TABLE `biciclette`
   MODIFY `bicicletta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT per la tabella `carte_credito`
+--
+ALTER TABLE `carte_credito`
+  MODIFY `carta_credito_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT per la tabella `clienti`
@@ -235,6 +245,12 @@ ALTER TABLE `clienti`
 --
 ALTER TABLE `operazioni`
   MODIFY `operazione_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT per la tabella `stazioni`
+--
+ALTER TABLE `stazioni`
+  MODIFY `stazione_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Limiti per le tabelle scaricate
