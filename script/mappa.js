@@ -22,6 +22,7 @@ async function generaMappa()
         attribution: 'Mappa fornita da <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
     }).addTo(mappa);
 
+/*
     // geosearch options
     let options = {
         key: 'oc_gs_SJqvrAWtCs2mcAvMs5f9yPs6LI1QcD',
@@ -39,6 +40,7 @@ async function generaMappa()
 
     // add geosearch to the map
     let geosearchControl = L.Control.openCageGeosearch(options).addTo(map);
+*/
 
     // prendo tutti i parcheggi delle biciclette
     let parcheggi = await getParcheggi();
@@ -63,7 +65,7 @@ function richiesta(page, params)
 async function getParcheggi()
 {
     // chiamata al db
-    let result = await richiesta("../services/getParcheggi.php");
+    let result = await richiesta("http://localhost:5000/getStazioni");
 
     return result;
 }

@@ -27,7 +27,7 @@
     }
     else // login con lo username
     {
-        $result =  doLogin($connDB, $checkLoginCliente_Username);
+        $result = doLogin($connDB, $checkLoginCliente_Username);
 
         // chiudo connessione al database
         $connDB->close();
@@ -65,9 +65,9 @@
             $_SESSION["cliente_id"] = $cliente["cliente_id"];
 
             // return
-            echo true;
+            return true;
         }
-        else            
-            echo false;
+                 
+        return false;
     }
 ?>
