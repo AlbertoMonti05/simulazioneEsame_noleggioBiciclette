@@ -38,7 +38,7 @@ async function generaMappa()
     };
 
     // add geosearch to the map
-    let geosearchControl = new L.Control.openCageGeosearch(options).addTo(map);
+    let geosearchControl = L.Control.openCageGeosearch(options).addTo(map);
 
     // prendo tutti i parcheggi delle biciclette
     let parcheggi = await getParcheggi();
