@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 19, 2024 alle 21:13
+-- Creato il: Mag 21, 2024 alle 20:34
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -52,8 +52,16 @@ CREATE TABLE `biciclette` (
   `codice` int(11) NOT NULL,
   `latitudine` double NOT NULL,
   `longitudine` double NOT NULL,
-  `km_percorsi` int(11) NOT NULL
+  `km_percorsi` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dump dei dati per la tabella `biciclette`
+--
+
+INSERT INTO `biciclette` (`bicicletta_id`, `codice`, `latitudine`, `longitudine`, `km_percorsi`) VALUES
+(1, 10000, 45.46616665464403, 9.174049656162099, 12.7),
+(2, 10001, 45.477451450652865, 9.17340055882721, 8);
 
 -- --------------------------------------------------------
 
@@ -90,17 +98,18 @@ CREATE TABLE `clienti` (
   `username` varchar(32) NOT NULL,
   `mail` varchar(64) NOT NULL,
   `password` varchar(32) NOT NULL,
-  `indirizzo` varchar(11) DEFAULT NULL
+  `indirizzo` varchar(64) DEFAULT NULL,
+  `latitudine` double NOT NULL,
+  `longitudine` double NOT NULL,
+  `carta_credito_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dump dei dati per la tabella `clienti`
 --
 
-INSERT INTO `clienti` (`cliente_id`, `nome`, `cognome`, `username`, `mail`, `password`, `indirizzo`) VALUES
-(38, 'mario', 'rossi', 'marioRossi', 'mario@gmail.com', 'de2f15d014d40b93578d255e6221fd60', NULL),
-(39, 'a', 'aa', 'user', 'a@gmail.com', '4124bc0a9335c27f086f24ba207a4912', NULL),
-(40, 'nome', 'cognome', 'useraa', 'mail', '1a1dc91c907325c69271ddf0c944bc72', NULL);
+INSERT INTO `clienti` (`cliente_id`, `nome`, `cognome`, `username`, `mail`, `password`, `indirizzo`, `latitudine`, `longitudine`, `carta_credito_id`) VALUES
+(1, 'mario', 'rossi', 'mr', 'mario@gmail.com', 'd9394066970e44ae252fd0347e58c03e', 'via Copernico 12, Milano', 45.488048209183184, 9.201445498993305, 1);
 
 -- --------------------------------------------------------
 
@@ -112,12 +121,22 @@ CREATE TABLE `operazioni` (
   `operazione_id` int(11) NOT NULL,
   `tipo` enum('noleggio','riconsegna') NOT NULL,
   `data_ora` datetime NOT NULL,
-  `km_percorsi` int(11) DEFAULT NULL,
-  `tariffa` int(11) DEFAULT NULL,
+  `km_percorsi` float DEFAULT NULL,
+  `tariffa` float DEFAULT NULL,
   `cliente_id` int(11) NOT NULL,
   `stazione_id` int(11) NOT NULL,
   `bicicletta_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dump dei dati per la tabella `operazioni`
+--
+
+INSERT INTO `operazioni` (`operazione_id`, `tipo`, `data_ora`, `km_percorsi`, `tariffa`, `cliente_id`, `stazione_id`, `bicicletta_id`) VALUES
+(1, 'noleggio', '2024-05-08 20:26:07', NULL, NULL, 1, 1, 1),
+(2, 'riconsegna', '2024-05-08 22:27:07', 12.7, 3, 1, 2, 1),
+(3, 'noleggio', '2024-05-12 00:00:00', NULL, NULL, 1, 4, 2),
+(4, 'riconsegna', '2024-05-12 00:00:00', 8, 2, 1, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -176,7 +195,8 @@ ALTER TABLE `carte_credito`
 ALTER TABLE `clienti`
   ADD PRIMARY KEY (`cliente_id`),
   ADD UNIQUE KEY `username` (`username`),
-  ADD UNIQUE KEY `mail` (`mail`);
+  ADD UNIQUE KEY `mail` (`mail`),
+  ADD KEY `carta_credito_id` (`carta_credito_id`);
 
 --
 -- Indici per le tabelle `operazioni`
@@ -202,7 +222,37 @@ ALTER TABLE `stazioni`
 -- AUTO_INCREMENT per la tabella `biciclette`
 --
 ALTER TABLE `biciclette`
-  MODIFY `bicicletta_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `bicicletta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT per la tabella `clienti`
+--
+ALTER TABLE `clienti`
+  MODIFY `cliente_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT per la tabella `operazioni`
+--
+ALTER TABLE `operazioni`
+  MODIFY `operazione_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Limiti per le tabelle scaricate
+--
+
+--
+-- Limiti per la tabella `clienti`
+--
+ALTER TABLE `clienti`
+  ADD CONSTRAINT `clienti_ibfk_1` FOREIGN KEY (`carta_credito_id`) REFERENCES `carte_credito` (`carta_credito_id`);
+
+--
+-- Limiti per la tabella `operazioni`
+--
+ALTER TABLE `operazioni`
+  ADD CONSTRAINT `operazioni_ibfk_1` FOREIGN KEY (`cliente_id`) REFERENCES `clienti` (`cliente_id`),
+  ADD CONSTRAINT `operazioni_ibfk_2` FOREIGN KEY (`stazione_id`) REFERENCES `stazioni` (`stazione_id`),
+  ADD CONSTRAINT `operazioni_ibfk_3` FOREIGN KEY (`bicicletta_id`) REFERENCES `biciclette` (`bicicletta_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
