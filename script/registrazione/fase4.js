@@ -4,6 +4,8 @@ let username = null;
 let mail = null;
 let password = null;
 let indirizzo = null;
+let latitudine = null;
+let longitudine = null;
 
 // DOCUMENTO CARICATO
 $(document).ready(function()
@@ -29,6 +31,8 @@ function getDatiFasePrecedente()
     mail = localStorage.getItem('mail');
     password = localStorage.getItem('password');
     indirizzo = localStorage.getItem('indirizzo');
+    latitudine = localStorage.getItem('latitudine');
+    longitudine = localStorage.getItem('longitudine');
 }
 
 // FUNZIONE PER INSERIRE I DATI DELLA FASE PRECEDENTE NELLA PAGINA
@@ -46,6 +50,7 @@ let cognomeTitolareCarta = null;
 let numeroCarta = null;
 let scadenzaCarta = null;
 let cvvCarta = null;
+let carta_credito_id = null;
 
 // REGISTRAZIONE
 async function doRegistrazione()
@@ -63,17 +68,30 @@ async function doRegistrazione()
     // controlli a buon fine
     if(stato == true)
     {
-        // prendo i dati 
-        let params = getDati();
+        // inserisco carta di credito
+        carta_credito_id = await insertCartaCredito();
 
         // richiestra di registrazione al db
-        await callDB_registrazione(params);
+        await callDB_registrazione();
     }
     else
     {
         alert(stato);
         return;
     }
+}
+
+// FUNZIONE PER INSERIRE LA CARTA DI CREDITO
+async function insertCartaCredito()
+{
+    // chiamata al db
+    let id = await richiesta("../../services/insertCartaCredito.php", {nomeTitolareCarta: nomeTitolareCarta, cognomeTitolareCarta: cognomeTitolareCarta, numeroCarta: numeroCarta, scadenzaCarta: scadenzaCarta, cvvCarta: cvvCarta});
+
+    // inserimento corretto
+    if(id > 0)
+        return id;  // ritorno id carta inserita
+
+    return null;
 }
 
 // CONTROLLI SUI PARAMETRI IN INPUT
@@ -115,17 +133,11 @@ function controlloData(scadenzaCarta)
     return true;
 }
 
-// FUNZIONE PER PRENDERE I DATI
-function getDati()
-{
-    return {nome: nome, cognome: cognome, username:username,mail:mail,password:password,indirizzo:indirizzo,nomeTitolareCarta:nomeTitolareCarta,cognomeTitolareCarta:cognomeTitolareCarta,numeroCarta:numeroCarta,scadenzaCarta:scadenzaCarta,cvvCarta,cvvCarta}
-}
-
 // CHIAMATA AL DB PER FARE LA REGISTRAZIONE
-async function callDB_registrazione(params)
+async function callDB_registrazione()
 {
     // chiamata al db
-    let result = await richiesta("../../services/registrazione.php", params);
+    let result = await richiesta("../../services/registrazione.php", {nome: nome, cognome:cognome, username: username, mail:mail, password:password, indirizzo:indirizzo, latitudine:latitudine, longitudine:longitudine, carta_credito_id:carta_credito_id});
 
     if(result == "")
         result = true;

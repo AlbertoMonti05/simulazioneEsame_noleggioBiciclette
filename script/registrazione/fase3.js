@@ -40,6 +40,8 @@ function visualizzaDati()
 }
 
 let indirizzo = null;
+let latitudine = null;
+let longitudine = null;
 
 // PROCEDO CON LA REGISTRAZIONE
 async function avanti()
@@ -52,26 +54,26 @@ async function avanti()
 
     if(stato == true)
     {
-        let coordinate = getLatLonFromAddress(indirizzo);
+        getLatLonFromAddress(indirizzo)
+        .then(coordinate => {
+            console.log("Lat: " + coordinate[0] + " -- Lon: " + coordinate[1]);
+            latitudine = coordinate[0];
+            longitudine = coordinate[1];
+            salvaDati(indirizzo, latitudine, longitudine);
+        })
+        .catch(error => {
+            console.error(error);
+        });
     }
 
     reindizzamento(stato);
 }
 
 // FUNZIONE PER PRENDERE LATITUDINE E LONGITUDINE DALL'INDIRIZZO INSERIT
-function getLatLonFromAddress()
-{
-    indirizzo = $("#indirizzo").val();
-
+function getLatLonFromAddress(indirizzo) {
     let api_key = '3364281cf8284978864b8b201baeccdb';
-
-    // forward geocoding example (address to coordinate)
-    //let query = 'Philipsbornstr. 2, 30165 Hannover, Germany';
-    // note: query needs to be URI encoded (see below)
-
     let query = indirizzo;
-
-    let api_url = 'https://api.opencagedata.com/geocode/v1/json'
+    let api_url = 'https://api.opencagedata.com/geocode/v1/json';
 
     let request_url = api_url
         + '?'
@@ -80,39 +82,28 @@ function getLatLonFromAddress()
         + '&pretty=1'
         + '&no_annotations=1';
 
-    // see full list of required and optional parameters:
-    // https://opencagedata.com/api#required-params
+    return new Promise((resolve, reject) => {
+        let request = new XMLHttpRequest();
+        request.open('GET', request_url, true);
 
-    let request = new XMLHttpRequest();
-    request.open('GET', request_url, true);
+        request.onload = function () {
+            if (request.status === 200) {
+                let data = JSON.parse(request.responseText);
+                resolve([data.results[0].geometry.lat, data.results[0].geometry.lng]);
+            } else if (request.status <= 500) {
+                let data = JSON.parse(request.responseText);
+                reject("Unable to geocode! Response code: " + request.status + ", error msg: " + data.status.message);
+            } else {
+                reject("Server error");
+            }
+        };
 
-    request.onload = function() {
-        // see full list of possible response codes:
-        // https://opencagedata.com/api#codes
+        request.onerror = function () {
+            reject("Unable to connect to server");
+        };
 
-        if (request.status === 200)
-        {
-            // Success!
-            let data = JSON.parse(request.responseText);
-            alert("lat: " + data.results[0].geometry.lat + " -- lon: " + data.results[0].geometry.lng); // print the location
-        }
-        else if (request.status <= 500)
-        {
-            // We reached our target server, but it returned an error
-            console.log("unable to geocode! Response code: " + request.status);
-            let data = JSON.parse(request.responseText);
-            console.log('error msg: ' + data.status.message);
-        } 
-        else 
-            console.log("server error");
-    };
-
-    request.onerror = function() {
-        // There was a connection error of some sort
-        console.log("unable to connect to server");
-    };
-
-    request.send();  // make the request
+        request.send();
+    });
 }
 
 // RICHIESTA SERVIZIO
@@ -144,9 +135,6 @@ function reindizzamento(stato)
     // controlli ok
     if(stato == true)
     {
-        // salvo dati
-        salvaDati();
-
         // reindirizzo
         window.location.href = "fase4.php";
     }
@@ -155,7 +143,9 @@ function reindizzamento(stato)
 }
 
 // FUNZIONE PER SALVARE I DATI DELLA FASE
-function salvaDati()
+function salvaDati(indirizzo, latitudine, longitudine)
 {
     localStorage.setItem('indirizzo', indirizzo);
+    localStorage.setItem('latitudine', latitudine);
+    localStorage.setItem('longitudine', longitudine);
 }

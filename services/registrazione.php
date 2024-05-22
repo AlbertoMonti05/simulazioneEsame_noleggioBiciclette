@@ -34,7 +34,7 @@
     $password = md5($_GET["password"]);
 
     // parametri nello statement
-    $statement->bind_param("ssssffsi", $_GET["nome"], $_GET["cognome"], $_GET["username"], $_GET["mail"], $password ,$_GET["latitudine"], $_GET["longitudine"], $_GET["indirizzo"], $_GET["carta_credito_id"]);
+    $statement->bind_param("ssssssddi", $_GET["nome"], $_GET["cognome"], $_GET["username"], $_GET["mail"], $password, $_GET["indirizzo"], $_GET["latitudine"], $_GET["longitudine"], $_GET["carta_credito_id"]);
 
     // eseguo lo statement
     $statement->execute();
