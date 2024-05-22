@@ -68,7 +68,7 @@
                     <div style="text-align: right;">
                         <a href="profilo.php">PROFILO</a>
                         <br>
-                        <a href="admin/riepiloghi.php">RIEPILOGHI</a>
+                        <a href="riepiloghi.php">RIEPILOGHI</a>
                         <br>
                         <a href="logout.php">LOGOUT</a>
                     </div>
