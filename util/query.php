@@ -28,6 +28,12 @@
     // modifico dati del profilo
     $modificaDatiProfilo = "UPDATE `clienti` SET `nome` = ?, `cognome` = ?, `mail` = ?, `username` = ?, `latitudine` = ?, `longitudine` = ?, `indirizzo` = ? WHERE `cliente_id` = ?";
 
+    // prendo tutte le biciclette
+    $getBiciclette = "SELECT * FROM `biciclette`";
+
+    // prendo bicicletta tramite id
+    $getBicicletta = "SELECT * FROM `biciclette` WHERE `bicicletta_id` = ?";
+
     // prendo tutti le stazioni
     $getStazioni = "SELECT * FROM `stazioni`";
 
