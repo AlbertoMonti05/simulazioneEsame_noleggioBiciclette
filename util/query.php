@@ -17,7 +17,7 @@
     $checkUsername = "SELECT * FROM `clienti` WHERE `username` = ?";
 
     // registrazione
-    $registrazione = "INSERT INTO `clienti` (`nome`, `cognome`, `username`, `mail`, `password`, `latitudine`, `longitudine`, `indirizzo`, `carta_credito_id`) VALUE (?,?,?,?,?,?,?,?,?)";
+    $registrazione = "INSERT INTO `clienti` (`nome`, `cognome`, `username`, `mail`, `password`, `indirizzo`, `latitudine`, `longitudine`, `carta_credito_id`) VALUE (?,?,?,?,?,?,?,?,?)";
 
     // prendo i dati del cliente
     $getDatiCliente = "SELECT `nome`, `cognome`, `username`, `mail`, `latitudine`, `longitudine`, `indirizzo` FROM `clienti` WHERE `cliente_id` = ?";
@@ -65,4 +65,7 @@
         FROM stazioni
         LEFT JOIN operazioni ON stazioni.stazione_id = operazioni.stazione_id AND operazioni.tipo = 'noleggio'
         WHERE stazioni.stazione_id = ?;";
+
+    // prendo la stazione tramite latitudine e longitudine
+    $insertCartaCredito = "INSERT INTO `carte_credito` (`nome_titolare`, `cognome_titolare`, `numero`, `scadenza`, `cvv`) VALUES (?,?,?,?,?)";
 ?>
