@@ -37,19 +37,8 @@
 
         <?php
 
-            // ospite
-            if(!isset($_SESSION['cliente_id']))
-            {
-                ?>
-                    <div style="text-align: right;">
-                        <a href="login.php">LOGIN</a>
-                        <br>
-                        <a href="registrazione.php">REGISTRATI</a>
-                    </div>
-                <?php
-            }
             // admin
-            elseif(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == true)
+            if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == true)
             {
                 ?>
                     <div style="text-align: right;">
@@ -58,6 +47,18 @@
                         <a href="admin/biciclette.php">BICICLETTE</a>
                         <br>
                         <a href="admin/riepiloghi.php">RIEPILOGHI</a>
+                        <br>
+                        <a href="logout.php">LOGOUT</a>
+                    </div>
+                <?php
+            }
+            else if(!isset($_SESSION['cliente_id']))    // ospite
+            {
+                ?>
+                    <div style="text-align: right;">
+                        <a href="login.php">LOGIN</a>
+                        <br>
+                        <a href="registrazione.php">REGISTRATI</a>
                     </div>
                 <?php
             }
