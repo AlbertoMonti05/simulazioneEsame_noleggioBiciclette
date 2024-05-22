@@ -36,7 +36,7 @@ async function generaMappa()
 // FUNZIONE PER PRENDERE LE STAZIONI
 async function getStazioni()
 {
-    let stazioni = await richiesta("../services/getStazioni.php");
+    let stazioni = await richiestaJSON("../services/getStazioni.php");
 
     return stazioni;
 }
@@ -44,7 +44,7 @@ async function getStazioni()
 // FUNZIONE PER PRENDERE CASA DEL CLIENTE
 async function getCasaCliente()
 {
-    let casaCliente = await richiesta("../services/getDatiCliente.php");
+    let casaCliente = await richiestaJSON("../services/getDatiCliente.php");
 
     return casaCliente;
 }
@@ -52,7 +52,7 @@ async function getCasaCliente()
 // FUNZIONE PER PRENDERE CASA DEL CLIENTE
 async function getPostiLiberi()
 {
-    let casaCliente = await richiesta("../services/getPostiLiberi.php");
+    let casaCliente = await richiestaJSON("../services/getPostiLiberi.php");
 
     return casaCliente;
 }

@@ -27,13 +27,13 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Parcheggio - BycicleRent</title>
+        <title>Stazione - BycicleRent</title>
 
         <!-- IMPORTO jQuery -->
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
         <!-- IMPORTO LO SCRIPT -->
-        <script src="../script/parcheggio.js"></script>
+        <script src="../script/stazione.js"></script>
 
     </head>
 

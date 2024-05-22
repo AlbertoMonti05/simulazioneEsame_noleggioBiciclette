@@ -8,23 +8,11 @@ $(document).ready(async function()
     visualizza(parcheggio);
 });
 
-// RICHIESTA SERVIZIO
-function richiesta(page, params)
-{
-    return new Promise(function(resolve)
-    {
-        $.get(page, params, function(phpData)
-        {
-            resolve(phpData);
-        }, "json");
-    });
-}
-
 // FUNZIONE PER PRENDERE IL PARCHEGGIO TRAMITE LATITUDINE E LONGITUDINE
 async function getParcheggio()
 {
     // chiamata al db
-    let result = await richiesta("../services/getParcheggioLatLon.php");
+    let result = await richiestaJSON("../services/getParcheggioLatLon.php");
 
     return result;
 }

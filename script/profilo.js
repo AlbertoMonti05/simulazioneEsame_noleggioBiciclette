@@ -1,15 +1,3 @@
-// RICHIESTA SERVIZIO
-function richiesta(page, params)
-{
-    return new Promise(function(resolve)
-    {
-        $.get(page, params, function(phpData)
-        {
-            resolve(phpData);
-        }, "json");
-    });
-}
-
 // PAGINA CARICATA
 $(document).ready(async function()
 {
@@ -24,7 +12,7 @@ $(document).ready(async function()
 async function getDati()
 {
     // chiamata al db
-    let result = await richiesta("../services/getDatiCliente.php");
+    let result = await richiestaJSON("../services/getDatiCliente.php");
 
     return result;
 }
@@ -46,7 +34,7 @@ async function caricaDati(dati)
 async function getIndirizzo(params)
 {
     // chiamata al db
-    let result = await richiesta("../services/getIndirizzo.php", params);
+    let result = await richiestaJSON("../services/getIndirizzo.php", params);
 
     return result["via"] + ", " + result["citta"] + ", (" + result["provincia"] + "), " + result["cap"];
 }

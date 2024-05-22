@@ -5,18 +5,6 @@ let mail = "";
 let username = "";
 //let indirizzo = "";
 
-// RICHIESTA SERVIZIO
-function richiesta(page, params)
-{
-    return new Promise(function(resolve)
-    {
-        $.get(page, params, function(phpData)
-        {
-            resolve(phpData);
-        }, "json");
-    });
-}
-
 // PAGINA CARICATA
 $(document).ready(async function()
 {
@@ -31,7 +19,7 @@ $(document).ready(async function()
 async function modificaDati()
 {
     // modifico i dati nel database
-    let stato = await richiesta("../services/modificaDatiProfilo.php", {nome: nome, cognome: cognome, mail: mail, username: username/*, indirizzo: indirizzo*/});
+    let stato = await richiestaJSON("../services/modificaDatiProfilo.php", {nome: nome, cognome: cognome, mail: mail, username: username/*, indirizzo: indirizzo*/});
 
     if(stato == true)
         alert("Dati modificati");
@@ -64,7 +52,7 @@ async function caricaDati(dati)
 async function getDati()
 {
     // chiamata al db
-    let result = await richiesta("../services/getDatiCliente.php");
+    let result = await richiestaJSON("../services/getDatiCliente.php");
 
     return result;
 }

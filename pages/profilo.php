@@ -23,6 +23,7 @@
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
         <!-- IMPORTO LO SCRIPT -->
+        <script src="../script/richiesta.js"></script>
         <script src="../script/profilo.js"></script>
 
     </head>
