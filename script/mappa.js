@@ -50,9 +50,9 @@ async function getCasaCliente()
 }
 
 // FUNZIONE PER PRENDERE CASA DEL CLIENTE
-async function getPostiLiberi()
+async function getPostiLiberi(params)
 {
-    let casaCliente = await richiestaJSON("../services/getPostiLiberi.php");
+    let casaCliente = await richiestaJSON("../services/getPostiLiberi.php", params);
 
     return casaCliente;
 }
@@ -74,7 +74,7 @@ async function aggiungiStazine(stazione)
     let marker = L.marker([stazione["latitudine"], stazione["longitudine"]]).addTo(mappa);
 
     // prendo i posti liberi
-    let postiLiberi = await getPostiLiberi();
+    let postiLiberi = await getPostiLiberi({stazione_id: stazione["stazione_id"]});
 
     // popup
     let popupContent = `

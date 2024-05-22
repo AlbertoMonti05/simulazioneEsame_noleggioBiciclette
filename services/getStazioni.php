@@ -3,13 +3,6 @@
     if(!isset($_SESSION))
         session_start();
 
-    // parametri non passati
-    if(!isset($_GET["stazione_id"]))
-    {
-        echo "ERRORE! Parametri non passati";
-        return;
-    }
-
     // credenziali del database
     include_once("../util/credDb.php");
     global $server, $cliente, $psw, $dbBiciclette;
@@ -32,7 +25,14 @@
     $statement->execute();
 
     // prendo il risultato
-    $result = $statement->get_result()->fetch_assoc();
+    $result = $statement->get_result();
 
-    echo json_encode($stazioni["slot_liberi"]);
+    $stazioni = array();
+
+    while(($row = $result->fetch_assoc()) != null)
+    {
+        $stazioni[] = $row;
+    }
+
+    echo json_encode($stazioni);
 ?>

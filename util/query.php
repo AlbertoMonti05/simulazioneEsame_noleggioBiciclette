@@ -35,7 +35,7 @@
     $getStazioneLatLon = "SELECT * FROM `stazioni` WHERE `latitudine` = ? AND `longitudine` = ?";
 
     // prendo posti liberi nella stazione
-    $getPostiLiberiById = " SELECT \
+    $getPostiLiberiById = " SELECT
         stazioni.stazione_id,
         stazioni.via AS nome_stazione,
         stazioni.slotMax - COUNT(operazioni.operazione_id) AS slot_liberi
