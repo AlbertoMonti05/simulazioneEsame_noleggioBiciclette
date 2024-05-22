@@ -48,6 +48,19 @@
                     </div>
                 <?php
             }
+            // admin
+            elseif(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == true)
+            {
+                ?>
+                    <div style="text-align: right;">
+                        <a href="admin/stazioni.php">STAZIONI</a>
+                        <br>
+                        <a href="admin/biciclette.php">BICICLETTE</a>
+                        <br>
+                        <a href="admin/riepiloghi.php">RIEPILOGHI</a>
+                    </div>
+                <?php
+            }
             else
             {
                 ?>
