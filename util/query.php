@@ -46,6 +46,11 @@
     // prendo la stazione tramite latitudine e longitudine
     $getStazioneLatLon = "SELECT * FROM `stazioni` WHERE `latitudine` = ? AND `longitudine` = ?";
 
+    // prendo riepilogo totale del cliente
+    $getRiepilogoTotaleCliente = "SELECT COUNT(*) AS numeroTratte, SUM(`km_percorsi`) AS km_percorsi, SUM(`tariffa`) AS tariffa
+        FROM operazioni
+        WHERE `cliente_id` = ?";
+
     // prendo posti liberi nella stazione
     $getPostiLiberiById = " SELECT
         stazioni.stazione_id,
