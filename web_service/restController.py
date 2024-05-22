@@ -372,7 +372,8 @@ def insert_operazione():
         km_percorsi = None
 
     # query
-    query = " INSERT INTO operazioni (tipo, data_ora, km_percorsi, tariffa, cliente_id, stazione_id, bicicletta_id) \
+    query = " INSERT INTO operazioni \
+        (tipo, data_ora, km_percorsi, tariffa, cliente_id, stazione_id, bicicletta_id) \
         VALUES (%s, %s, %s, %s, %s, %s, %s); "
     params = (tipo, data_ora, km_percorsi, tariffa, cliente_id, stazione_id, bicicletta_id,)
     
