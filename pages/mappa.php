@@ -19,8 +19,9 @@
         <!-- IMPORTO LO SCRIPT -->
         <!-- IMPORTO jQuery -->
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-            <!-- Includi la libreria Leaflet.js -->
+        <!-- Includi la libreria Leaflet.js -->
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <script src="../script/richiesta.js"></script>
         <script src="../script/mappa.js"></script>
         
         <!-- IMPORTO LO STILE -->
