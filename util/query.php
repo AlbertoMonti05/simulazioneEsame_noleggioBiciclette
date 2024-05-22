@@ -34,6 +34,15 @@
     // prendo stazione tramite id
     $getStazione = "SELECT * FROM `stazioni` WHERE `stazione_id` = ?";
 
+    // prendo tratte del cliente
+    $getTratteCliente = "SELECT * FROM `operazioni` WHERE `cliente_id` = ?";
+
+    // prendo tratte della bicicletta
+    $getTratteBicicletta = "SELECT * FROM `operazioni` WHERE `bicicletta_id` = ?";
+
+    // prendo operazioni della stazione
+    $getOperazioniStazione = "SELECT * FROM `operazioni` WHERE `stazione_id` = ?";
+
     // prendo la stazione tramite latitudine e longitudine
     $getStazioneLatLon = "SELECT * FROM `stazioni` WHERE `latitudine` = ? AND `longitudine` = ?";
 
