@@ -17,10 +17,10 @@
     $checkUsername = "SELECT * FROM `clienti` WHERE `username` = ?";
 
     // registrazione
-    $registrazione = "INSERT INTO `clienti` (`nome`, `cognome`, `username`, `mail`, `password`) VALUE (?,?,?,?,?)";
+    $registrazione = "INSERT INTO `clienti` (`nome`, `cognome`, `username`, `mail`, `password`, `latitudine`, `longitudine`, `indirizzo`) VALUE (?,?,?,?,?,?,?,?)";
 
     // prendo i dati del cliente
-    $getDatiCliente = "SELECT `nome`, `cognome`, `username`, `mail`, `indirizzo_id` FROM `clienti` WHERE `cliente_id` = ?";
+    $getDatiCliente = "SELECT `nome`, `cognome`, `username`, `mail`, `latitudine`, `longitudine`, `indirizzo` FROM `clienti` WHERE `cliente_id` = ?";
 
     // prendo l'indirizzo
     $getIndirizzo = "SELECT * FROM `indirizzi` WHERE `indirizzo_id` = ?";
@@ -28,9 +28,18 @@
     // modifico dati del profilo
     $modificaDatiProfilo = "UPDATE `clienti` SET `nome` = ?, `cognome` = ?, `mail` = ?, `username` = ? WHERE `cliente_id` = ?";
 
-    // prendo tutti i parcheggi
-    $getParcheggi = "SELECT * FROM `parcheggi`";
+    // prendo tutti le stazioni
+    $getStazioni = "SELECT * FROM `stazioni`";
 
-    // prendo il parcheggio tramite latitudine e longitudine
-    $getParcheggioLatLon = "SELECT * FROM `parcheggi` WHERE `latitudine` = ? AND `longitudine` = ?";
+    // prendo la stazione tramite latitudine e longitudine
+    $getStazioneLatLon = "SELECT * FROM `stazioni` WHERE `latitudine` = ? AND `longitudine` = ?";
+
+    // prendo posti liberi nella stazione
+    $getPostiLiberiById = " SELECT \
+        stazioni.stazione_id,
+        stazioni.via AS nome_stazione,
+        stazioni.slotMax - COUNT(operazioni.operazione_id) AS slot_liberi
+        FROM stazioni
+        LEFT JOIN operazioni ON stazioni.stazione_id = operazioni.stazione_id AND operazioni.tipo = 'noleggio'
+        WHERE stazioni.stazione_id = ?;";
 ?>
