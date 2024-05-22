@@ -31,6 +31,9 @@
     // prendo tutti le stazioni
     $getStazioni = "SELECT * FROM `stazioni`";
 
+    // prendo stazione tramite id
+    $getStazione = "SELECT * FROM `stazioni` WHERE `stazione_id` = ?";
+
     // prendo la stazione tramite latitudine e longitudine
     $getStazioneLatLon = "SELECT * FROM `stazioni` WHERE `latitudine` = ? AND `longitudine` = ?";
 

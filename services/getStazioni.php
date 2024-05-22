@@ -9,7 +9,7 @@
 
     // query
     include_once("../util/query.php");
-    global $getStazioni;
+    global $getStazioni, $getStazione;
 
     // connessione al database
     $connDB = new mysqli($server, $cliente, $psw, $dbBiciclette);
@@ -19,7 +19,17 @@
         die("Connessione con il database non riuscita: " . $connDB->connect_error);
 
     // statement
-    $statement = $connDB->prepare($getStazioni);
+    $statement;
+
+    // stazione_id passato
+    if(isset($_GET["stazione_id"]))
+    {
+        $statement = $connDB->prepare($getStazione);
+
+        $statement->bind_param("i", $_GET["stazione_id"]);
+    }
+    else
+        $statement = $connDB->prepare($getStazioni);
 
     // eseguo lo statement
     $statement->execute();
