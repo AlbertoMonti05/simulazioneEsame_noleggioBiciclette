@@ -2,6 +2,16 @@
     // prendo la sessione
     session_start();
 
+    // parametri non passati
+    if(!isset($_GET["nome"]) || !isset($_GET["cognome"]) 
+    || !isset($_GET["username"]) || !isset($_GET["mail"]) || !isset($_GET["password"]) 
+    || !isset($_GET["latitudine"]) || !isset($_GET["longitudine"]) 
+    || !isset($_GET["indirizzo"]) || !isset($_GET["carta_credito_id"]))
+    {
+        echo "ERRORE! Parametri non passati";
+        return;
+    }
+
     // credenziali del database
     include_once("../util/credDb.php");
     global $server, $cliente, $psw, $dbBiciclette;
@@ -24,7 +34,7 @@
     $password = md5($_GET["password"]);
 
     // parametri nello statement
-    $statement->bind_param("sssss", $_GET["nome"], $_GET["cognome"], $_GET["username"], $_GET["mail"], $password);
+    $statement->bind_param("ssssffsi", $_GET["nome"], $_GET["cognome"], $_GET["username"], $_GET["mail"], $password ,$_GET["latitudine"], $_GET["longitudine"], $_GET["indirizzo"], $_GET["carta_credito_id"]);
 
     // eseguo lo statement
     $statement->execute();
@@ -35,22 +45,13 @@
     $return;
 
     // registrazione effettuata
-    if ($result) 
-    {
-        // chiudo connessione al database
-        $connDB->close();
-
-        // return
+    if ($result)
         $return = true;
-    }
     else
-    {
-        // chiudo connessione al database
-        $connDB->close();
-
-        // return
         $return = false;
-    }
+
+    // chiudo connessione al database
+    $connDB->close();
 
     echo $return;
 ?>

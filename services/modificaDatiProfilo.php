@@ -3,6 +3,13 @@
     if(!isset($_SESSION))
         session_start();
 
+    // parametri non passati
+    if(!isset($_GET["nome"]) || !isset($_GET["cognome"]) || !isset($_GET["mail"]) || !isset($_GET["username"]) || !isset($_GET["latitudine"]) || !isset($_GET["longitudine"]) || !isset($_GET["indirizzo"]))
+    {
+        echo "ERRORE! Parametri non passati";
+        return;
+    }
+
     // cliente non autenticato
     if(!isset($_SESSION["cliente_id"]))
     {
@@ -29,7 +36,7 @@
     $statement = $connDB->prepare($modificaDatiProfilo);
 
     // parametri nello statement
-    $statement->bind_param("ssssi", $_GET["nome"], $_GET["cognome"], $_GET["mail"], $_GET["username"], $_SESSION["cliente_id"]);
+    $statement->bind_param("ssssffsi", $_GET["nome"], $_GET["cognome"], $_GET["mail"], $_GET["username"], $_GET["latitudine"], $_GET["longitudine"], $_GET["indirizzo"], $_SESSION["cliente_id"]);
 
     // eseguo lo statement
     $statement->execute();

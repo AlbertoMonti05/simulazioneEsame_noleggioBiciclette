@@ -17,16 +17,16 @@
     $checkUsername = "SELECT * FROM `clienti` WHERE `username` = ?";
 
     // registrazione
-    $registrazione = "INSERT INTO `clienti` (`nome`, `cognome`, `username`, `mail`, `password`, `latitudine`, `longitudine`, `indirizzo`) VALUE (?,?,?,?,?,?,?,?)";
+    $registrazione = "INSERT INTO `clienti` (`nome`, `cognome`, `username`, `mail`, `password`, `latitudine`, `longitudine`, `indirizzo`, `carta_credito_id`) VALUE (?,?,?,?,?,?,?,?,?)";
 
     // prendo i dati del cliente
     $getDatiCliente = "SELECT `nome`, `cognome`, `username`, `mail`, `latitudine`, `longitudine`, `indirizzo` FROM `clienti` WHERE `cliente_id` = ?";
 
     // prendo l'indirizzo
-    $getIndirizzo = "SELECT * FROM `indirizzi` WHERE `indirizzo_id` = ?";
+    $getIndirizzo = "SELECT `indirizzo` FROM `clienti` WHERE `cliente_id` = ?";
 
     // modifico dati del profilo
-    $modificaDatiProfilo = "UPDATE `clienti` SET `nome` = ?, `cognome` = ?, `mail` = ?, `username` = ? WHERE `cliente_id` = ?";
+    $modificaDatiProfilo = "UPDATE `clienti` SET `nome` = ?, `cognome` = ?, `mail` = ?, `username` = ?, `latitudine` = ?, `longitudine` = ?, `indirizzo` = ? WHERE `cliente_id` = ?";
 
     // prendo tutti le stazioni
     $getStazioni = "SELECT * FROM `stazioni`";

@@ -29,23 +29,13 @@
     $statement = $connDB->prepare($getIndirizzo);
 
     // parametri nello statement
-    $statement->bind_param("i", $_GET["indirizzo_id"]);
+    $statement->bind_param("i", $_SESSION["cliente_id"]);
 
     // eseguo lo statement
     $statement->execute();
 
     // prendo il risultato
-    $result = $statement->get_result();
+    $result = $statement->get_result()->fetch_assoc();
 
-    // indirizzo trovato
-    if ($result->num_rows == 1) 
-    {
-        // prendo i dati dell'indirizzo
-        $indirizzo = $result->fetch_assoc();
-
-        // return
-        echo json_encode($indirizzo);
-    }
-    else            
-        echo null;
+    echo json_encode($result["indirizzo"]);
 ?>

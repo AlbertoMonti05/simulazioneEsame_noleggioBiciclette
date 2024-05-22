@@ -2,6 +2,13 @@
     // prendo la sessione
     session_start();
 
+    // parametri non passati
+    if(!isset($_GET["mail"]))
+    {
+        echo "ERRORE! Parametri non passati";
+        return;
+    }
+
     // credenziali del database
     include_once("../util/credDb.php");
     global $server, $cliente, $psw, $dbBiciclette;

@@ -2,9 +2,12 @@
     // prendo la sessione
     session_start();
 
-    // controllo parametri passati
+    // parametri non passati
     if(!isset($_GET["mail_username"]) || !isset($_GET["password"]))
-        die("ERRORE! Passare i parametri necessari");
+    {
+        echo "ERRORE! Parametri non passati";
+        return;
+    }
 
     // credenziali del database
     include_once("../util/credDb.php");
