@@ -50,7 +50,7 @@ async function avanti()
     indirizzo = $("#indirizzo").val();
 
     // eseguo i controlli
-    let stato = await doControlli();
+    let stato = doControlli();
 
     if(stato == true)
     {
@@ -119,7 +119,7 @@ function richiesta(page, params)
 }
 
 // CONTROLLI SUI PARAMETRI IN INPUT
-async function doControlli()
+function doControlli()
 {
     // parametri mancanti
     if(indirizzo == "")

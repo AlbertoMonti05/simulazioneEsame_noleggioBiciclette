@@ -62,7 +62,7 @@ async function doRegistrazione()
     cvvCarta = $("#cvvCarta").val();
 
     // eseguo i controlli
-    let stato = await doControlli();
+    let stato = doControlli();
 
     // controlli a buon fine
     if(stato == true)
@@ -78,7 +78,7 @@ async function doRegistrazione()
 }
 
 // CONTROLLI SUI PARAMETRI IN INPUT
-async function doControlli()
+function doControlli()
 {
     // parametri mancanti
     if(nomeTitolareCarta == "" || cognomeTitolareCarta == "" || numeroCarta == "" || scadenzaCarta == "" || cvvCarta == "")

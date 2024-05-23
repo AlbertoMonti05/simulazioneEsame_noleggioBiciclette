@@ -9,14 +9,14 @@ async function avanti()
     cognome = $("#cognome").val();
 
     // eseguo i controlli
-    let stato = await doControlli();
+    let stato = doControlli();
 
     // reindirizzo
     reindizzamento(stato);
 }
 
 // CONTROLLI SUI PARAMETRI IN INPUT
-async function doControlli()
+function doControlli()
 {
     // parametri mancanti
     if(nome == "" || cognome == "")
