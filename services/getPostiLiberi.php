@@ -4,7 +4,7 @@
         session_start();
 
     // parametri non passati
-    if(!isset($_SESSION["stazione_id"]))
+    if(!isset($_SESSION["stazione_id"]) && !isset($_GET["stazione_id"]))
     {
         echo "ERRORE! Parametri non passati";
         return;
@@ -29,7 +29,10 @@
     $statement = $connDB->prepare($getPostiLiberiById);
 
     // parametri nello statement
-    $statement->bind_param("i", $_SESSION["stazione_id"]);
+    if(isset($_SESSION["stazione_id"]))
+        $statement->bind_param("i", $_SESSION["stazione_id"]);
+    else 
+        $statement->bind_param("i", $_GET["stazione_id"]);
 
     // eseguo lo statement
     $statement->execute();

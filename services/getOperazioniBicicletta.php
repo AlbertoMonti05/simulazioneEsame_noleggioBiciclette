@@ -3,13 +3,20 @@
     if(!isset($_SESSION))
         session_start();
 
+    // parametri non passati
+    if(!isset($_SESSION["bicicletta_id"]))
+    {
+        echo "ERRORE! Parametri non passati";
+        return;
+    }
+
     // credenziali del database
     include_once("../util/credDb.php");
     global $server, $cliente, $psw, $dbBiciclette;
 
     // query
     include_once("../util/query.php");
-    global $getBiciclette, $getBicicletta;
+    global $getOperazioniBicicletta;
 
     // connessione al database
     $connDB = new mysqli($server, $cliente, $psw, $dbBiciclette);
@@ -19,17 +26,13 @@
         die("Connessione con il database non riuscita: " . $connDB->connect_error);
 
     // statement
-    $statement;
+    $statement = $connDB->prepare($getOperazioniBicicletta);
 
-    // stazione_id passato
-    if(isset($_SESSION["bicicletta_id"]))
-    {
-        $statement = $connDB->prepare($getBicicletta);
+    // parametri nello statement
+    $statement->bind_param("i", $_SESSION["bicicletta_id"]);
 
-        $statement->bind_param("i", $_SESSION["bicicletta_id"]);
-    }
-    else
-        $statement = $connDB->prepare($getBiciclette);
+    // eseguo lo statement
+    $statement->execute();
 
     // eseguo lo statement
     $statement->execute();
@@ -37,12 +40,12 @@
     // prendo il risultato
     $result = $statement->get_result();
 
-    $biciclette = array();
+    $operazioni = array();
 
     while(($row = $result->fetch_assoc()) != null)
     {
-        $biciclette[] = $row;
+        $operazioni[] = $row;
     }
 
-    echo json_encode($biciclette);
+    echo json_encode($operazioni);
 ?>

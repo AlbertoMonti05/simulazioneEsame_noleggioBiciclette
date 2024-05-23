@@ -73,4 +73,7 @@
 
     // prendo operazioni stazione
     $getOperazioniStazione = "SELECT * FROM `operazioni` WHERE `stazione_id` = ?";
+
+    // prendo operazioni bicicletta
+    $getOperazioniStazione = "SELECT * FROM `operazioni` WHERE `bicicletta_id` = ?";
 ?>
