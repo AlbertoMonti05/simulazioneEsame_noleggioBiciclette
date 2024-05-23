@@ -33,11 +33,22 @@ function insersciStazione(stazione)
     $("#stazione").append(option);
 }
 
+let stazione = "";
+
 // AGGIUNGO LA BICICLETTA
 async function aggiungiBicicletta()
 {
-    let temp = $("#stazione").val();
-    let coordinate = temp.split(",");
+    stazione = $("#stazione").val();
+
+    let statoControlli = doControlli();
+
+    if(statoControlli != true)
+    {
+        alert(statoControlli);
+        return;
+    }
+
+    let coordinate = stazione.split(",");
     
     let latitudine = coordinate[0];
     let longitudine = coordinate[1];
@@ -46,13 +57,24 @@ async function aggiungiBicicletta()
     let codice = ultimoCodice + 1;
 
     // aggiungo la bicicletta
-    let stato = await richiestaJSON("../../services/aggiungiBicicletta.php", {codice: codice, latitudine: latitudine, longitudine: longitudine});
+    let stato = await richiesta("../../services/aggiungiBicicletta.php", {codice: codice, latitudine: latitudine, longitudine: longitudine});
 
-    if(stato == true)
+    if(stato == "")
     {
         alert("Bicicletta aggiunta");
         window.location.href = "../../pages/admin/visualizzaBiciclette.php";
     }
     else
         alert("Errore! Bicicletta non aggiunta");
+}
+
+// CONTROLLI SUI PARAMETRI IN INPUT
+function doControlli()
+{
+    // parametri mancanti
+    if(stazione == "")
+        return "ERRORE! Inserire tutti i campi!";
+
+    // tutto ok
+    return true;
 }

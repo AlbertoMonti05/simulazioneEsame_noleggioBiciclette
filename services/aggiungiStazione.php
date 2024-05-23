@@ -11,7 +11,7 @@
     }
 
     // parametri non passati
-    if(!isset($_GET["codice"]) || !isset($_GET["latitudine"]) || !isset($_GET["longitudine"]))
+    if(!isset($_GET["via"]) || !isset($_GET["latitudine"]) || !isset($_GET["longitudine"]) || !isset($_GET["slotMax"]))
     {
         echo "ERRORE! Parametri non passati";
         return;
@@ -23,7 +23,7 @@
 
     // query
     include_once("../util/query.php");
-    global $aggiungiBicicletta;
+    global $aggiungiStazione;
 
     // connessione al database
     $connDB = new mysqli($server, $cliente, $psw, $dbBiciclette);
@@ -33,10 +33,10 @@
         die("Connessione con il database non riuscita: " . $connDB->connect_error);
 
     // statement
-    $statement = $connDB->prepare($aggiungiBicicletta);
+    $statement = $connDB->prepare($aggiungiStazione);
 
     // parametri nello statement
-    $statement->bind_param("idd", $_GET["codice"], $_GET["latitudine"], $_GET["longitudine"]);
+    $statement->bind_param("sddi", $_GET["via"], $_GET["latitudine"], $_GET["longitudine"], $_GET["slotMax"]);
 
     // eseguo lo statement
     $statement->execute();
@@ -46,7 +46,7 @@
 
     $return;
 
-    // bicicletta aggiunta
+    // stazione aggiunta
     if ($result)
         $return = true;
     else

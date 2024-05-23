@@ -49,7 +49,7 @@
     <div class="container mt-5">
         <h1 class="text-center">MAPPA STAZIONI</h1>
         <div class="text-right mb-3">
-            <a href="admin/aggiungiStazione.php" class="btn btn-primary">AGGIUNGI STAZIONE</a>
+            <a href="aggiungiStazione.php" class="btn btn-primary">AGGIUNGI STAZIONE</a>
         </div>
     </div>
 
