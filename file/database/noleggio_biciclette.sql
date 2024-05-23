@@ -1,31 +1,14 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Creato il: Mag 23, 2024 alle 15:24
--- Versione del server: 10.4.32-MariaDB
--- Versione PHP: 8.2.12
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Database: `noleggio_biciclette`
---
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `admin`
---
+CREATE DATABASE IF NOT EXISTS `noleggio_biciclette` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `noleggio_biciclette`;
 
 CREATE TABLE `admin` (
   `admin_id` int(11) NOT NULL,
@@ -33,18 +16,11 @@ CREATE TABLE `admin` (
   `password` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Dump dei dati per la tabella `admin`
---
-
 INSERT INTO `admin` (`admin_id`, `mail`, `password`) VALUES
-(1, 'admin1@admin.it', '21232f297a57a5a743894a0e4a801fc3');
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `biciclette`
---
+(1, 'admin1@admin.it', '21232f297a57a5a743894a0e4a801fc3'),
+(2, 'admin2@admin.it', '5f4dcc3b5aa765d61d8327deb882cf99'),
+(3, 'admin3@admin.it', 'e99a18c428cb38d5f260853678922e03'),
+(4, 'admin4@admin.it', '098f6bcd4621d373cade4e832627b4f6');
 
 CREATE TABLE `biciclette` (
   `bicicletta_id` int(11) NOT NULL,
@@ -53,10 +29,6 @@ CREATE TABLE `biciclette` (
   `longitudine` double NOT NULL,
   `km_percorsi` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dump dei dati per la tabella `biciclette`
---
 
 INSERT INTO `biciclette` (`bicicletta_id`, `codice`, `latitudine`, `longitudine`, `km_percorsi`) VALUES
 (1, 1001, 45.4661, 9.174, 12.7),
@@ -118,13 +90,47 @@ INSERT INTO `biciclette` (`bicicletta_id`, `codice`, `latitudine`, `longitudine`
 (57, 1057, 45.502, 9.2283, 99.3),
 (58, 1058, 45.5026, 9.229, 80.6),
 (59, 1059, 45.5032, 9.2297, 118.4),
-(60, 1060, 45.5039, 9.2304, 97.5);
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `clienti`
---
+(60, 1060, 45.5039, 9.2304, 97.5),
+(61, 1061, 45.5045, 9.2311, 50.2),
+(62, 1062, 45.5051, 9.2318, 64.3),
+(63, 1063, 45.5058, 9.2325, 80.5),
+(64, 1064, 45.5064, 9.2332, 92.7),
+(65, 1065, 45.5071, 9.2339, 105.1),
+(66, 1066, 45.5077, 9.2346, 58.6),
+(67, 1067, 45.5084, 9.2353, 63.9),
+(68, 1068, 45.509, 9.236, 72.4),
+(69, 1069, 45.5097, 9.2367, 84.2),
+(70, 1070, 45.5103, 9.2374, 91.5),
+(71, 1071, 45.511, 9.2381, 76.8),
+(72, 1072, 45.5116, 9.2388, 67.5),
+(73, 1073, 45.5123, 9.2395, 85.7),
+(74, 1074, 45.5129, 9.2402, 93.3),
+(75, 1075, 45.5136, 9.2409, 78.9),
+(76, 1076, 45.5142, 9.2416, 66.4),
+(77, 1077, 45.5149, 9.2423, 74.6),
+(78, 1078, 45.5155, 9.243, 82.1),
+(79, 1079, 45.5162, 9.2437, 96.8),
+(80, 1080, 45.5168, 9.2444, 88.4),
+(81, 1081, 45.5175, 9.2451, 79.9),
+(82, 1082, 45.5181, 9.2458, 65.3),
+(83, 1083, 45.5188, 9.2465, 71.7),
+(84, 1084, 45.5194, 9.2472, 88.2),
+(85, 1085, 45.5201, 9.2479, 94.6),
+(86, 1086, 45.5207, 9.2486, 83.5),
+(87, 1087, 45.5214, 9.2493, 78.4),
+(88, 1088, 45.522, 9.25, 69.3),
+(89, 1089, 45.5227, 9.2507, 73.9),
+(90, 1090, 45.5233, 9.2514, 92.8),
+(91, 1091, 45.524, 9.2521, 86.3),
+(92, 1092, 45.5246, 9.2528, 77.5),
+(93, 1093, 45.5253, 9.2535, 69.8),
+(94, 1094, 45.5259, 9.2542, 84.1),
+(95, 1095, 45.5266, 9.2549, 93.4),
+(96, 1096, 45.5272, 9.2556, 80.7),
+(97, 1097, 45.5279, 9.2563, 78.2),
+(98, 1098, 45.5285, 9.257, 67.9),
+(99, 1099, 45.5292, 9.2577, 72.3),
+(100, 1100, 45.5298, 9.2584, 95.6);
 
 CREATE TABLE `clienti` (
   `cliente_id` int(11) NOT NULL,
@@ -143,18 +149,43 @@ CREATE TABLE `clienti` (
   `cvvCarta` char(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Dump dei dati per la tabella `clienti`
---
-
 INSERT INTO `clienti` (`cliente_id`, `nome`, `cognome`, `username`, `mail`, `password`, `indirizzo`, `latitudine`, `longitudine`, `nomeTitolareCarta`, `cognomeTitolareCarta`, `numeroCarta`, `scadenzaCarta`, `cvvCarta`) VALUES
-(1, 'Mario', 'Rossi', 'mr', 'mr@gmail.com', 'd9394066970e44ae252fd0347e58c03e', 'via copernico 12, milano', 45.48802624809481, 9.201444324822106, 'Mario', 'Rossi', '1234567890123456', '2028-06', '123');
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `operazioni`
---
+(1, 'Mario', 'Rossi', 'mr', 'mr@gmail.com', 'd9394066970e44ae252fd0347e58c03e', 'via copernico 12, milano', 45.48802624809481, 9.201444324822106, 'Mario', 'Rossi', '1234567890123456', '2028-06', '123'),
+(2, 'Paolo', 'Bianchi', 'pbianchi', 'pbianchi@email.com', '202cb962ac59075b964b07152d234b70', 'Via Roma 1', 45.47, 9.18, 'Paolo', 'Bianchi', '1111222233334444', '2026-12', '111'),
+(3, 'Laura', 'Verdi', 'lverdi', 'lverdi@email.com', 'e10adc3949ba59abbe56e057f20f883e', 'Via Milano 2', 45.46, 9.19, 'Laura', 'Verdi', '2222333344445555', '2027-05', '222'),
+(4, 'Marco', 'Russo', 'mrusso', 'mrusso@email.com', 'f899139df5e1059396431415e770c6dd', 'Via Torino 3', 45.48, 9.2, 'Marco', 'Russo', '3333444455556666', '2025-08', '333'),
+(5, 'Giulia', 'Rossi', 'grossi', 'grossi@email.com', '6367c48dd193d56ea7b0baad25b19455', 'Via Napoli 4', 45.45, 9.21, 'Giulia', 'Rossi', '4444555566667777', '2026-11', '444'),
+(6, 'Davide', 'Galli', 'dgalli', 'dgalli@email.com', 'edf2fc857e218c6f3d9bc057edebf3f2', 'Via Venezia 5', 45.46, 9.17, 'Davide', 'Galli', '5555666677778888', '2027-09', '555'),
+(7, 'Elena', 'Leoni', 'eleoni', 'eleoni@email.com', '7b774effe4a349c6dd82ad4f4f21d34c', 'Via Firenze 6', 45.45, 9.22, 'Elena', 'Leoni', '6666777788889999', '2025-10', '666'),
+(8, 'Luca', 'Ferrari', 'lferrari', 'lferrari@email.com', '13f914cb66c62b29d31b6ad2679b3909', 'Via Bologna 7', 45.48, 9.19, 'Luca', 'Ferrari', '7777888899990000', '2027-03', '777'),
+(9, 'Sara', 'Brambilla', 'sbrambilla', 'sbrambilla@email.com', 'ac3478d69a3c81fa62e60f5c3696165a', 'Via Genova 8', 45.47, 9.21, 'Sara', 'Brambilla', '8888999900001111', '2026-06', '888'),
+(10, 'Matteo', 'Romano', 'mromano', 'mromano@email.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Via Palermo 9', 45.46, 9.23, 'Matteo', 'Romano', '9999000011112222', '2025-12', '999'),
+(11, 'Alessia', 'Martini', 'amartini', 'amartini@email.com', 'a04c6f150d2c14b792d0e93d9ab8f22b', 'Via Pisa 10', 45.45, 9.2, 'Alessia', 'Martini', '0000111122223333', '2027-07', '000'),
+(12, 'Lorenzo', 'Conti', 'lconti', 'lconti@email.com', 'd251e41299a5ff970fd69ee2f068d7e7', 'Via Torino 11', 45.47, 9.17, 'Lorenzo', 'Conti', '1011121314151617', '2026-04', '101'),
+(13, 'Chiara', 'Barbieri', 'cbarbieri', 'cbarbieri@email.com', '25d55ad283aa400af464c76d713c07ad', 'Via Venezia 12', 45.46, 9.18, 'Chiara', 'Barbieri', '1213141516171819', '2025-11', '121'),
+(14, 'Giovanni', 'Caruso', 'gcaruso', 'gcaruso@email.com', 'c4ca4238a0b923820dcc509a6f75849b', 'Via Firenze 13', 45.48, 9.22, 'Giovanni', 'Caruso', '1415161718192021', '2026-03', '141'),
+(15, 'Martina', 'Santoro', 'msantoro', 'msantoro@email.com', 'c81e728d9d4c2f636f067f89cc14862c', 'Via Bologna 14', 45.45, 9.21, 'Martina', 'Santoro', '1516171819202122', '2027-02', '151'),
+(16, 'Andrea', 'Gatti', 'agatti', 'agatti@email.com', 'eccbc87e4b5ce2fe28308fd9f2a7baf3', 'Via Genova 15', 45.46, 9.19, 'Andrea', 'Gatti', '1617181920212223', '2026-05', '161'),
+(17, 'Federico', 'Rossi', 'federossi', 'federossi@email.com', 'e99a18c428cb38d5f260853678922e03', 'Via Milano 21', 45.47, 9.18, 'Federico', 'Rossi', '1234567890123456', '2026-12', '456'),
+(18, 'Maria', 'Martini', 'mariamart', 'mariamart@email.com', '6c8349cc7260ae62e3b1396831a8398f', 'Via Roma 22', 45.46, 9.19, 'Maria', 'Martini', '2345678901234567', '2027-05', '567'),
+(19, 'Giacomo', 'Conte', 'gconte', 'gconte@email.com', '8b1a9953c4611296a827abf8c47804d7', 'Via Torino 23', 45.48, 9.2, 'Giacomo', 'Conte', '3456789012345678', '2025-08', '678'),
+(20, 'Silvia', 'Ricci', 'silviaricci', 'silviaricci@email.com', '3c363836cf4e16666669a25da280a186', 'Via Napoli 24', 45.45, 9.21, 'Silvia', 'Ricci', '4567890123456789', '2026-11', '789'),
+(21, 'Antonio', 'Ferrari', 'antoniof', 'antoniof@email.com', '34173cb38f07f89ddbebc2ac9128303f', 'Via Venezia 25', 45.46, 9.17, 'Antonio', 'Ferrari', '5678901234567890', '2027-09', '890'),
+(22, 'Elena', 'Galli', 'elenagalli', 'elenagalli@email.com', '04d1eaa01a5ec95a80b1b739ce22d288', 'Via Firenze 26', 45.45, 9.22, 'Elena', 'Galli', '6789012345678901', '2025-10', '901'),
+(23, 'Roberto', 'Lombardi', 'roblomb', 'roblomb@email.com', '1f0e3dad99908345f7439f8ffabdffc4', 'Via Bologna 27', 45.48, 9.19, 'Roberto', 'Lombardi', '7890123456789012', '2027-03', '012'),
+(24, 'Anna', 'Russo', 'annarusso', 'annarusso@email.com', 'c51ce410c124a10e0db5e4b97fc2af39', 'Via Genova 28', 45.47, 9.21, 'Anna', 'Russo', '8901234567890123', '2026-06', '123'),
+(25, 'Fabio', 'Leoni', 'fabioleoni', 'fabioleoni@email.com', '70efdf2ec9b086079795c442636b55fb', 'Via Palermo 29', 45.46, 9.23, 'Fabio', 'Leoni', '9012345678901234', '2025-12', '234'),
+(26, 'Giorgia', 'Marini', 'giorgiamarini', 'giorgiamarini@email.com', '6f4922f45568161a8cdf4ad2299f6d23', 'Via Pisa 30', 45.45, 9.2, 'Giorgia', 'Marini', '0123456789012345', '2027-07', '345'),
+(27, 'Paolo', 'Bianchi', 'paolobianchi', 'paolobianchi@email.com', 'ee11cbb19052e40b07aac0ca060c23ee', 'Via Verdi 31', 45.47, 9.19, 'Paolo', 'Bianchi', '3456789012345678', '2027-10', '456'),
+(28, 'Laura', 'Neri', 'lauraneri', 'lauraneri@email.com', '7c4a8d09ca3762af61e59520943dc264', 'Via Dante 32', 45.46, 9.18, 'Laura', 'Neri', '4567890123456789', '2026-11', '567'),
+(29, 'Luca', 'Gatti', 'lucagatti', 'lucagatti@email.com', 'b7e14c88b3cfde1529c38694e33cd7a4', 'Via Garibaldi 33', 45.45, 9.17, 'Luca', 'Gatti', '5678901234567890', '2027-09', '678'),
+(30, 'Sara', 'Villa', 'saravilla', 'saravilla@email.com', 'ba5eceda1bb0a2f483d8e98c9a4780be', 'Via Roma 34', 45.44, 9.16, 'Sara', 'Villa', '6789012345678901', '2025-10', '789'),
+(31, 'Davide', 'Ferrari', 'davideferrari', 'davideferrari@email.com', 'b2f5ff47436671b6e533d8dc3614845d', 'Via Milano 35', 45.48, 9.2, 'Davide', 'Ferrari', '7890123456789012', '2027-03', '890'),
+(32, 'Elena', 'Ricci', 'elenaricci', 'elenaricci@email.com', 'c7e1249ffc03eb9ded908c236bd1996d', 'Via Torino 36', 45.47, 9.21, 'Elena', 'Ricci', '8901234567890123', '2026-06', '901'),
+(33, 'Marco', 'Leoni', 'marcoleoni', 'marcoleoni@email.com', '6364d3f0f495b6ab9dcf8d3b5c6e0b01', 'Via Firenze 37', 45.46, 9.22, 'Marco', 'Leoni', '9012345678901234', '2025-12', '012'),
+(34, 'Giulia', 'Marini', 'giuliamarini', 'giuliamarini@email.com', 'e369853df766fa44e1ed0ff613f563bd', 'Via Napoli 38', 45.45, 9.23, 'Giulia', 'Marini', '0123456789012345', '2027-07', '123'),
+(35, 'Andrea', 'Moretti', 'andreamoretti', 'andreamoretti@email.com', 'c81e728d9d4c2f636f067f89cc14862c', 'Via Venezia 39', 45.44, 9.22, 'Andrea', 'Moretti', '1234567890123456', '2026-08', '234'),
+(36, 'Simona', 'Gallo', 'simonagallo', 'simonagallo@email.com', 'a87ff679a2f3e71d9181a67b7542122c', 'Via Genova 40', 45.43, 9.21, 'Simona', 'Gallo', '2345678901234567', '2025-04', '345');
 
 CREATE TABLE `operazioni` (
   `operazione_id` int(11) NOT NULL,
@@ -167,37 +198,174 @@ CREATE TABLE `operazioni` (
   `bicicletta_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Dump dei dati per la tabella `operazioni`
---
-
 INSERT INTO `operazioni` (`operazione_id`, `tipo`, `data_ora`, `km_percorsi`, `tariffa`, `cliente_id`, `stazione_id`, `bicicletta_id`) VALUES
-(1, 'noleggio', '2024-05-08 20:26:07', NULL, NULL, 1, 1, 1),
-(2, 'riconsegna', '2024-05-08 22:27:07', 12.7, 3, 1, 2, 1),
-(3, 'noleggio', '2024-05-12 00:00:00', NULL, NULL, 1, 4, 2),
-(4, 'riconsegna', '2024-05-12 00:00:00', 8, 2, 1, 3, 2),
-(5, 'noleggio', '2024-05-03 11:30:00', NULL, NULL, 3, 2, 3),
-(6, 'riconsegna', '2024-05-03 15:00:00', 6.5, 12, 3, 1, 3),
-(7, 'noleggio', '2024-05-04 12:45:00', NULL, NULL, 4, 3, 4),
-(8, 'riconsegna', '2024-05-04 16:30:00', 9.2, 18, 4, 4, 4),
-(9, 'noleggio', '2024-05-05 13:20:00', NULL, NULL, 5, 4, 5),
-(10, 'riconsegna', '2024-05-05 17:15:00', 7.8, 14, 5, 4, 5),
-(11, 'noleggio', '2024-05-06 14:00:00', NULL, NULL, 6, 3, 6),
-(12, 'riconsegna', '2024-05-06 18:00:00', 10.1, 20, 6, 3, 6),
-(13, 'noleggio', '2024-05-07 15:20:00', NULL, NULL, 7, 3, 7),
-(14, 'riconsegna', '2024-05-07 19:00:00', 6.9, 13, 7, 2, 7),
-(15, 'noleggio', '2024-05-08 16:10:00', NULL, NULL, 8, 1, 8),
-(16, 'riconsegna', '2024-05-08 20:00:00', 8.5, 16, 8, 2, 8),
-(17, 'noleggio', '2024-05-09 17:30:00', NULL, NULL, 9, 2, 9),
-(18, 'riconsegna', '2024-05-09 21:00:00', 7.3, 14.5, 9, 1, 9),
-(19, 'noleggio', '2024-05-10 18:40:00', NULL, NULL, 10, 2, 10),
-(20, 'noleggio', '2024-05-10 22:15:00', NULL, NULL, 10, 1, 10);
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `stazioni`
---
+(1, 'noleggio', '2024-05-23 10:30:00', NULL, NULL, 15, 7, 25),
+(2, 'riconsegna', '2024-05-23 12:15:00', 15.5, 10, 28, 12, 45),
+(3, 'noleggio', '2024-05-23 14:45:00', NULL, NULL, 5, 3, 10),
+(4, 'riconsegna', '2024-05-23 16:20:00', 8.3, 5.5, 18, 8, 73),
+(5, 'noleggio', '2024-05-23 17:55:00', NULL, NULL, 32, 5, 90),
+(6, 'riconsegna', '2024-05-23 19:30:00', 12.7, 8, 11, 10, 15),
+(7, 'noleggio', '2024-05-23 21:10:00', NULL, NULL, 24, 1, 60),
+(8, 'riconsegna', '2024-05-23 22:45:00', 5.9, 4, 36, 14, 5),
+(9, 'noleggio', '2024-05-23 23:55:00', NULL, NULL, 8, 9, 30),
+(10, 'riconsegna', '2024-05-24 01:20:00', 3.2, 2.5, 19, 6, 80),
+(11, 'noleggio', '2024-05-24 03:45:00', NULL, NULL, 7, 11, 75),
+(12, 'riconsegna', '2024-05-24 05:10:00', 6.8, 4.5, 21, 4, 20),
+(13, 'noleggio', '2024-05-24 06:35:00', NULL, NULL, 30, 13, 50),
+(14, 'riconsegna', '2024-05-24 08:00:00', 10.2, 6.5, 12, 2, 85),
+(15, 'noleggio', '2024-05-24 09:25:00', NULL, NULL, 13, 6, 15),
+(16, 'riconsegna', '2024-05-24 10:50:00', 7.5, 5, 29, 9, 70),
+(17, 'noleggio', '2024-05-24 12:15:00', NULL, NULL, 20, 14, 95),
+(18, 'riconsegna', '2024-05-24 13:40:00', 14.3, 9, 4, 3, 25),
+(19, 'noleggio', '2024-05-24 15:05:00', NULL, NULL, 35, 8, 60),
+(20, 'riconsegna', '2024-05-24 16:30:00', 8.9, 5.5, 16, 12, 40),
+(21, 'noleggio', '2024-05-24 17:55:00', NULL, NULL, 23, 1, 80),
+(22, 'riconsegna', '2024-05-24 19:20:00', 12.1, 7.5, 31, 11, 65),
+(23, 'noleggio', '2024-05-24 20:45:00', NULL, NULL, 6, 5, 30),
+(24, 'riconsegna', '2024-05-24 22:10:00', 9.6, 6, 9, 10, 55),
+(25, 'noleggio', '2024-05-24 23:35:00', NULL, NULL, 33, 15, 90),
+(26, 'riconsegna', '2024-05-25 01:00:00', 5.3, 3.5, 15, 7, 10),
+(27, 'noleggio', '2024-05-25 02:25:00', NULL, NULL, 2, 3, 45),
+(28, 'riconsegna', '2024-05-25 03:50:00', 8.7, 5.5, 26, 13, 75),
+(29, 'noleggio', '2024-05-25 05:15:00', NULL, NULL, 17, 6, 20),
+(30, 'riconsegna', '2024-05-25 06:40:00', 11.2, 7, 8, 2, 50),
+(31, 'noleggio', '2024-05-25 08:05:00', NULL, NULL, 24, 11, 85),
+(32, 'riconsegna', '2024-05-25 09:30:00', 6.4, 4, 14, 4, 15),
+(33, 'noleggio', '2024-05-25 10:55:00', NULL, NULL, 11, 1, 70),
+(34, 'riconsegna', '2024-05-25 12:20:00', 13.9, 8.5, 28, 14, 95),
+(35, 'noleggio', '2024-05-25 13:45:00', NULL, NULL, 22, 9, 40),
+(36, 'riconsegna', '2024-05-25 15:10:00', 8.2, 5, 32, 8, 65),
+(37, 'noleggio', '2024-05-25 16:35:00', NULL, NULL, 16, 15, 30),
+(38, 'riconsegna', '2024-05-25 18:00:00', 10.6, 6.5, 5, 10, 55),
+(39, 'noleggio', '2024-05-25 19:25:00', NULL, NULL, 27, 7, 90),
+(40, 'riconsegna', '2024-05-25 20:50:00', 7.8, 5, 18, 3, 10),
+(41, 'noleggio', '2024-05-25 22:15:00', NULL, NULL, 10, 13, 45),
+(42, 'riconsegna', '2024-05-25 23:40:00', 9.3, 6, 36, 1, 80),
+(43, 'noleggio', '2024-05-26 01:05:00', NULL, NULL, 19, 11, 25),
+(44, 'riconsegna', '2024-05-26 02:30:00', 5.7, 3.5, 34, 4, 60),
+(45, 'noleggio', '2024-05-26 03:55:00', NULL, NULL, 3, 15, 95),
+(46, 'riconsegna', '2024-05-26 05:20:00', 11.8, 7.5, 23, 2, 20),
+(47, 'noleggio', '2024-05-26 06:45:00', NULL, NULL, 25, 13, 50),
+(48, 'noleggio', '2024-05-24 09:30:00', NULL, NULL, 8, 3, 25),
+(49, 'riconsegna', '2024-05-24 10:55:00', 7.8, 4.5, 23, 12, 60),
+(50, 'noleggio', '2024-05-24 12:20:00', NULL, NULL, 17, 5, 35),
+(51, 'riconsegna', '2024-05-24 13:45:00', 9.2, 5.5, 2, 13, 70),
+(52, 'noleggio', '2024-05-24 15:10:00', NULL, NULL, 10, 7, 45),
+(53, 'riconsegna', '2024-05-24 16:35:00', 8.5, 5, 21, 9, 80),
+(54, 'noleggio', '2024-05-24 18:00:00', NULL, NULL, 35, 15, 15),
+(55, 'riconsegna', '2024-05-24 19:25:00', 10.7, 6.5, 12, 6, 50),
+(56, 'noleggio', '2024-05-24 20:50:00', NULL, NULL, 1, 1, 95),
+(57, 'noleggio', '2024-05-26 17:25:00', NULL, NULL, 32, 6, 15),
+(58, 'riconsegna', '2024-05-26 18:50:00', 10.2, 6.5, 9, 12, 40),
+(59, 'noleggio', '2024-05-26 20:15:00', NULL, NULL, 18, 1, 80),
+(60, 'riconsegna', '2024-05-26 21:40:00', 8.6, 5.5, 33, 11, 65),
+(61, 'noleggio', '2024-05-26 23:05:00', NULL, NULL, 7, 5, 30),
+(62, 'riconsegna', '2024-05-27 00:30:00', 9.7, 6, 26, 10, 55),
+(63, 'noleggio', '2024-05-27 01:55:00', NULL, NULL, 31, 15, 90),
+(64, 'riconsegna', '2024-05-27 03:20:00', 6.3, 4, 15, 7, 10),
+(65, 'noleggio', '2024-05-27 04:45:00', NULL, NULL, 6, 3, 45),
+(66, 'riconsegna', '2024-05-27 06:10:00', 8.2, 5.5, 28, 13, 75),
+(67, 'noleggio', '2024-05-27 07:35:00', NULL, NULL, 19, 6, 20),
+(68, 'riconsegna', '2024-05-27 09:00:00', 11.4, 7, 8, 2, 50),
+(69, 'noleggio', '2024-05-27 10:25:00', NULL, NULL, 26, 11, 85),
+(70, 'riconsegna', '2024-05-27 11:50:00', 6.7, 4, 14, 4, 15),
+(71, 'noleggio', '2024-05-27 13:15:00', NULL, NULL, 11, 1, 70),
+(72, 'riconsegna', '2024-05-27 14:40:00', 12.8, 8, 28, 14, 95),
+(73, 'noleggio', '2024-05-27 16:05:00', NULL, NULL, 22, 9, 40),
+(74, 'riconsegna', '2024-05-27 17:30:00', 8.5, 5, 32, 8, 65),
+(75, 'noleggio', '2024-05-27 18:55:00', NULL, NULL, 16, 15, 30),
+(76, 'riconsegna', '2024-05-27 20:20:00', 10.3, 6.5, 5, 10, 55),
+(77, 'noleggio', '2024-05-27 21:45:00', NULL, NULL, 27, 7, 90),
+(78, 'riconsegna', '2024-05-27 11:00:00', 7.4, 4.25, 9, 15, 40),
+(79, 'noleggio', '2024-05-27 12:25:00', NULL, NULL, 27, 12, 45),
+(80, 'riconsegna', '2024-05-27 13:50:00', 9.9, 6, 1, 7, 50),
+(81, 'noleggio', '2024-05-27 15:15:00', NULL, NULL, 32, 3, 55),
+(82, 'riconsegna', '2024-05-27 16:40:00', 8.6, 5.25, 15, 10, 60),
+(83, 'noleggio', '2024-05-27 18:05:00', NULL, NULL, 6, 5, 65),
+(84, 'riconsegna', '2024-05-27 19:30:00', 10.5, 6.5, 24, 13, 70),
+(85, 'noleggio', '2024-05-27 20:55:00', NULL, NULL, 13, 9, 75),
+(86, 'riconsegna', '2024-05-28 08:20:00', 6.8, 3.8, 11, 6, 80),
+(87, 'noleggio', '2024-05-28 09:45:00', NULL, NULL, 21, 1, 85),
+(88, 'riconsegna', '2024-05-28 11:10:00', 8.2, 4.9, 32, 8, 90),
+(89, 'noleggio', '2024-05-28 12:35:00', NULL, NULL, 19, 4, 95),
+(90, 'riconsegna', '2024-05-28 14:00:00', 10.2, 6.2, 8, 11, 100),
+(91, 'noleggio', '2024-05-28 15:25:00', NULL, NULL, 34, 7, 5),
+(92, 'riconsegna', '2024-05-28 16:50:00', 9.5, 5.75, 18, 14, 10),
+(93, 'noleggio', '2024-05-28 18:15:00', NULL, NULL, 24, 10, 15),
+(94, 'noleggio', '2024-05-28 21:05:00', NULL, NULL, 16, 3, 20),
+(95, 'riconsegna', '2024-05-29 07:30:00', 7.2, 4, 7, 6, 25),
+(96, 'noleggio', '2024-05-29 08:55:00', NULL, NULL, 29, 12, 30),
+(97, 'riconsegna', '2024-05-29 10:20:00', 8.8, 5.25, 14, 15, 35),
+(98, 'noleggio', '2024-05-29 11:45:00', NULL, NULL, 22, 9, 40),
+(99, 'riconsegna', '2024-05-29 13:10:00', 9.7, 6, 1, 1, 45),
+(100, 'noleggio', '2024-05-29 14:35:00', NULL, NULL, 12, 7, 50),
+(101, 'riconsegna', '2024-05-29 16:00:00', 10.1, 6.5, 21, 10, 55),
+(102, 'noleggio', '2024-05-29 17:25:00', NULL, NULL, 33, 5, 60),
+(103, 'riconsegna', '2024-05-29 18:50:00', 8.6, 5, 8, 13, 65),
+(104, 'noleggio', '2024-05-29 20:15:00', NULL, NULL, 17, 2, 70),
+(105, 'riconsegna', '2024-05-30 08:40:00', 6.9, 3.9, 30, 8, 75),
+(106, 'noleggio', '2024-05-30 10:05:00', NULL, NULL, 26, 4, 80),
+(107, 'riconsegna', '2024-05-30 11:30:00', 8.4, 4.8, 3, 11, 85),
+(108, 'noleggio', '2024-05-30 12:55:00', NULL, NULL, 11, 6, 90),
+(109, 'riconsegna', '2024-05-30 14:20:00', 9.2, 5.5, 18, 14, 95),
+(110, 'noleggio', '2024-05-30 15:45:00', NULL, NULL, 34, 10, 100),
+(111, 'riconsegna', '2024-05-30 17:10:00', 10.5, 6.75, 25, 1, 5),
+(112, 'noleggio', '2024-05-30 18:35:00', NULL, NULL, 19, 7, 10),
+(113, 'riconsegna', '2024-05-30 20:00:00', 12.3, 7.8, 32, 10, 15),
+(114, 'noleggio', '2024-05-30 21:25:00', NULL, NULL, 27, 3, 20),
+(115, 'riconsegna', '2024-05-31 07:50:00', 7.8, 4.5, 5, 6, 25),
+(116, 'noleggio', '2024-05-31 09:15:00', NULL, NULL, 30, 12, 30),
+(117, 'riconsegna', '2024-05-31 10:40:00', 9.1, 5.75, 15, 15, 35),
+(118, 'noleggio', '2024-05-31 12:05:00', NULL, NULL, 23, 9, 40),
+(119, 'riconsegna', '2024-05-31 13:30:00', 10.2, 6.25, 2, 1, 45),
+(120, 'noleggio', '2024-05-31 14:55:00', NULL, NULL, 13, 7, 50),
+(121, 'riconsegna', '2024-05-31 16:20:00', 10.8, 6.8, 22, 10, 55),
+(122, 'noleggio', '2024-05-31 17:45:00', NULL, NULL, 35, 5, 60),
+(123, 'riconsegna', '2024-05-31 19:10:00', 9.6, 5.8, 9, 13, 65),
+(124, 'noleggio', '2024-05-31 20:35:00', NULL, NULL, 18, 2, 70),
+(125, 'riconsegna', '2024-06-01 08:00:00', 7.2, 4.25, 31, 8, 75),
+(126, 'noleggio', '2024-06-01 09:25:00', NULL, NULL, 25, 4, 80),
+(127, 'riconsegna', '2024-06-01 10:50:00', 8.9, 5.25, 4, 11, 85),
+(128, 'noleggio', '2024-06-01 12:15:00', NULL, NULL, 10, 6, 90),
+(129, 'riconsegna', '2024-06-01 13:40:00', 9.5, 5.75, 19, 14, 95),
+(130, 'noleggio', '2024-06-01 15:05:00', NULL, NULL, 33, 10, 100),
+(131, 'noleggio', '2024-06-01 17:55:00', NULL, NULL, 27, 3, 20),
+(132, 'riconsegna', '2024-06-02 07:20:00', 7.4, 4.25, 5, 6, 25),
+(133, 'noleggio', '2024-06-02 08:45:00', NULL, NULL, 30, 12, 30),
+(134, 'riconsegna', '2024-06-02 10:10:00', 9.2, 5.5, 15, 15, 35),
+(135, 'noleggio', '2024-06-02 11:35:00', NULL, NULL, 23, 9, 40),
+(136, 'riconsegna', '2024-06-02 13:00:00', 10.3, 6.25, 2, 1, 45),
+(137, 'noleggio', '2024-06-02 14:25:00', NULL, NULL, 13, 7, 50),
+(138, 'riconsegna', '2024-06-02 15:50:00', 10.9, 6.8, 22, 10, 55),
+(139, 'noleggio', '2024-06-02 17:15:00', NULL, NULL, 35, 5, 60),
+(140, 'riconsegna', '2024-06-02 18:40:00', 9.7, 5.8, 9, 13, 65),
+(141, 'noleggio', '2024-06-02 20:05:00', NULL, NULL, 18, 2, 70),
+(142, 'riconsegna', '2024-06-03 08:30:00', 7.2, 4.25, 31, 8, 75),
+(143, 'noleggio', '2024-06-03 09:55:00', NULL, NULL, 25, 4, 80),
+(144, 'riconsegna', '2024-06-03 11:20:00', 8.9, 5.25, 4, 11, 85),
+(145, 'noleggio', '2024-06-03 12:45:00', NULL, NULL, 10, 6, 90),
+(146, 'riconsegna', '2024-06-03 14:10:00', 9.5, 5.75, 19, 14, 95),
+(147, 'noleggio', '2024-06-03 15:35:00', NULL, NULL, 33, 10, 100),
+(148, 'riconsegna', '2024-06-03 17:00:00', 11.1, 7, 26, 2, 5),
+(149, 'noleggio', '2024-06-03 18:25:00', NULL, NULL, 20, 8, 10),
+(150, 'riconsegna', '2024-06-03 19:50:00', 12.2, 7.7, 33, 12, 15),
+(151, 'noleggio', '2024-06-03 21:15:00', NULL, NULL, 28, 3, 20),
+(152, 'riconsegna', '2024-06-04 07:40:00', 7.6, 4.4, 6, 6, 25),
+(153, 'noleggio', '2024-06-04 09:05:00', NULL, NULL, 31, 12, 30),
+(154, 'riconsegna', '2024-06-04 10:30:00', 9.4, 5.6, 16, 15, 35),
+(155, 'noleggio', '2024-06-04 11:55:00', NULL, NULL, 24, 9, 40),
+(156, 'riconsegna', '2024-06-04 13:20:00', 10.5, 6.3, 3, 1, 45),
+(157, 'noleggio', '2024-06-04 14:45:00', NULL, NULL, 14, 7, 50),
+(158, 'riconsegna', '2024-06-04 16:10:00', 11.2, 6.9, 23, 10, 55),
+(159, 'noleggio', '2024-06-04 17:35:00', NULL, NULL, 36, 5, 60),
+(160, 'riconsegna', '2024-06-04 19:00:00', 9.8, 5.9, 10, 13, 65),
+(161, 'noleggio', '2024-06-04 20:25:00', NULL, NULL, 19, 2, 70),
+(162, 'riconsegna', '2024-06-05 08:50:00', 7.4, 4.3, 32, 8, 75),
+(163, 'noleggio', '2024-06-05 10:15:00', NULL, NULL, 26, 4, 80),
+(164, 'riconsegna', '2024-06-05 11:40:00', 9.1, 5.4, 5, 11, 85),
+(165, 'noleggio', '2024-06-05 13:05:00', NULL, NULL, 11, 6, 90),
+(166, 'riconsegna', '2024-06-05 14:30:00', 9.6, 5.8, 20, 14, 95),
+(167, 'noleggio', '2024-06-05 15:55:00', NULL, NULL, 35, 10, 100);
 
 CREATE TABLE `stazioni` (
   `stazione_id` int(11) NOT NULL,
@@ -207,102 +375,69 @@ CREATE TABLE `stazioni` (
   `slotMax` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Dump dei dati per la tabella `stazioni`
---
-
 INSERT INTO `stazioni` (`stazione_id`, `via`, `latitudine`, `longitudine`, `slotMax`) VALUES
 (1, 'Via Garibaldi', 45.46616665464403, 9.174049656162099, 30),
 (2, 'Via Matteotti', 45.47396133651221, 9.162068653528493, 20),
 (3, 'Piazza del mercato', 45.47391761520903, 9.195303473626618, 10),
-(4, 'Via arco della pace', 45.477451450652865, 9.17340055882721, 15);
+(4, 'Via arco della pace', 45.477451450652865, 9.17340055882721, 15),
+(5, 'Via Santa Sofia 11, Milano', 45.45720443477219, 9.190788824549939, 20),
+(6, 'Via Dante', 45.46, 9.19, 25),
+(7, 'Corso Sempione', 45.47, 9.18, 20),
+(8, 'Viale Monza', 45.48, 9.2, 30),
+(9, 'Via Torino', 45.46, 9.17, 15),
+(10, 'Via Manzoni', 45.45, 9.16, 20),
+(11, 'Via Montenapoleone', 45.465, 9.15, 25),
+(12, 'Piazza Duomo', 45.47, 9.19, 40),
+(13, 'Corso Buenos Aires', 45.48, 9.21, 35),
+(14, 'Via della Moscova', 45.45, 9.22, 20),
+(15, 'Via Paolo Sarpi', 45.46, 9.23, 25);
 
---
--- Indici per le tabelle scaricate
---
 
---
--- Indici per le tabelle `admin`
---
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`admin_id`),
   ADD UNIQUE KEY `mail` (`mail`);
 
---
--- Indici per le tabelle `biciclette`
---
 ALTER TABLE `biciclette`
   ADD PRIMARY KEY (`bicicletta_id`),
   ADD UNIQUE KEY `codice` (`codice`);
 
---
--- Indici per le tabelle `clienti`
---
 ALTER TABLE `clienti`
   ADD PRIMARY KEY (`cliente_id`),
   ADD UNIQUE KEY `username` (`username`),
   ADD UNIQUE KEY `mail` (`mail`),
   ADD UNIQUE KEY `numeroCarta` (`numeroCarta`,`cvvCarta`);
 
---
--- Indici per le tabelle `operazioni`
---
 ALTER TABLE `operazioni`
   ADD PRIMARY KEY (`operazione_id`),
-  ADD KEY `cliente_id` (`cliente_id`),
   ADD KEY `stazione_id` (`stazione_id`),
-  ADD KEY `bicicletta_id` (`bicicletta_id`);
+  ADD KEY `bicicletta_id` (`bicicletta_id`),
+  ADD KEY `cliente_id` (`cliente_id`);
 
---
--- Indici per le tabelle `stazioni`
---
 ALTER TABLE `stazioni`
   ADD PRIMARY KEY (`stazione_id`),
   ADD UNIQUE KEY `via` (`via`);
 
---
--- AUTO_INCREMENT per le tabelle scaricate
---
 
---
--- AUTO_INCREMENT per la tabella `admin`
---
 ALTER TABLE `admin`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
---
--- AUTO_INCREMENT per la tabella `biciclette`
---
 ALTER TABLE `biciclette`
-  MODIFY `bicicletta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `bicicletta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
---
--- AUTO_INCREMENT per la tabella `clienti`
---
 ALTER TABLE `clienti`
-  MODIFY `cliente_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `cliente_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
---
--- AUTO_INCREMENT per la tabella `operazioni`
---
 ALTER TABLE `operazioni`
-  MODIFY `operazione_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `operazione_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=168;
 
---
--- AUTO_INCREMENT per la tabella `stazioni`
---
 ALTER TABLE `stazioni`
-  MODIFY `stazione_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `stazione_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
---
--- Limiti per le tabelle scaricate
---
 
---
--- Limiti per la tabella `operazioni`
---
 ALTER TABLE `operazioni`
-  ADD CONSTRAINT `operazioni_ibfk_1` FOREIGN KEY (`bicicletta_id`) REFERENCES `biciclette` (`bicicletta_id`);
+  ADD CONSTRAINT `operazioni_ibfk_1` FOREIGN KEY (`bicicletta_id`) REFERENCES `biciclette` (`bicicletta_id`),
+  ADD CONSTRAINT `operazioni_ibfk_2` FOREIGN KEY (`stazione_id`) REFERENCES `stazioni` (`stazione_id`),
+  ADD CONSTRAINT `operazioni_ibfk_3` FOREIGN KEY (`cliente_id`) REFERENCES `clienti` (`cliente_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
