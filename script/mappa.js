@@ -67,11 +67,19 @@ function aggiungiStazioni(stazioni)
     });
 }
 
+// Crea un'icona personalizzata usando un'immagine JPG
+let stazioneIcon = L.icon({
+    iconUrl: '../file/img/stazione.jpg', // Specifica il percorso della tua immagine
+    iconSize: [40, 40], // Dimensione dell'icona
+    iconAnchor: [16, 32], // Punto dell'icona che corrisponde alla posizione del marker
+    popupAnchor: [0, -32] // Punto dell'icona da cui si apre il popup
+});
+
 // FUNZIONE PER AGGIUNGERE IL MARKER DI UNA STAZIONE NELLA MAPPA
 async function aggiungiStazine(stazione)
 {
     // marker
-    let marker = L.marker([stazione["latitudine"], stazione["longitudine"]]).addTo(mappa);
+    let marker = L.marker([stazione["latitudine"], stazione["longitudine"]], { icon: stazioneIcon} ).addTo(mappa);
 
     // prendo i posti liberi
     let postiLiberi = await getPostiLiberi({stazione_id: stazione["stazione_id"]});
