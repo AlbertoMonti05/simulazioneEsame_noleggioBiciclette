@@ -49,6 +49,7 @@
         <div class="row justify-content-end">
             <div class="col-md-6 text-right">
                 <a href="aggiungiBicicletta.php" class="btn btn-primary">AGGIUNGI BICICLETTA</a>
+                <a href="bicicletteInManutenzione.php" class="btn btn-primary">BICICLETTE IN MANUTENZIONE</a>
             </div>
         </div>
     </div>

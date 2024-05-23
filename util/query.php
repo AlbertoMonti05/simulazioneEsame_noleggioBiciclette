@@ -88,4 +88,10 @@
 
     // prendo ultimo codice bicicletta
     $getUltimoCodice = "SELECT MAX(`codice`) AS codice FROM `biciclette`";
+
+    // prendo biciclette in manutenzione
+    $getBicicletteInManutenzione = "SELECT * FROM `biciclette` WHERE `in_manutenzione` = 1";
+
+    // fine manutenzione bicicletta
+    $fineManutenzione = "UPDATE `biciclette` SET `in_manutenzione` = 0 WHERE `bicicletta_id` = ?";
 ?>
