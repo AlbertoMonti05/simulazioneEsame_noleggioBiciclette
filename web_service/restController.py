@@ -3,6 +3,7 @@ from flask import request, jsonify
 import mysql.connector
 from _config import *
 from mysql.connector import Error
+from geopy.distance import geodesic
 from app import app
 
 # FUNZIONE PER CREARE LA CONNESSIONE AL DATABASE
@@ -75,277 +76,6 @@ def execute_query(query, params=None):
 
 
 ###########################à
-
-
-# ENDPOINT PER CERCARE LE STAZIONI
-@app.route('/getStazioni', methods=['GET'])
-def getStazioni():
-    # prendo i parametri
-    via = request.args.get('via')
-    stazione_id = request.args.get('stazione_id')
-
-    # controllo parametri
-    if via:
-        # cerco per via
-        query = "SELECT * FROM stazioni WHERE via = %s;"
-        params = (via,)
-    elif stazione_id:
-        # converto id in intero
-        try:
-            stazione_id = int(stazione_id)
-        except ValueError:
-            return jsonify({'message': 'L\'ID della stazione deve essere un numero intero.'}), 400
-        
-        # cerco per id
-        query = "SELECT * FROM stazioni WHERE stazione_id = %s;"
-        params = (stazione_id,)
-    else:
-        # cerco tutte le stazioni
-        query = "SELECT * FROM stazioni;"
-        params = None
-    
-    # eseguo query
-    stazioni = execute_query(query, params)
-
-    # controllo il risultato
-    if stazioni:
-        return jsonify(stazioni)
-    
-    return jsonify({'message': 'Nessuna stazione trovata.'}), 404
-
-
-# ENDPOINT PER ELIMINARE LE STAZIONI
-@app.route('/deleteStazioni', methods=['GET'])
-def deleteStazioni():
-    # prendo i parametri
-    via = request.args.get('via')
-    stazione_id = request.args.get('stazione_id')
-
-    # controllo parametri
-    if via:
-        # elimino per via
-        query = "DELETE FROM stazioni WHERE via = %s;"
-        params = (via,)
-    elif stazione_id:
-        # converto id in intero
-        try:
-            stazione_id = int(stazione_id)
-        except ValueError:
-            return jsonify({'message': 'L\'ID della stazione deve essere un numero intero.'}), 400
-        
-        # elimino per id
-        query = "DELETE FROM stazioni WHERE stazione_id = %s;"
-        params = (stazione_id,)
-    else:
-        # elimino tutte le stazioni
-        query = "DELETE * FROM stazioni;"
-        params = None
-    
-    # eseguo query
-    num_righe = execute_query(query, params)
-
-    # controllo il risultato
-    if num_righe > 0:
-        return jsonify({'message': 'Operazione eseguita con successo'})
-    
-    return jsonify({'message': 'ERRORE! Operazione non eseguita'}), 404
-
-
-# ENDPOINT PER CERCARE LE BICICLETTE
-@app.route('/getBiciclette', methods=['GET'])
-def getBiciclette():
-    # prendo i parametri
-    codice = request.args.get('codice')
-
-    # controllo parametri
-    if codice:
-        # cerco per codice
-        query = "SELECT * FROM biciclette WHERE codice = %s;"
-        params = (codice,)
-    else:
-        # cerco tutte le biciclette
-        query = "SELECT * FROM biciclette;"
-        params = None
-        
-    # eseguo query
-    biciclette = execute_query(query, params)
-
-    # controllo il risultato
-    if biciclette:
-        return jsonify(biciclette)
-    
-    return jsonify({'message': 'Nessuna bicicletta trovata.'}), 404
-
-
-# ENDPOINT PER ELIMINARE LE BICICLETTE
-@app.route('/deleteBiciclette', methods=['GET'])
-def deleteBiciclette():
-    # prendo i parametri
-    codice = request.args.get('codice')
-
-    # controllo parametri
-    if codice:
-        # elimino per codice
-        query = "DELETE FROM biciclette WHERE codice = %s;"
-        params = (codice,)
-    else:
-        # elimino tutte le biciclette
-        query = "DELETE * FROM biciclette;"
-        params = None
-        
-    # eseguo query
-    num_righe = execute_query(query, params)
-
-    # controllo il risultato
-    if num_righe > 0:
-        return jsonify({'message': 'Operazione eseguita con successo'})
-    
-    return jsonify({'message': 'ERRORE! Operazione non eseguita'}), 404
-
-
-# ENDPOINT PER AGGIUNGERE SLOT ALLE STAZIONI
-@app.route('/aggiungiSlot', methods=['GET'])
-def aggiungiSlot():
-    # prendo i parametri
-    numero = request.args.get('numero')
-    stazione_id = request.args.get('stazione_id')
-        
-    # converto numero in intero
-    try:
-        numero = int(numero)
-    except ValueError:
-        return jsonify({'message': 'Il numero di slot deve essere un numero intero.'}), 400        
-    
-    # controllo parametri
-    if stazione_id:
-        try:
-            stazione_id = int(stazione_id)
-        except ValueError:
-            return jsonify({'message': 'L\'ID della stazione deve essere un numero intero.'}), 400
-        
-        # aggiungo slot alla stazione
-        query = "UPDATE stazioni SET slotMax = slotMax + %s WHERE id = %s;"
-        params = (numero, stazione_id,)
-    else:
-        # aggiungo slot a tutte le stazioni
-        query = "UPDATE stazioni SET slotMax = slotMax + %s;"
-        params = (numero,)
-            
-    # eseguo  query
-    num_righe = execute_query(query, params)
-    
-    # controllo il risultato
-    if num_righe > 0:
-        return jsonify({'message': 'Operazione eseguita con successo'})
-    
-    return jsonify({'message': 'ERRORE! Operazione non eseguita'}), 404
-
-# ENDPOINT PER RIMUOVERE SLOT ALLE STAZIONI
-@app.route('/rimuoviSlot', methods=['GET'])
-def rimuoviSlot():
-    # prendo i parametri
-    numero = request.args.get('numero')
-    stazione_id = request.args.get('stazione_id')
-        
-    # converto numero in intero
-    try:
-        numero = int(numero)
-    except ValueError:
-        return jsonify({'message': 'Il numero di slot deve essere un numero intero.'}), 400
-    
-    # controllo parametri
-    if stazione_id:
-        try:
-            stazione_id = int(stazione_id)
-        except ValueError:
-            return jsonify({'message': 'L\'ID della stazione deve essere un numero intero.'}), 400
-        
-        # aggiungo slot alla stazione
-        query = "UPDATE stazioni SET slotMax = slotMax - %s WHERE id = %s;"
-        params = (numero, stazione_id,)
-    else:
-        # aggiungo slot a tutte le stazioni
-        query = "UPDATE stazioni SET slotMax = slotMax - %s;"
-        params = (numero,)
-            
-    # eseguo  query
-    num_righe = execute_query(query, params)
-    
-    # controllo il risultato
-    if num_righe > 0:
-        return jsonify({'message': 'Operazione eseguita con successo'})
-    
-    return jsonify({'message': 'ERRORE! Operazione non eseguita'}), 404
-
-# ENDPOINT PER MODIFICARE LE BICICLETTE
-@app.route('/updateBicicletta', methods=['GET'])
-def updateBicicletta():
-    # prendo i parametri
-    codice = request.args.get('codice')
-    nuovoCodice = request.args.get('nuovoCodice')
-    km_percorsi = request.args.get('km_percorsi')
-    bicicletta_id = request.args.get('bicicletta_id')
-    latitudine = request.args.get('latitudine')
-    longitudine = request.args.get('longitudine')
-    
-    # converto codice in intero
-    try:
-        codice = int(codice)
-    except ValueError:
-        return jsonify({'message': 'Il codice della bicicletta deve essere un numero intero.'}), 400
-    
-    # converto nuovoCodice in intero
-    try:
-        nuovoCodice = int(nuovoCodice)
-    except ValueError:
-        return jsonify({'message': 'il nuovo codice della bicicletta deve essere un numero intero.'}), 400
-    
-    # converto km_percorsi in float
-    try:
-        km_percorsi = float(km_percorsi)
-    except ValueError:
-        return jsonify({'message': 'I chilometri percorsi devono essere un numero.'}), 400
-    
-    # converto id in intero
-    try:
-        bicicletta_id = int(bicicletta_id)
-    except ValueError:
-        return jsonify({'message': 'L\'ID della bicicletta deve essere un numero intero.'}), 400
-    
-    # converto latitudine in float
-    try:
-        latitudine = float(latitudine)
-    except ValueError:
-        return jsonify({'message': 'La latitudine deve essere un numero.'}), 400
-    
-    # converto longitudine in float
-    try:
-        longitudine = float(longitudine)
-    except ValueError:
-        return jsonify({'message': 'La longitudine deve essere un numero.'}), 400
-    
-    # controllo parametri
-    if codice and nuovoCodice:
-        # modifico codice
-        query = "UPDATE biciclette SET codice = %s WHERE codice = %s;"
-        params = (nuovoCodice, codice,)
-    elif km_percorsi and bicicletta_id:
-        # modifico chilometri percorsi
-        query = "UPDATE biciclette SET km_percorsi = km_percorsi + %s WHERE bicicletta_id = %s;"
-        params = (km_percorsi, bicicletta_id,)
-    elif bicicletta_id and latitudine and longitudine:
-        # modifico latitudine e longitudine
-        query = "UPDATE biciclette SET latitudine = %s, longitudine = %s WHERE bicicletta_id = %s;"
-        params = (latitudine, longitudine, bicicletta_id,)
-    
-    # eseguo query
-    num_righe = execute_query(query, params)
-        
-    # controllo il risultato
-    if num_righe > 0:
-        return jsonify({'message': 'Operazione eseguita con successo'})
-    
-    return jsonify({'message': 'ERRORE! Operazione non eseguita'}), 404
 
 
 # ENDPOINT PER INSERIRE UN OPERAZIONE
@@ -439,20 +169,59 @@ def insert_operazione():
     execute_query("COMMIT")
     return jsonify({'message': "Operazione eseguita con successo"})
 
+# FUZNIONE PER CONTROLLARE LE COORDINATE
+def is_valid_coordinate(lat, lon):
+    return -90 <= lat <= 90 and -180 <= lon <= 180
 
-# ENDPOINT PER OTTENERE IL NUMERO DI SLOT LIBERI PER OGNI STAZIONE
-@app.route('/getSlotLiberi', methods=['GET'])
-def getSlotLiberi():
-    # Query per trovare il numero di slot liberi nelle varie stazioni
-    query = " SELECT \
-            stazioni.stazione_id, \
-            stazioni.via AS nome_stazione, \
-            stazioni.slotMax - COUNT(operazioni.operazione_id) AS slot_liberi \
-        FROM stazioni \
-        LEFT JOIN \
-            operazioni ON stazioni.stazione_id = operazioni.stazione_id AND operazioni.tipo = 'noleggio' \
-        GROUP BY stazioni.stazione_id "
-        
-    slotLiberi = execute_query(query)
-    
-    return jsonify({'slotLiberi': slotLiberi})
+# FUNZIONE PER CONTROLLARE L'ID DELLA BICICLETTA
+def is_valid_codice(codice):
+    return isinstance(codice, int) and codice > 0
+
+# ENDPOINT PER CALCOLARE I KM PERCORSI NELLA TRATTA
+@app.route('/aggiornaCoordinateBicicletta', methods=['GET'])
+def aggiornaCoordinateBicicletta():
+    # prendo i parametri
+    codice = request.args.get('codice')
+    new_lat = request.args.get('latitudine')
+    new_lon = request.args.get('longitudine')
+
+    # controllo presenza parametri
+    if codice is None or new_lat is None or new_lon is None:
+        return jsonify({"error": "ERRORE! Parametri mancanti"}), 400
+
+    # controllo coordinate
+    try:
+        new_lat = float(new_lat)
+        new_lon = float(new_lon)
+    except ValueError:
+        return jsonify({"error": "ERRORE! Coordinate non valide"}), 400
+
+    if not is_valid_coordinate(new_lat, new_lon):
+        return jsonify({"error": "ERRORE! Coordinate non valide"}), 400
+
+    # controllo codice
+    try:
+        codice = int(codice)
+    except ValueError:
+        return jsonify({"error": "ERRORE! Codice bicicletta non valido"}), 400
+
+    if not is_valid_codice(codice):
+        return jsonify({"error": "ERRORE! Codice bicicletta non valido"}), 400
+
+    # prendo vecchie coordinate
+    query = "SELECT latitudine, longitudine FROM biciclette WHERE codice = %s"
+    result = execute_query(query, (codice,))
+    if result is None:
+        return jsonify({"message": "ERRORE! Bicicletta non trovata"}), 404
+
+    old_lat= result[0]['latitudine']
+    old_lon = result[0]['longitudine']
+
+    # calcolo distanza tra le coordainte
+    distance = geodesic((old_lat, old_lon), (new_lat, new_lon)).kilometers
+
+    # aggiorno coordinate e km percorsi nel database
+    update_query = "UPDATE biciclette SET latitudine = %s, longitudine = %s, km_percorsi = km_percorsi + %s WHERE codice = %s"
+    execute_query(update_query, (new_lat, new_lon, distance, codice))
+
+    return jsonify({"message": "Coordinate e km percorsi aggiornati con successo"}), 200
