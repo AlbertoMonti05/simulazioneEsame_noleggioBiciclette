@@ -59,13 +59,18 @@
 
     // prendo posti liberi nella stazione
     $getPostiLiberiById = " SELECT
-        stazioni.stazione_id,
-        stazioni.via AS nome_stazione,
-        stazioni.slotMax - COUNT(operazioni.operazione_id) AS slot_liberi
+            stazioni.stazione_id,
+            stazioni.via AS nome_stazione,
+            stazioni.slotMax - 
+            (SELECT COUNT(*) FROM operazioni WHERE operazioni.stazione_id = stazioni.stazione_id AND operazioni.tipo = 'noleggio') +
+            (SELECT COUNT(*) FROM operazioni WHERE operazioni.stazione_id = stazioni.stazione_id AND operazioni.tipo = 'riconsegna') AS slot_liberi
         FROM stazioni
-        LEFT JOIN operazioni ON stazioni.stazione_id = operazioni.stazione_id AND operazioni.tipo = 'noleggio'
-        WHERE stazioni.stazione_id = ?;";
+        WHERE stazioni.stazione_id = ?;
+        ";
 
     // prendo la stazione tramite latitudine e longitudine
     $insertCartaCredito = "INSERT INTO `carte_credito` (`nome_titolare`, `cognome_titolare`, `numero`, `scadenza`, `cvv`) VALUES (?,?,?,?,?)";
+
+    // prendo operazioni stazione
+    $getOperazioniStazione = "SELECT * FROM `operazioni` WHERE `stazione_id` = ?";
 ?>

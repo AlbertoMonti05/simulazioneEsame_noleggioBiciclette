@@ -16,7 +16,7 @@
 
     // query
     include_once("../util/query.php");
-    global $getPostiLiberiById;
+    global $getOperazioniStazione;
 
     // connessione al database
     $connDB = new mysqli($server, $cliente, $psw, $dbBiciclette);
@@ -26,7 +26,7 @@
         die("Connessione con il database non riuscita: " . $connDB->connect_error);
 
     // statement
-    $statement = $connDB->prepare($getPostiLiberiById);
+    $statement = $connDB->prepare($getOperazioniStazione);
 
     // parametri nello statement
     $statement->bind_param("i", $_SESSION["stazione_id"]);
@@ -38,7 +38,14 @@
     $statement->execute();
 
     // prendo il risultato
-    $result = $statement->get_result()->fetch_assoc();
+    $result = $statement->get_result();
 
-    echo json_encode($result["slot_liberi"]);
+    $operazioni = array();
+
+    while(($row = $result->fetch_assoc()) != null)
+    {
+        $operazioni[] = $row;
+    }
+
+    echo json_encode($operazioni);
 ?>
