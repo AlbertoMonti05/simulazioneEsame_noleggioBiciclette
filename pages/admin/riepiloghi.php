@@ -11,6 +11,10 @@
     // stazione id settato
     if(isset($_SESSION['stazione_id']))
         unset($_SESSION['stazione_id']); // tolgo stazione id
+
+    // bicicletta id settato
+    if(isset($_SESSION['bicicletta_id']))
+        unset($_SESSION['bicicletta_id']); // tolgo bicicletta id
 ?>
 
 <!DOCTYPE html>
