@@ -9,77 +9,74 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
+<head>
 
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Mappa - BycicleRent</title>
+    <title>Mappa - BycicleRent</title>
 
-        <!-- IMPORTO LO SCRIPT -->
-        <!-- IMPORTO jQuery -->
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <!-- Includi la libreria Leaflet.js -->
-        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-        <script src="../script/richiesta.js"></script>
-        <script src="../script/mappa.js"></script>
-        
-        <!-- IMPORTO LO STILE -->
-        <link rel="stylesheet" type="text/css" href="../style/mappa.css" />
-        <!-- Includi il foglio di stile di Leaflet -->
-        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- IMPORTO jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Includi la libreria Leaflet.js -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="../script/richiesta.js"></script>
+    <script src="../script/mappa.js"></script>
 
-    </head>
+    <!-- IMPORTO LO STILE -->
+    <link rel="stylesheet" type="text/css" href="../style/mappa.css" />
+    <!-- Includi il foglio di stile di Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
-    <body>
-        
-        <h1 style="text-align: center;">MAPPA STAZIONI NOGLEGGIO/RICONSEGNA BICICLETTE</h1>
+    <!-- Aggiungi Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-        <?php
+    <style>
+        /* Stile personalizzato per il div della mappa */
+        #map-container {
+            height: 80vh; /* Altezza del 80% della viewport */
+        }
+    </style>
 
+</head>
+
+<body>
+
+    <div class="container-fluid">
+
+        <h1 class="text-center mt-5">MAPPA STAZIONI NOLEGGIO/RICONSEGNA BICICLETTE</h1>
+
+        <div class="text-right mt-3">
+            <?php
             // admin
-            if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == true)
-            {
+            if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == true) {
                 ?>
-                    <div style="text-align: right;">
-                        <a href="admin/visualizzaStazioni.php">STAZIONI</a>
-                        <br>
-                        <a href="admin/visualizzaBiciclette.php">BICICLETTE</a>
-                        <br>
-                        <a href="admin/riepiloghi.php">RIEPILOGHI</a>
-                        <br>
-                        <a href="logout.php">LOGOUT</a>
-                    </div>
+                <a href="admin/visualizzaStazioni.php" class="btn btn-primary">STAZIONI</a>
+                <a href="admin/visualizzaBiciclette.php" class="btn btn-primary">BICICLETTE</a>
+                <a href="admin/riepiloghi.php" class="btn btn-primary">RIEPILOGHI</a>
+                <a href="logout.php" class="btn btn-danger">LOGOUT</a>
+                <?php
+            } else if(!isset($_SESSION['cliente_id'])) {
+                // ospite
+                ?>
+                <a href="login.php" class="btn btn-primary">LOGIN</a>
+                <a href="registrazione.php" class="btn btn-primary">REGISTRATI</a>
+                <?php
+            } else {
+                ?>
+                <a href="profilo.php" class="btn btn-primary">PROFILO</a>
+                <a href="riepiloghi.php" class="btn btn-primary">RIEPILOGHI</a>
+                <a href="logout.php" class="btn btn-danger">LOGOUT</a>
                 <?php
             }
-            else if(!isset($_SESSION['cliente_id']))    // ospite
-            {
-                ?>
-                    <div style="text-align: right;">
-                        <a href="login.php">LOGIN</a>
-                        <br>
-                        <a href="registrazione.php">REGISTRATI</a>
-                    </div>
-                <?php
-            }
-            else
-            {
-                ?>
-                    <div style="text-align: right;">
-                        <a href="profilo.php">PROFILO</a>
-                        <br>
-                        <a href="riepiloghi.php">RIEPILOGHI</a>
-                        <br>
-                        <a href="logout.php">LOGOUT</a>
-                    </div>
-                <?php
-            }
+            ?>
+        </div>
 
-        ?>
+        <div class="mt-5" id="map-container"></div>
 
-        <br>
-        <div id="map-container"></div>
+    </div>
 
-    </body>
+</body>
 
 </html>

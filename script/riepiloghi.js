@@ -53,49 +53,54 @@ async function visualizzaRiepilogo(riepilogoTotale)
 async function visualizzaTratta(tratta)
 {
     // creo il div
-    let div = $("<div></div>")
+    let div = $("<div class='mb-4'></div>");
 
     // elemento per il tipo
-    let tipo = $("<input type='text' readonly='readonly'>")
-    tipo.val(tratta["tipo"]);
-    div.append("tipo: ");
-    div.append(tipo);
-    div.append("<br>");
+    let tipo = $("<input type='text' readonly='readonly' class='form-control'>").val(tratta["tipo"]);
+    let div1 = $("<div class='col-sm-8'></div>");
+    div1.append("tipo di operazione:");
+    div1.append(tipo);
+    div1.append("<br>");
+    div.append(div1);
 
     // elemento per la data_ora
-    let data_ora = $("<input type='text' readonly='readonly'>")
-    data_ora.val(tratta["data_ora"]);
-    div.append("data e ora: ");
-    div.append(data_ora);
-    div.append("<br>");
+    let data_ora = $("<input type='text' readonly='readonly' class='form-control'>").val(tratta["data_ora"]);
+    let div2 = $("<div class='col-sm-8'></div>");
+    div2.append("data e ora operazione:");
+    div2.append(data_ora);
+    div2.append("<br>");
+    div.append(div2);
 
     // se è una riconsegna
-    if(tratta["tipo"] == "riconsegna")
-    {
+    if (tratta["tipo"] == "riconsegna") {
         // elemento per i km fatti
-        let km_percorsi = $("<input type='text' readonly='readonly'>")
-        km_percorsi.val(tratta["km_percorsi"]);
-        div.append("km percorsi: ");
-        div.append(km_percorsi);
-        div.append("<br>");
+        let km_percorsi = $("<input type='text' readonly='readonly' class='form-control'>").val(tratta["km_percorsi"]);
+        let div3 = $("<div class='col-sm-8'></div>");
+        div3.append("km percorsi:");
+        div3.append(km_percorsi);
+        div3.append("<br>");
 
         // elemento per la tariffa
-        let tariffa = $("<input type='text' readonly='readonly'>")
-        tariffa.val(tratta["tariffa"]);
-        div.append("tariffa: ");
-        div.append(tariffa);
-        div.append("<br>");
-    }
-    
-    // elemento per la stazione
-    let stazione = $("<input type='text' readonly='readonly'>")
-    // prendo via stazione
-    let datiStazione = await richiestaJSON("../services/getStazioni.php", {stazione_id: tratta["stazione_id"]});
-    stazione.val(datiStazione[0]["via"]);
-    div.append("stazione: ");
-    div.append(stazione);
-    div.append("<br>");
+        let tariffa = $("<input type='text' readonly='readonly' class='form-control'>").val(tratta["tariffa"]);
+        let div4 = $("<div class='col-sm-8'></div>");
+        div4.append("tariffa:");
+        div4.append(tariffa);
+        div4.append("<br>");
 
+        div.append(div3);
+        div.append(div4);
+    }
+
+    // elemento per la stazione
+    let stazione = $("<input type='text' readonly='readonly' class='form-control'>");
+    // prendo via stazione
+    let datiStazione = await richiestaJSON("../services/getStazioni.php", { stazione_id: tratta["stazione_id"] });
+    stazione.val(datiStazione[0]["via"]);
+    let div5 = $("<div class='col-sm-8'></div>");
+    div5.append("presso stazione:");
+    div5.append(stazione);
+    div5.append("<br>");
+    div.append(div5);
 
     $("#trattaPerTratta").append(div);
     $("#trattaPerTratta").append($("<br>"));
