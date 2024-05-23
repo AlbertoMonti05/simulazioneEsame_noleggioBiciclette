@@ -2,11 +2,15 @@
     // prendo la sessione
     session_start();
 
-    // utente non in sessione
+    // admin non in sessione
     if(!isset($_SESSION['isAdmin']))
         header("Location: ../mappa.php");
     // else 
         // rimango su questa pagina
+
+    // stazione id settato
+    if(isset($_SESSION['stazione_id']))
+        unset($_SESSION['stazione_id']); // tolgo stazione id
 ?>
 
 <!DOCTYPE html>
