@@ -40,7 +40,7 @@
             <br>
             username: <input type="text" id="username" onchange="modificaUsername()">
             <br>
-            indirizzo: <input type="text" id="indirizzo">
+            indirizzo: <input type="text" id="indirizzo" onchange="modificaUsername()">
             <br>
             <button onclick="modificaDati()">MOFIFICA DATI</button>
             <a href="profilo.php">ANNULLA</a>

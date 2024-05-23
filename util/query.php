@@ -26,7 +26,7 @@
     $getIndirizzo = "SELECT `indirizzo` FROM `clienti` WHERE `cliente_id` = ?";
 
     // modifico dati del profilo
-    $modificaDatiProfilo = "UPDATE `clienti` SET `nome` = ?, `cognome` = ?, `mail` = ?, `username` = ?, `latitudine` = ?, `longitudine` = ?, `indirizzo` = ? WHERE `cliente_id` = ?";
+    $modificaDatiProfilo = "UPDATE `clienti` SET `nome` = ?, `cognome` = ?, `mail` = ?, `username` = ?, `indirizzo` = ?, `latitudine` = ?, `longitudine` = ? WHERE `cliente_id` = ?";
 
     // prendo tutte le biciclette
     $getBiciclette = "SELECT * FROM `biciclette`";

@@ -24,10 +24,8 @@ async function caricaDati(dati)
     $("#cognome").val(dati["cognome"]);
     $("#mail").val(dati["mail"]);
     $("#username").val(dati["username"]);
-
-    let indirizzo = await getIndirizzo({indirizzo_id: dati["indirizzo_id"]});
-    $("#indirizzo").val(indirizzo);
-    $("#indirizzo").attr("size", indirizzo.length);
+    $("#indirizzo").val(dati["indirizzo"]);
+    $("#indirizzo").attr("size", dati["indirizzo"].length);
 }
 
 // PRENDO L'INDIRIZZO
