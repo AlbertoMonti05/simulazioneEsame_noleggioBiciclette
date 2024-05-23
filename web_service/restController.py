@@ -148,6 +148,7 @@ def insert_operazione():
         execute_query("ROLLBACK")
         return jsonify({'message': "ERRORE! Operazione non eseguita"})
     
+    '''
     # se è una riconsegna
     if tipo == 'riconsegna':
         # query per aggiornare km percorsi dalla bicicletta
@@ -164,6 +165,7 @@ def insert_operazione():
             # elimino transazione
             execute_query("ROLLBACK")
             return jsonify({'message': "ERRORE! Operazione non eseguita"})
+    '''
     
     # invio transazione
     execute_query("COMMIT")
