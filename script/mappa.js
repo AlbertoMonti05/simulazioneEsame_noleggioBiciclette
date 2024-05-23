@@ -92,11 +92,18 @@ async function aggiungiStazine(stazione)
     });
 }
 
+// Crea un'icona personalizzata usando un'immagine JPG
+let casaIcon = L.icon({
+    iconUrl: '../file/img/house.jpg', // Specifica il percorso della tua immagine
+    iconSize: [40, 40], // Dimensione dell'icona
+    iconAnchor: [16, 32], // Punto dell'icona che corrisponde alla posizione del marker
+    popupAnchor: [0, -32] // Punto dell'icona da cui si apre il popup
+});
+
 // FUNZIONE PER AGGIUNGERE IL MARKER DELLA CASA DEL CLIENTE
-function aggiugniMarkerCliente(casaCliente)
-{
-    // marker
-    let marker = L.marker([casaCliente["latitudine"], casaCliente["longitudine"]]).addTo(mappa);
+function aggiugniMarkerCliente(casaCliente) {
+    // marker con icona personalizzata
+    let marker = L.marker([casaCliente["latitudine"], casaCliente["longitudine"]], { icon: casaIcon }).addTo(mappa);
 
     // popup
     let popupContent = `
