@@ -48,7 +48,7 @@
     <div class="container mt-3">
         <div class="row justify-content-end">
             <div class="col-md-6 text-right">
-                <a href="admin/aggiungiBicicletta.php" class="btn btn-primary">AGGIUNGI BICICLETTA</a>
+                <a href="aggiungiBicicletta.php" class="btn btn-primary">AGGIUNGI BICICLETTA</a>
             </div>
         </div>
     </div>

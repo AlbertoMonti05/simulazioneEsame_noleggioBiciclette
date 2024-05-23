@@ -80,4 +80,12 @@
     // modifico bicicletta
     $modificaBicicletta = "UPDATE `biciclette` SET `codice` = ?, `km_percorsi` = ? WHERE `bicicletta_id` = ?";
 
+    // aggiungo bicicletta
+    $aggiungiBicicletta = "INSERT INTO `biciclette` (`codice`, `latitudine`, `longitudine`) VALUES (?,?,?)";
+
+    // aggiungo stazione
+    $aggiungiStazione = "INSERT INTO `stazioni` (`via`, `latitudine`, `longitudine`, `slotMax`) VALUES (?,?,?,?)";
+
+    // prendo ultimo codice bicicletta
+    $getUltimoCodice = "SELECT MAX(`codice`) AS codice FROM `biciclette`";
 ?>
