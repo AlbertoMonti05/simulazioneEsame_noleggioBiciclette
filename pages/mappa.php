@@ -42,9 +42,9 @@
             {
                 ?>
                     <div style="text-align: right;">
-                        <a href="admin/stazioni.php">STAZIONI</a>
+                        <a href="admin/visualizzaStazioni.php">STAZIONI</a>
                         <br>
-                        <a href="admin/biciclette.php">BICICLETTE</a>
+                        <a href="admin/visualizzaBiciclette.php">BICICLETTE</a>
                         <br>
                         <a href="admin/riepiloghi.php">RIEPILOGHI</a>
                         <br>
