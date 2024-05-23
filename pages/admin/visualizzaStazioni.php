@@ -3,52 +3,58 @@
     session_start();
 
     // admin non in sessione
-    if(!isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == true)
+    if(!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] !== true) {
         header("Location: ../mappa.php");
-    // else 
-        // rimango su questa pagina
+        exit; 
+    }
 
     // stazione id settato
-    if(isset($_SESSION['stazione_id']))
+    if(isset($_SESSION['stazione_id'])) {
         unset($_SESSION['stazione_id']); // tolgo stazione id
+    }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
+<head>
 
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Mappa Stazioni - BycicleRent</title>
+    <title>Mappa Stazioni - BycicleRent</title>
 
-        <!-- IMPORTO LO SCRIPT -->
-        <!-- IMPORTO jQuery -->
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <!-- Includi la libreria Leaflet.js -->
-        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-        <script src="../../script/richiesta.js"></script>
-        <script src="../../script/admin/visualizzaStazioni.js"></script>
-        
-        <!-- IMPORTO LO STILE -->
-        <link rel="stylesheet" type="text/css" href="../../style/mappa.css" />
-        <!-- Includi il foglio di stile di Leaflet -->
-        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- IMPORTO jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-    </head>
+    <!-- Aggiungi Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <body>
-        
-        <h1 style="text-align: center;">MAPPA STAZIONI</h1>
+    <!-- IMPORTO LO SCRIPT -->
+    <!-- Includi la libreria Leaflet.js -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="../../script/richiesta.js"></script>
+    <script src="../../script/admin/visualizzaStazioni.js"></script>
 
-            <div style="text-align: right;">
-                <a href="admin/aggiungiStazione.php">AGGIUNGI STAZIONE</a>
-            </div>
+    <!-- IMPORTO LO STILE -->
+    <link rel="stylesheet" type="text/css" href="../../style/mappa.css" />
+    <!-- Includi il foglio di stile di Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
-        <br>
-        <div id="map-container"></div>
+</head>
 
-    </body>
+<body>
+
+    <div class="container mt-5">
+        <h1 class="text-center">MAPPA STAZIONI</h1>
+        <div class="text-right mb-3">
+            <a href="admin/aggiungiStazione.php" class="btn btn-primary">AGGIUNGI STAZIONE</a>
+        </div>
+    </div>
+
+    <div class="mt-5" id="map-container"></div>
+
+</body>
 
 </html>

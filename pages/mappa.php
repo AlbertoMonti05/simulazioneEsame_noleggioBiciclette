@@ -45,7 +45,7 @@
 
     <div class="container-fluid">
 
-        <h1 class="text-center mt-5">MAPPA STAZIONI NOLEGGIO/RICONSEGNA BICICLETTE</h1>
+        <h1 class="text-center mt-5">MAPPA</h1>
 
         <div class="text-right mt-3">
             <?php

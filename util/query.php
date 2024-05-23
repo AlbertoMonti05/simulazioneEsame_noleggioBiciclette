@@ -73,4 +73,11 @@
 
     // prendo operazioni bicicletta
     $getOperazioniBicicletta = "SELECT * FROM `operazioni` WHERE `bicicletta_id` = ?";
+
+    // modifico stazione
+    $modificaStazione = "UPDATE `stazioni` SET `via` = ?, `latitudine` = ?, `longitudine` = ?, `slotMax` = ? WHERE `stazione_id` = ?";
+
+    // modifico bicicletta
+    $modificaBicicletta = "UPDATE `biciclette` SET `codice` = ?, `km_percorsi` = ? WHERE `bicicletta_id` = ?";
+
 ?>
