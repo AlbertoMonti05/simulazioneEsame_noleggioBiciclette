@@ -15,7 +15,7 @@ async function generaMappa()
     let posIniziale = [45.468242296531756, 9.180818901720453]; // MILANO
 
     // creo una nuova istanza di mappa Leaflet
-    mappa = L.map('map-container').setView(posIniziale, 10); // 10 è il livello di zoom iniziale
+    mappa = L.map('map-container').setView(posIniziale, 12); // 10 è il livello di zoom iniziale
 
     // aggiungo un layer di mappa
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
