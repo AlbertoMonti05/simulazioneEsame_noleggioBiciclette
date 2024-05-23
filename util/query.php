@@ -75,5 +75,5 @@
     $getOperazioniStazione = "SELECT * FROM `operazioni` WHERE `stazione_id` = ?";
 
     // prendo operazioni bicicletta
-    $getOperazioniStazione = "SELECT * FROM `operazioni` WHERE `bicicletta_id` = ?";
+    $getOperazioniBicicletta = "SELECT * FROM `operazioni` WHERE `bicicletta_id` = ?";
 ?>
