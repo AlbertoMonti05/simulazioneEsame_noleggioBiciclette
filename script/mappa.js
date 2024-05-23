@@ -49,12 +49,12 @@ async function getCasaCliente()
     return casaCliente;
 }
 
-// FUNZIONE PER PRENDERE CASA DEL CLIENTE
+// FUNZIONE PER PRENDERE I POSTI LIBERI DI UNA STAZIONE
 async function getPostiLiberi(params)
 {
-    let casaCliente = await richiestaJSON("../services/getPostiLiberi.php", params);
+    let posti = await richiestaJSON("../services/getPostiLiberi.php", params);
 
-    return casaCliente;
+    return posti;
 }
 
 // FUNZIONE PER AGGIUNGERE LE STAZIONI NELLA MAPPA
