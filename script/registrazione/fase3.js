@@ -134,7 +134,7 @@ function reindizzamento(stato)
 {
     // controlli ok
     if(stato == true)
-    {
+    {        
         // reindirizzo
         window.location.href = "fase4.php";
     }

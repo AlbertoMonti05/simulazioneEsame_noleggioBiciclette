@@ -117,6 +117,7 @@ function aggiugniMarkerCliente(casaCliente) {
     let popupContent = `
         <b>CASA TUA</b><br>
         Indirizzo: ${casaCliente["indirizzo"]}<br>
+        <a href="../pages/modificaDatiProfilo.php">MODIFICA INDIRIZZO</a>
     `;
 
     // Aggiungi il popup al marker

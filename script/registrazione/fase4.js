@@ -50,7 +50,6 @@ let cognomeTitolareCarta = null;
 let numeroCarta = null;
 let scadenzaCarta = null;
 let cvvCarta = null;
-let carta_credito_id = null;
 
 // REGISTRAZIONE
 async function doRegistrazione()
@@ -68,9 +67,6 @@ async function doRegistrazione()
     // controlli a buon fine
     if(stato == true)
     {
-        // inserisco carta di credito
-        carta_credito_id = await insertCartaCredito();
-
         // richiestra di registrazione al db
         await callDB_registrazione();
     }
@@ -79,19 +75,6 @@ async function doRegistrazione()
         alert(stato);
         return;
     }
-}
-
-// FUNZIONE PER INSERIRE LA CARTA DI CREDITO
-async function insertCartaCredito()
-{
-    // chiamata al db
-    let id = await richiesta("../../services/insertCartaCredito.php", {nomeTitolareCarta: nomeTitolareCarta, cognomeTitolareCarta: cognomeTitolareCarta, numeroCarta: numeroCarta, scadenzaCarta: scadenzaCarta, cvvCarta: cvvCarta});
-
-    // inserimento corretto
-    if(id > 0)
-        return id;  // ritorno id carta inserita
-
-    return null;
 }
 
 // CONTROLLI SUI PARAMETRI IN INPUT
@@ -137,7 +120,7 @@ function controlloData(scadenzaCarta)
 async function callDB_registrazione()
 {
     // chiamata al db
-    let result = await richiesta("../../services/registrazione.php", {nome: nome, cognome:cognome, username: username, mail:mail, password:password, indirizzo:indirizzo, latitudine:latitudine, longitudine:longitudine, carta_credito_id:carta_credito_id});
+    let result = await richiesta("../../services/registrazione.php", {nome: nome, cognome:cognome, username: username, mail:mail, password:password, indirizzo:indirizzo, latitudine:latitudine, longitudine:longitudine, nomeTitolareCarta: nomeTitolareCarta, cognomeTitolareCarta: cognomeTitolareCarta, numeroCarta:numeroCarta, scadenzaCarta:scadenzaCarta, cvvCarta:cvvCarta});
 
     if(result == "")
         result = true;
@@ -152,8 +135,11 @@ function reindizzamento(stato)
     // registrazione ok
     if(stato == true)
     {
+        // svuoto local storage
+        window.localStorage.clear();
+
         // reindirizzo
-        window.location.href = "../login.php";
+        window.location.href = "../mappa.php";
     }
     else
         alert(stato);

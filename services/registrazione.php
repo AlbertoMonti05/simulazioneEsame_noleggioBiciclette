@@ -6,9 +6,17 @@
     if(!isset($_GET["nome"]) || !isset($_GET["cognome"]) 
     || !isset($_GET["username"]) || !isset($_GET["mail"]) || !isset($_GET["password"]) 
     || !isset($_GET["latitudine"]) || !isset($_GET["longitudine"]) 
-    || !isset($_GET["indirizzo"]) || !isset($_GET["carta_credito_id"]))
+    || !isset($_GET["indirizzo"]) || !isset($_GET["nomeTitolareCarta"]) || !isset($_GET["cognomeTitolareCarta"]) 
+    || !isset($_GET["numeroCarta"]) || !isset($_GET["scadenzaCarta"]) || !isset($_GET["cvvCarta"]))
     {
         echo "ERRORE! Parametri non passati";
+        return;
+    }
+
+    // mail errata
+    if(!str_contains($_GET["mail"], "@"))
+    {
+        echo "ERRORE! Formato mail non valido";
         return;
     }
 
@@ -34,7 +42,7 @@
     $password = md5($_GET["password"]);
 
     // parametri nello statement
-    $statement->bind_param("ssssssddi", $_GET["nome"], $_GET["cognome"], $_GET["username"], $_GET["mail"], $password, $_GET["indirizzo"], $_GET["latitudine"], $_GET["longitudine"], $_GET["carta_credito_id"]);
+    $statement->bind_param("ssssssddsssss", $_GET["nome"], $_GET["cognome"], $_GET["username"], $_GET["mail"], $password, $_GET["indirizzo"], $_GET["latitudine"], $_GET["longitudine"], $_GET["nomeTitolareCarta"], $_GET["cognomeTitolareCarta"], $_GET["numeroCarta"], $_GET["scadenzaCarta"], $_GET["cvvCarta"]);
 
     // eseguo lo statement
     $statement->execute();
