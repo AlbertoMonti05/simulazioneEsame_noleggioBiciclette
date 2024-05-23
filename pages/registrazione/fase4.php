@@ -41,7 +41,7 @@
             <br>
             cognome titolare carta:<input type="text" id="cognomeTitolareCarta">
             <br>
-            numero carta:<input type="password" id="numeroCarta" maxlength="16">
+            numero carta:<input type="text" id="numeroCarta" maxlength="16">
             <br>
             scadenza carta:<input type="month" id="scadenzaCarta">
             <br>
