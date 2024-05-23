@@ -225,5 +225,28 @@ def aggiornaCoordinateBicicletta():
     # aggiorno coordinate e km percorsi nel database
     update_query = "UPDATE biciclette SET latitudine = %s, longitudine = %s, km_percorsi = km_percorsi + %s WHERE codice = %s"
     execute_query(update_query, (new_lat, new_lon, distance, codice))
-
+    
+    # controllo se devo mettere la bici in manutezione
+    checkManutezioneBicicletta(codice)
+    
     return jsonify({"message": "Coordinate e km percorsi aggiornati con successo"}), 200
+
+# FUNZIONE PER METTERE LA BICI IN MANUTENZIONE, SE NECESSARIO
+def checkManutezioneBicicletta(codice):
+    # non controllo il codice perche' e' di sicuro corretto
+    # i controlli vengono fatti dalla funzione chiamante
+    
+    # prendo i km percorsi dalla bicicletta
+    query = "SELECT km_percorsi, numero_manutenzioni FROM biciclette WHERE codice = %s"
+    result = execute_query(query, (codice,))
+    
+    km_percorsi = result[0]['km_percorsi']
+    numero_manutenzioni = result[0]['numero_manutenzioni']
+    
+    # bici da mettere in manutenzione
+    if km_percorsi > ((numero_manutenzioni+1) * 1000):
+        update_query = "UPDATE biciclette SET in_manutenzione = 1, numero_manutenzioni = numero_manutenzioni + 1 WHERE codice = %s"
+        execute_query(update_query, (codice,))
+
+    
+    return
