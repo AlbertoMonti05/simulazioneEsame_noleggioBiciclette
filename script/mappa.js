@@ -80,7 +80,6 @@ async function aggiungiStazine(stazione)
     let popupContent = `
         <b>Stazione ${stazione["via"]}</b><br>
         Posti liberi: ${postiLiberi}<br>
-        <a href="../pages/stazione.php?latitudine=${stazione["latitudine"]}&longitudine=${stazione["longitudine"]}">Visualizza Dettagli</a>
     `;
 
     // Aggiungi il popup al marker
