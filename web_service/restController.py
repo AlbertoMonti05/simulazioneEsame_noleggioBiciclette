@@ -1,3 +1,4 @@
+import datetime
 from flask import request, jsonify
 import mysql.connector
 from _config import *
@@ -60,7 +61,7 @@ def execute_query(query, params=None):
             row_count = cursor.rowcount
             return row_count
         else:
-            # non ritorno nulla (query come la create table, ecc...)
+            # non ritorno nulla (query come la create table, BEGIN TRANSACTION, ...)
             conn.commit()
             return None
     except Error as e:
@@ -358,20 +359,51 @@ def insert_operazione():
     cliente_id = request.args.get('cliente_id')
     stazione_id = request.args.get('stazione_id')
     bicicletta_id = request.args.get('bicicletta_id')
-
+    
+    # dati non passati
+    if not tipo or not data_ora or not km_percorsi or not tariffa or not cliente_id or not stazione_id or not bicicletta_id:
+        return jsonify({'message': "ERRORE! Parametri non passati"})
+    
+    # operazione non valida
+    if not tipo == "noleggio" or not tipo == "riconsegna":
+        return jsonify({'message': "ERRORE! Tipo di operazione non valido"})
+    
+    # data non valida
+    data_ora_parsed = datetime.strptime(data_ora, '%Y-%m-%d %H:%M:%S')
+    if data_ora_parsed > datetime.now():
+        return jsonify({'message': "ERRORE! Data e ora non valide"}), 400
+    
     # converto i parametri per evitare SQL injection
-    km_percorsi = int(km_percorsi) if km_percorsi else None
-    tariffa = int(tariffa) if tariffa else None
+    km_percorsi = float(km_percorsi) if km_percorsi else None
+    tariffa = float(tariffa) if tariffa else None
     cliente_id = int(cliente_id)
     stazione_id = int(stazione_id)
     bicicletta_id = int(bicicletta_id)
+    
+    # km percorsi non validi
+    if km_percorsi <= 0:
+        return jsonify({'message': "ERRORE! Km percorsi non validi"}), 400
+    
+    # tariffa non valida
+    if tariffa <= 0:
+        return jsonify({'message': "ERRORE! Tariffa non valida"}), 400
+    
+    # id cliente non valido
+    if cliente_id <= 0:
+        return jsonify({'message': "ERRORE! Id cliente non valido"}), 400
+    
+    # id stazione non valido
+    if stazione_id <= 0:
+        return jsonify({'message': "ERRORE! Id stazione non valido"}), 400
+    
+    # id bicicletta non valido
+    if bicicletta_id <= 0:
+        return jsonify({'message': "ERRORE! Id bicicletta non valido"}), 400
+    
+    # inizio transaction
+    execute_query("BEGIN TRANSACTION")
 
-    # imposto attributi a None per il tipo noleggio
-    if tipo == 'noleggio':
-        tariffa = None
-        km_percorsi = None
-
-    # query
+    # query per inserire operazione
     query = " INSERT INTO operazioni \
         (tipo, data_ora, km_percorsi, tariffa, cliente_id, stazione_id, bicicletta_id) \
         VALUES (%s, %s, %s, %s, %s, %s, %s); "
@@ -380,10 +412,32 @@ def insert_operazione():
     # eseguo query
     id = execute_query(query, params)
     
-    if id > 0:
-        return jsonify({'message': "Operazione eseguita con successo"})
+    # errore
+    if not id > 0:
+        # elimino transazione
+        execute_query("ROLLBACK")
+        return jsonify({'message': "ERRORE! Operazione non eseguita"})
     
-    return jsonify({'message': "ERRORE! Operazione non eseguita"})
+    # se è una riconsegna
+    if tipo == 'riconsegna':
+        # query per aggiornare km percorsi dalla bicicletta
+        query = " UPDATE biciclette \
+            SET km_percorsi = km_percorsi + ? \
+            WHERE bicicletta_id = ?;"
+        params = (km_percorsi, bicicletta_id,)
+    
+        # eseguo query
+        id = execute_query(query, params)
+        
+        # errore
+        if not id > 0:
+            # elimino transazione
+            execute_query("ROLLBACK")
+            return jsonify({'message': "ERRORE! Operazione non eseguita"})
+    
+    # invio transazione
+    execute_query("COMMIT")
+    return jsonify({'message': "Operazione eseguita con successo"})
 
 
 # ENDPOINT PER OTTENERE IL NUMERO DI SLOT LIBERI PER OGNI STAZIONE
