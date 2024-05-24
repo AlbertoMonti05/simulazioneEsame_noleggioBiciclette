@@ -10,10 +10,30 @@
         return;
     }
 
-    // parametri non passati
-    if(!isset($_SESSION["stazione_id"]) || !isset($_GET["via"]) || !isset($_GET["latitudine"]) || !isset($_GET["longitudine"]) || !isset($_GET["slotMax"]))
+    // parametri non passati o non validi
+    $requiredParams = ["via", "latitudine", "longitudine", "slotMax"];
+    foreach ($requiredParams as $param) {
+        if (!isset($_GET[$param])) {
+            echo "ERRORE! Parametro '$param' non passato";
+            return;
+        }
+    }
+
+    // validazione dei parametri
+    $via = filter_var($_GET["via"], FILTER_SANITIZE_SPECIAL_CHARS);
+    $latitudine = filter_var($_GET["latitudine"], FILTER_VALIDATE_FLOAT);
+    $longitudine = filter_var($_GET["longitudine"], FILTER_VALIDATE_FLOAT);
+    $slotMax = filter_var($_GET["slotMax"], FILTER_VALIDATE_INT);
+
+    if ($via === false || $latitudine === false || $longitudine === false || $slotMax === false) {
+        echo "ERRORE! Parametri non validi";
+        return;
+    }
+
+    // parametri di sessione
+    if (!isset($_SESSION["stazione_id"]) || !filter_var($_SESSION["stazione_id"], FILTER_VALIDATE_INT))
     {
-        echo "ERRORE! Parametri non passati";
+        echo "ERRORE! Parametro di sessione 'stazione_id' non valido o non passato";
         return;
     }
 

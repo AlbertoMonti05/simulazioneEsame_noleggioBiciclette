@@ -17,7 +17,7 @@
     $checkUsername = "SELECT * FROM `clienti` WHERE `username` = ?";
 
     // registrazione
-    $registrazione = "INSERT INTO `clienti` (`nome`, `cognome`, `username`, `mail`, `password`, `indirizzo`, `latitudine`, `longitudine`, `nomeTitolareCarta`, `cognomeTitolareCarta`, `numeroCarta`, `scadenzaCarta`, `cvvCarta`) VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    $registrazione = "INSERT INTO `clienti` (`nome`, `cognome`, `username`, `mail`, `password`, `indirizzo`, `latitudine`, `longitudine`, `nomeTitolareCarta`, `cognomeTitolareCarta`, `numeroCarta`, `scadenzaCarta`, `cvvCarta`, `codiceTessera`) VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
     // prendo i dati del cliente
     $getDatiCliente = "SELECT `nome`, `cognome`, `username`, `mail`, `latitudine`, `longitudine`, `indirizzo` FROM `clienti` WHERE `cliente_id` = ?";
@@ -94,4 +94,19 @@
 
     // fine manutenzione bicicletta
     $fineManutenzione = "UPDATE `biciclette` SET `in_manutenzione` = 0 WHERE `bicicletta_id` = ?";
+
+    // blocco tessera cliente
+    $bloccaTessera = "UPDATE `clienti` SET `tesseraSmarrita` = 1 WHERE `cliente_id` = ?";
+
+    // sblocco tessera cliente
+    $sbloccaTessera = "UPDATE `clienti` SET `tesseraSmarrita` = 0 WHERE `cliente_id` = ?";
+
+    // modifico codice tessera cliente
+    $nuovaTessera = "UPDATE `clienti` SET `codiceTessera` = ?, `tesseraSmarrita` = 0 WHERE `cliente_id` = ?";
+
+    // prendo clienti con tessera bloccata
+    $getTessereBloccate = "SELECT * FROM `clienti` WHERE `tesseraSmarrita` = 1";
+
+    // prendo codice tessera più grande
+    $lastCodiceTessera = "SELECT MAX(`codiceTessera`) AS codice FROM `clienti`";
 ?>

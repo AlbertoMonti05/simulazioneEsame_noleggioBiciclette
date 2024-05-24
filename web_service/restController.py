@@ -89,18 +89,21 @@ def insert_operazione():
     cliente_id = request.args.get('cliente_id')
     stazione_id = request.args.get('stazione_id')
     bicicletta_id = request.args.get('bicicletta_id')
+    codiceTessera = request.args.get('codiceTessera')
     
     # dati non passati
-    if not tipo or not data_ora or not km_percorsi or not tariffa or not cliente_id or not stazione_id or not bicicletta_id:
+    if not tipo or not data_ora or not km_percorsi or not tariffa or not cliente_id or not stazione_id or not bicicletta_id or not codiceTessera:
         return jsonify({'message': "ERRORE! Parametri non passati"})
     
     # operazione non valida
-    if not tipo == "noleggio" or not tipo == "riconsegna":
+    '''
+    if tipo != "noleggio" or tipo != "riconsegna":
         return jsonify({'message': "ERRORE! Tipo di operazione non valido"})
+    '''
     
     # data non valida
-    data_ora_parsed = datetime.strptime(data_ora, '%Y-%m-%d %H:%M:%S')
-    if data_ora_parsed > datetime.now():
+    data_ora_parsed = datetime.datetime.strptime(data_ora, '%Y-%m-%d %H:%M:%S')
+    if data_ora_parsed > datetime.datetime.now():
         return jsonify({'message': "ERRORE! Data e ora non valide"}), 400
     
     # converto i parametri per evitare SQL injection
@@ -109,6 +112,7 @@ def insert_operazione():
     cliente_id = int(cliente_id)
     stazione_id = int(stazione_id)
     bicicletta_id = int(bicicletta_id)
+    codiceTessera = int(codiceTessera)
     
     # km percorsi non validi
     if km_percorsi <= 0:
@@ -130,8 +134,24 @@ def insert_operazione():
     if bicicletta_id <= 0:
         return jsonify({'message': "ERRORE! Id bicicletta non valido"}), 400
     
-    # inizio transaction
-    execute_query("BEGIN TRANSACTION")
+    # codice tessera non valido
+    if codiceTessera <= 0 or len(str(codiceTessera)) != 4:
+        return jsonify({'message': "ERRORE! Codice tessera non valido"}), 400
+        
+    # controllo il codice della tessera
+    query = "SELECT tesseraSmarrita FROM clienti WHERE codiceTessera = %s"
+    params = (codiceTessera,)
+    
+    # eseguo query
+    result = execute_query(query, params)
+    if result is None:
+        return jsonify({"message": "ERRORE! Bicicletta non trovata"}), 404
+
+    tesseraSmarrita= result[0]['tesseraSmarrita']
+    
+    # tessera bloccata
+    if tesseraSmarrita == 1:
+        return jsonify({'message': "ERRORE! Questa tessera è bloccata"}), 400
 
     # query per inserire operazione
     query = " INSERT INTO operazioni \
@@ -144,31 +164,9 @@ def insert_operazione():
     
     # errore
     if not id > 0:
-        # elimino transazione
-        execute_query("ROLLBACK")
         return jsonify({'message': "ERRORE! Operazione non eseguita"})
-    
-    '''
-    # se è una riconsegna
-    if tipo == 'riconsegna':
-        # query per aggiornare km percorsi dalla bicicletta
-        query = " UPDATE biciclette \
-            SET km_percorsi = km_percorsi + ? \
-            WHERE bicicletta_id = ?;"
-        params = (km_percorsi, bicicletta_id,)
-    
-        # eseguo query
-        id = execute_query(query, params)
         
-        # errore
-        if not id > 0:
-            # elimino transazione
-            execute_query("ROLLBACK")
-            return jsonify({'message': "ERRORE! Operazione non eseguita"})
-    '''
-    
     # invio transazione
-    execute_query("COMMIT")
     return jsonify({'message': "Operazione eseguita con successo"})
 
 # FUZNIONE PER CONTROLLARE LE COORDINATE

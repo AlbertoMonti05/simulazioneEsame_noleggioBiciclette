@@ -55,6 +55,7 @@
                 <a href="admin/visualizzaStazioni.php" class="btn btn-primary">STAZIONI</a>
                 <a href="admin/visualizzaBiciclette.php" class="btn btn-primary">BICICLETTE</a>
                 <a href="admin/riepiloghi.php" class="btn btn-primary">RIEPILOGHI</a>
+                <a href="admin/visualizzaTessereBloccate.php" class="btn btn-primary">VISUALIZZA TESSERE BLOCCATE</a>
                 <a href="logout.php" class="btn btn-danger">LOGOUT</a>
                 <?php
             } else if(!isset($_SESSION['cliente_id'])) {
@@ -67,6 +68,7 @@
                 ?>
                 <a href="profilo.php" class="btn btn-primary">PROFILO</a>
                 <a href="riepiloghi.php" class="btn btn-primary">RIEPILOGHI</a>
+                <a href="bloccaTessera.php" class="btn btn-primary">BLOCCA TESSERA</a>
                 <a href="logout.php" class="btn btn-danger">LOGOUT</a>
                 <?php
             }
